@@ -1,20 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Booking from './Components/BookingForm';
-import NavBar from "./Components/NavBar" ;
-import Home from "./Components/Home";
-import About from "./Components/About";
+import Booking from './pages/BookingForm';
+import NavBar from "./Components/NavBar/NavBar";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Header from "./Components/Header/Header";
 
 function App() {
   return (
     <Router>
-      <div>
-        <NavBar />
+      <div >
+        <Header />
+        <NavBar className="navBar"/>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/about" element={<About />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </div>
     </Router>
@@ -22,3 +23,4 @@ function App() {
 };
 
 export default App;
+
