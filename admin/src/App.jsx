@@ -6,7 +6,6 @@ const App = () => {
   return (
     <div>
       <Header />
-      <h1>hello</h1>
       <Sidebar />
     </div>
   )
