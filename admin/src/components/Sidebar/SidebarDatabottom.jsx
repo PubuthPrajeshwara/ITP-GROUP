@@ -7,12 +7,18 @@ import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
 import LocalAtmOutlinedIcon from '@mui/icons-material/LocalAtmOutlined';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
+import BookOnlineOutlinedIcon from '@mui/icons-material/BookOnlineOutlined';
 
 export const SidebarDatabottom = [
   {
-    title: "Service/Repair",
+    title: "Service",
     icon: <CarRepairOutlinedIcon />,
     link: "/service"
+  },
+  {
+    title: "Bokking",
+    icon: <BookOnlineOutlinedIcon />,
+    link: "/booking"
   },
   {
     title: "Issue",
