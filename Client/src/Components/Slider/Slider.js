@@ -6,6 +6,8 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import CarRepairIcon from '@mui/icons-material/CarRepair';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import EmergencyShareOutlinedIcon from '@mui/icons-material/EmergencyShareOutlined';
+import { Link } from 'react-router-dom';
+
 
 const slideImages = [
     {
@@ -51,9 +53,9 @@ const slideImages = [
               <div className="image-container">
                 <img src={slideImage.url} alt={slideImage.caption.text} />
                 <div className='text'>
-                <a href={slideImage.caption.link} target="_blank" rel="noopener noreferrer">
+                <Link to={slideImage.caption.link}>
                   <span>{slideImage.caption.text}</span>
-                </a>
+                </Link>
                 <span className='aditional'>{slideImage.caption.additionalText}</span> {/* Display additional caption */}
                 </div>
               </div>

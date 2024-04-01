@@ -20,11 +20,33 @@
     align-items: center;
     justify-content: flex-end;
     color: white;
+    margin-right: 10px;
 }
 
 .logo {
     width:auto;
     height: 100px;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+    font-size: small;
+    margin-right: 60px;
+}
+
+.cart-count {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -35px;
+    margin-left: -45px;
+    border-radius: 11px;
+    font-size: 14px;
+    background-color: #e14141;
+    color: white;
 }
 
 .man {
