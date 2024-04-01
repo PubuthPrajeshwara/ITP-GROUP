@@ -1,13 +1,13 @@
 import React from 'react'
 import Header from './components/Header/Header'
-import Sidebar from './components/Sidebar/Sidebar'
+import Admin from './pages/Admin/Admin'
 
 const App = () => {
   return (
 
       <div>
         <Header />
-        <Sidebar />
+        <Admin/>
       </div>
 
   )
