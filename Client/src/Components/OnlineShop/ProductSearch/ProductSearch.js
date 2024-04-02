@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import all_products from '../../assets/products/all_products';
+import all_products from '../../../assets/products/all_products';
 import './ProductSearch.css';
 
 const ProductSearch = () => {

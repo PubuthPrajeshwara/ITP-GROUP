@@ -1,7 +1,11 @@
+body {
+    perspective: 1000px;
+  }
+
 .item{
     width:350px;
     border-radius: 5px;
-    box-shadow: 1px 4px 4px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .item img{
@@ -10,7 +14,8 @@
 
 .details{
     padding: 10px;
-    background-color: rgba(0, 124, 177, 0.5);
+    background: linear-gradient(0deg, #007cb1 0%, #e1ffea22 100%);
+    border: 2px ;
 }
 
 .item p {
@@ -29,12 +34,13 @@
 }
 
 .item-price-old{
-    color: #8c8c8c;
+    color: rgba(0, 0, 0, 0.5);
     font-size: 18px;
     text-decoration: line-through;
 }
 
 .item:hover{
-    transform: scale(1.05);
-    transition: 0.6s;
+    box-shadow: 1px 4px 4px 4px rgba(0, 0, 0, 0.15);
+    transition: 0.1s;
+
 }

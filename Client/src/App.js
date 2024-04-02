@@ -4,12 +4,13 @@ import NavBar from "./Components/NavBar/NavBar";
 import Home from "./pages/Home";
 import Header from "./Components/Header/Header";
 import BookingForm from "./pages/BookingForm";
-import Cart from "./pages/cart";
-import Product from "./pages/Product";
-import OnlineShop from "./pages/OnlineShop";
+import Cart from "./pages/OnlineShopPages/Cart/cart";
+import Product from "./pages/OnlineShopPages/Product/Product";
+import OnlineShop from "./pages/OnlineShopPages/OnlineShop/OnlineShop";
 import EmergencyIssue from "./pages/emergencyIssue";
-import ProductSearch from "./Components/ProductSearch/ProductSearch";
-import FilteredProductsPage from "./pages/filtered/FilteredProductsPage";
+import ProductSearch from "./Components/OnlineShop/ProductSearch/ProductSearch";
+import FilteredProductsPage from "./pages/OnlineShopPages/filtered/FilteredProductsPage";
+import ProductCategory from "./pages/OnlineShopPages/ProductCategory/ProductCategory";
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
           <Route path='/product' element={<Product/>}>
             <Route path=':productId' element={<Product/>}/>
           </Route>
+          <Route path="/interiour" element={<ProductCategory category="Interiour"/>} />
+          <Route path="/exteriour" element={<ProductCategory category="Exteriour"/>} />
+          <Route path="/carcare" element={<ProductCategory category="Car_care"/>} />
           <Route path="/" element={<ProductSearch />} />
           <Route path="/search-results" element={<FilteredProductsPage />} />
         </Routes>

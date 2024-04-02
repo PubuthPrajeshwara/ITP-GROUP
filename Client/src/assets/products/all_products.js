@@ -13,7 +13,7 @@ let all_product = [
     {
         id: 2,
         name: "lorem Ipsium",
-        category: "Interiour",
+        category: "Exteriour",
         brand: "toyota",
         image: img_1,
         new_price: 2453.40,
@@ -22,7 +22,7 @@ let all_product = [
     {
         id: 3,
         name: "lorem Ipsium",
-        category: "Interiour",
+        category: "Exteriour",
         brand: "toyota",
         image: img_1,
         new_price: 2453.40,
@@ -30,8 +30,8 @@ let all_product = [
     },
     {
         id: 4,
-        name: "lorem Ipsium",
-        category: "Interiour",
+        name: "Car care",
+        category: "Car_care",
         brand: "toyota",
         image: img_1,
         new_price: 2453.40,
@@ -40,7 +40,7 @@ let all_product = [
     {
         id: 5,
         name: "lorem Ipsium",
-        category: "Interiour",
+        category: "Car_care",
         brand: "toyota",
         image: img_1,
         new_price: 2453.40,
@@ -49,7 +49,7 @@ let all_product = [
     {
         id: 6,
         name: "lorem Ipsium",
-        category: "Interiour",
+        category: "Car_care",
         brand: "toyota",
         image: img_1,
         new_price: 2453.40,
@@ -58,7 +58,7 @@ let all_product = [
     {
         id: 7,
         name: "lorem Ipsium",
-        category: "Interiour",
+        category: "Car_care",
         brand: "toyota",
         image: img_1,
         new_price: 2453.40,
@@ -85,7 +85,7 @@ let all_product = [
     {
         id: 10,
         name: "lorem Ipsium",
-        category: "Interiour",
+        category: "Exteriour",
         brand: "toyota",
         image: img_1,
         new_price: 2453.40,
@@ -103,7 +103,7 @@ let all_product = [
     {
         id: 12,
         name: "lorem Ipsium",
-        category: "Interiour",
+        category: "Exteriour",
         brand: "toyota",
         image: img_1,
         new_price: 2453.40,

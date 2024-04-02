@@ -19,6 +19,7 @@
     color: #171717;
     font-size: 80px;
     font-weight: 600;
+    margin-left: -70px;
 }
 
 .offers-left p{
@@ -32,7 +33,8 @@
     height: 70px;
     border-radius: 35px;
     background: #ff4141;
-    border: none;
+    transition: .3s;
+    border: 2px solid transparent;
     color: white;
     font-size: 22px;
     font-weight: 500px;
@@ -40,8 +42,12 @@
     cursor: pointer;
 }
 
-.offers-left button:active{
-    background: #ff4162;
+.offers-left button:hover{
+    background: white;
+    border-color: #ff4141;
+    color: #ff4141;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    
 }
 
 .offers-right{

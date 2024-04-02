@@ -1,6 +1,6 @@
 import React from 'react'
 import './popular.css'
-import pop_products from '../../assets/products/pop_products'
+import pop_products from '../../../assets/products/pop_products'
 import  Item  from '../item/item'
 
 export const popular = () => {

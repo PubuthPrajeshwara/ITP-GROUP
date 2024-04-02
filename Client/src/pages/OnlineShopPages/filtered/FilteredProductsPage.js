@@ -1,6 +1,6 @@
 import React from 'react';
 import './FilteredProductsPage.css'
-import Item from '../../Components/item/item';
+import Item from '../../../Components/OnlineShop/item/item';
 import { useLocation } from 'react-router-dom';
 
 const FilteredProductsPage = () => {

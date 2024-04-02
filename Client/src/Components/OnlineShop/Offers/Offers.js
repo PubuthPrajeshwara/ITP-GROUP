@@ -1,6 +1,6 @@
 import React from 'react'
 import './Offers.css'
-import img_2 from '../../assets/img_2.png'
+import img_2 from '../../../assets/img_2.png'
 
 const Offers = () => {
   return (
