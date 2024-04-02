@@ -3,7 +3,7 @@ import img_1 from "../../assets/img_1.png"
 let all_product = [
     {
         id: 1,
-        name: "lorem Ipsium",
+        name: "balla",
         category: "Interiour",
         brand: "toyota",
         image: img_1,
@@ -111,3 +111,5 @@ let all_product = [
     },
 
 ]
+
+export default all_product;
