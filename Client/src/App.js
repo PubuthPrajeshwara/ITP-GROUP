@@ -11,6 +11,7 @@ import EmergencyIssue from "./pages/emergencyIssue";
 import ProductSearch from "./Components/OnlineShop/ProductSearch/ProductSearch";
 import FilteredProductsPage from "./pages/OnlineShopPages/filtered/FilteredProductsPage";
 import ProductCategory from "./pages/OnlineShopPages/ProductCategory/ProductCategory";
+import Service from "./pages/Service";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/onlineShop' element={<OnlineShop/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/emergency' element={<EmergencyIssue/>}/>
+          <Route path='/service' element={<Service/>}/>
           <Route path='/product' element={<Product/>}>
             <Route path=':productId' element={<Product/>}/>
           </Route>
