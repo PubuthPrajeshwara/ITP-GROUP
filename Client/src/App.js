@@ -10,6 +10,7 @@ import OnlineShop from "./pages/OnlineShop";
 import EmergencyIssue from "./pages/emergencyIssue";
 import ProductSearch from "./Components/ProductSearch/ProductSearch";
 import FilteredProductsPage from "./pages/filtered/FilteredProductsPage";
+import Service from "./pages/Service";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/onlineShop' element={<OnlineShop/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/emergency' element={<EmergencyIssue/>}/>
+          <Route path='/service' element={<Service/>}/>
           <Route path='/product' element={<Product/>}>
             <Route path=':productId' element={<Product/>}/>
           </Route>
