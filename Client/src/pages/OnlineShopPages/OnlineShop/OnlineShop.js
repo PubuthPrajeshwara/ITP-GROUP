@@ -7,12 +7,18 @@ import ProductSearch from '../../../Components/OnlineShop/ProductSearch/ProductS
 import CarCare from '../../../Components/OnlineShop/CarCare/CarCare'
 import Interiour from '../../../Components/OnlineShop/Interiour/Interiour'
 import Exteriour from '../../../Components/OnlineShop/Exteriour/Exteriour'
+import DropDownMenu from '../../../Components/OnlineShop/DropdownMenu/DropDownMenu'
+import PopupSort from '../../../Components/Sort/PopupSort'
 
 const OnlineShop = () => {
   return (
     <div className='OnlineShop'>
         <img className='banner' src={Banner} alt="logo" />
-        <ProductSearch/>
+        <div className='filter'>
+          <DropDownMenu/>
+          <ProductSearch/>
+          <PopupSort/>
+        </div>
         <Popular/>
         <Offers/>
         <Interiour />

@@ -41,7 +41,7 @@ let all_product = [
         id: 5,
         name: "lorem Ipsium",
         category: "Car_care",
-        brand: "toyota",
+        brand: "honda",
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,

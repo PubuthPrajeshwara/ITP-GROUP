@@ -12,6 +12,8 @@ import ProductSearch from "./Components/OnlineShop/ProductSearch/ProductSearch";
 import FilteredProductsPage from "./pages/OnlineShopPages/filtered/FilteredProductsPage";
 import ProductCategory from "./pages/OnlineShopPages/ProductCategory/ProductCategory";
 import Service from "./pages/Service";
+import Sort from "./Components/Sort/Sort";
+import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
           <Route path="/carcare" element={<ProductCategory category="Car_care"/>} />
           <Route path="/" element={<ProductSearch />} />
           <Route path="/search-results" element={<FilteredProductsPage />} />
+          <Route path="/" element={<Sort />} />
+          <Route path="/filtered-products" element={<SortedProduct />} />
         </Routes>
       </div>
     </Router>

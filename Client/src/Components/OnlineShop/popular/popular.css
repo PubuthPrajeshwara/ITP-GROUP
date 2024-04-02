@@ -27,7 +27,8 @@ body{
 }
 
 .popular-item{
-    margin-top: 50px;
-    display: flex;
+    margin: 50px 170px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 30px;
 }
