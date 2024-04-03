@@ -5,14 +5,14 @@ import all_product from '../../../assets/products/all_products';
 import { Link } from 'react-router-dom';
 
 const Exteriour = () => {
-    const ExteriourProducts = all_product.filter(product => product.category === 'Car_care');
+    const ExteriourProducts = all_product.filter(product => product.category === 'Exteriour');
     const firstFourItems = ExteriourProducts.slice(0, 4);
     
 
     return (
         <div>
         <div className='heading'>
-            <h1 className='Exteriour-title'>CAR CARE PRODUCTS</h1>
+            <h1 className='Exteriour-title'>EXTERIOUR PRODUCTS</h1>
             < Link to='/Exteriour' className='link'>
                 view more
             </Link>

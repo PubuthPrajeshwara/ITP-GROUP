@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import all_products from '../../../assets/products/all_products';
 import './ProductSearch.css';
 
 const ProductSearch = () => {
@@ -9,12 +8,9 @@ const ProductSearch = () => {
 
   const handleSearch = () => {
     if (searchTerm.trim() !== '') {
-      const filteredProducts = all_products.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      navigate('/search-results', { state: { filteredProducts } });
+      navigate('/search-results', { state: { searchTerm } });
     } else {
-      alert('Can not search field empty');
+      alert('Cannot search with an empty field');
     }
   };
 

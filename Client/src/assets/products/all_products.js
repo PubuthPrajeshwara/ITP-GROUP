@@ -9,6 +9,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
     {
         id: 2,
@@ -18,6 +19,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
     {
         id: 3,
@@ -27,6 +29,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
     {
         id: 4,
@@ -36,6 +39,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
     {
         id: 5,
@@ -45,6 +49,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
     {
         id: 6,
@@ -54,6 +59,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
     {
         id: 7,
@@ -63,6 +69,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
     {
         id: 8,
@@ -72,6 +79,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
     {
         id: 9,
@@ -81,6 +89,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
     {
         id: 10,
@@ -90,6 +99,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
     {
         id: 11,
@@ -99,6 +109,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
     {
         id: 12,
@@ -108,6 +119,7 @@ let all_product = [
         image: img_1,
         new_price: 2453.40,
         old_price: 3204.34,
+        description: "Vehicle glass cleaner is a specially formulated product designed to effectively clean and enhance the clarity of automotive glass surfaces. It is used to remove dirt, grime, water spots, bug splatter, and other contaminants that accumulate on the windshield, windows, and mirrors of vehicles. This type of cleaner typically contains powerful cleaning agents that break down stubborn residues without leaving streaks or residue behind. Additionally, some glass cleaners may also include ingredients that provide anti-fogging properties or help repel water, improving visibility in various weather conditions.",
     },
 
 ]

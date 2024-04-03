@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import logo from '../../assets/newlogo.png';
-import man from '../../assets/man.png';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from 'react-router-dom';
-
 import './Header.css'
+import { ProductContext } from '../../Context/ProductContext';
 
 function Header() {
+
+const {getTotalCartItems} = useContext(ProductContext);
+
   return (
     <div className='Header'>
         <div className='leftHeader'>
@@ -18,12 +20,12 @@ function Header() {
           <div className='cart'>
           <Link to='/cart'><ShoppingCartOutlinedIcon style={{ color: 'white' }} fontSize="large"/></Link>
           <div className='cart-count'>
-            0
+            {getTotalCartItems()}
           </div>
           </div>
-          <h3 className='Hey'>Hey,</h3>
-          <h3 className='name'>User</h3>
-          <img className='man' src={man} alt="man" />
+          <Link to='/loginSignup'>
+          <button className='login_btn'>Log In</button>
+          </Link>
         </div>
     </div>
   )
