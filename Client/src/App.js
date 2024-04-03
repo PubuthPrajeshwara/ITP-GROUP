@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
 import NavBar from "./Components/NavBar/NavBar";
 import Home from "./pages/Home";
 import Header from "./Components/Header/Header";
-import BookingForm from "./pages/BookingForm";
+import BookingForm from "./pages/BookingPage/BookingForm";
 import Cart from "./pages/OnlineShopPages/Cart/cart";
 import Product from "./pages/OnlineShopPages/Product/Product";
 import OnlineShop from "./pages/OnlineShopPages/OnlineShop/OnlineShop";
@@ -14,6 +14,7 @@ import ProductCategory from "./pages/OnlineShopPages/ProductCategory/ProductCate
 import Service from "./pages/Service";
 import Sort from "./Components/Sort/Sort";
 import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <div >
         <Header />
         <NavBar className="navBar"/>
+       
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/booking' element={<BookingForm/>}/>
@@ -39,6 +41,7 @@ function App() {
           <Route path="/" element={<Sort />} />
           <Route path="/filtered-products" element={<SortedProduct />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );
