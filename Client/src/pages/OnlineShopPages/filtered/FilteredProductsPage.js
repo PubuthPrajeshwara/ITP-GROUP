@@ -1,20 +1,25 @@
 import React from 'react';
-import './FilteredProductsPage.css'
+import './FilteredProductsPage.css';
 import Item from '../../../Components/OnlineShop/item/item';
 import { useLocation } from 'react-router-dom';
+import all_product from '../../../assets/products/all_products';
 
 const FilteredProductsPage = () => {
   const location = useLocation();
-  const filteredProducts = location.state.filteredProducts;
+  const searchTerm = location.state?.searchTerm || '';
+
+  const filteredProducts = all_product.filter(product =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className='Filter_products'>
-      <h2>Search Results</h2>
+      <h2>Search Results for "{searchTerm}"</h2>
       {filteredProducts.length > 0 ? (
         <div className="product-list">
           {filteredProducts.map(product => (
             <Item
-              key={product.id}
+              id={product.id}
               name={product.name}
               image={product.image}
               new_price={product.new_price}
@@ -30,5 +35,6 @@ const FilteredProductsPage = () => {
 };
 
 export default FilteredProductsPage;
+
 
 

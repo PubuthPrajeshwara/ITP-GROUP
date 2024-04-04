@@ -49,11 +49,22 @@
     color: white;
 }
 
-.man {
-    width: auto;
-    height: 60px;
-    margin-left: 5px;
-    margin-right: 10px;
+.login_btn {
+    width: 120px;
+    height: 40px;
+    margin-right: 20px;
+    color: white;
+    background-color: #e14141;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+
+}
+
+.login_btn:hover{
+    color: #e14141;
+    border-color: #e14141;
+    background-color: transparent;
 }
 
 .pd {

@@ -9,7 +9,7 @@ body{
     color: #ffffff;
     position: relative;
     display: flex;
-    width: 100%;
+    width: auto;
     height: 350px; 
     text-align: left;
     padding: 10px;

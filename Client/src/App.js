@@ -13,6 +13,7 @@ import FilteredProductsPage from "./pages/OnlineShopPages/filtered/FilteredProdu
 import ProductCategory from "./pages/OnlineShopPages/ProductCategory/ProductCategory";
 import Service from "./pages/Service";
 import Sort from "./Components/Sort/Sort";
+import LoginSignup from "./pages/login/loginSignup";
 import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
 
@@ -30,6 +31,7 @@ function App() {
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/emergency' element={<EmergencyIssue/>}/>
           <Route path='/service' element={<Service/>}/>
+          <Route path='/loginSignup' element={<LoginSignup/>}/>
           <Route path='/product' element={<Product/>}>
             <Route path=':productId' element={<Product/>}/>
           </Route>

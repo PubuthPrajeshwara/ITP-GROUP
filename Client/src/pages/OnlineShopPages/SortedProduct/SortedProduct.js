@@ -13,7 +13,7 @@ const SortedProduct = () => {
           <div className="product-list">
             {filteredProducts.map(product => (
               <Item
-                key={product.id}
+                id={product.id}
                 name={product.name}
                 image={product.image}
                 new_price={product.new_price}
