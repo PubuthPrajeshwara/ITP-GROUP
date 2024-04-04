@@ -8,7 +8,7 @@
     width: 500px;
     font-size: 17px;
     border-radius: 0px;
-    border: 1px solid #555;
+    border: none;
     padding: 10px;
 }
 
@@ -17,6 +17,7 @@
     font-size: 17px;
     border-radius: 0px;
     background-color: #e14141;
+    height:50px;
     border: none;
     color: white;
 }
