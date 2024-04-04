@@ -14,7 +14,7 @@ function Sidebar() {
           <li
             key={key}
             className='Row'
-            id={location.pathname === val.link ? "active" : ""}
+            id={location.pathname.startsWith(val.link) ? "active" : ""}
           >
             <Link to={val.link}>
               <div id="icon">{val.icon}</div>
@@ -29,7 +29,7 @@ function Sidebar() {
           <li
             key={key}
             className='Row'
-            id={location.pathname === val.link ? "active" : ""}
+            id={location.pathname.startsWith(val.link) ? "active" : ""}
           >
             <Link to={val.link}>
               <div id="icon">{val.icon}</div>

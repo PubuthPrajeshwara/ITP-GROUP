@@ -7,7 +7,7 @@ export const SidebarDatatop = [
   {
     title: "Dashboard",
     icon: <SpaceDashboardOutlinedIcon />,
-    link: "/"
+    link: "/dashboard"
   },
   {
     title: "Home",
