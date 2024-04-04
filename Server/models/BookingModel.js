@@ -24,7 +24,8 @@ const bookingSchema = new Schema({
     },
     serviceTyep:{
         type:String, //data type
-        require:true //validate
+        require:true, //validate
+        enum:['Car Wash','Car Repair','Car Paint','Car Service']
     },
     vModel:{
         type:String, //data type

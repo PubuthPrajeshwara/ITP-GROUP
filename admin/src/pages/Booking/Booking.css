@@ -1,0 +1,92 @@
+body{
+    background-color: #efefef;
+.booking{
+    display: flex;
+    flex-direction: column;
+    max-width: 79em;
+    width: 100%;
+    margin: 0 auto;
+    padding-right: 1em;
+}    
+
+}
+.urlBar{
+    display: flex;
+    align-items: center;
+    margin: 1em;
+    height: 45px;
+    margin-bottom: 0;
+    padding-left: 1em;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.tblContainer{
+    height: 100%;
+    margin: 1em;
+    padding: 1.5em;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    border-radius: 10px;
+
+}
+/* Style for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Style for table header */
+  th {
+    background-color: #f2f2f2;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  /* Style for table data */
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  /* Style for table actions */
+ .accept {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+
+  .delete {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  td button:hover {
+    background-color: #030303;
+  }
+  
+  /* Style for Add Row button */
+  button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
