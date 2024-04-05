@@ -1,0 +1,11 @@
+.options{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+
+.options-right{
+    display: flex;
+    gap: 10px;
+    margin-right: 10px;
+}

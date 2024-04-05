@@ -14,13 +14,16 @@ import Payment from '../Payment/Payment'
 import OnlineShop from '../OnlineShop/OnlineShop'
 import Customer from '../Customer/Customer'
 import Booking from '../Booking/Booking'
+import Orders from '../../components/onlineShop/Orders/Orders'
+import Alerts from '../../components/onlineShop/Alerts/Alerts'
+import AddProduct from '../../components/onlineShop/AddProduct/AddProduct'
 
 const Admin = () => {
   return (
     <div className='Admin'>
       <Sidebar/>
       <Routes>
-      <Route path='/' element={<Dashboard/>}/>
+      <Route path='/dashboard' element={<Dashboard/>}/>
             <Route path='/home' element={<Home/>}/>
             <Route path='/users' element={<Users/>}/>
             <Route path='/service' element={<Service/>}/>
@@ -32,6 +35,7 @@ const Admin = () => {
             <Route path='/payment' element={<Payment/>}/>
             <Route path='/onlineshop' element={<OnlineShop/>}/>
             <Route path='/customer' element={<Customer/>}/>
+
       </Routes>
     </div>
   )
