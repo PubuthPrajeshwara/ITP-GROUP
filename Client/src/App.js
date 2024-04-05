@@ -7,7 +7,7 @@ import BookingForm from "./pages/BookingPage/BookingForm";
 import Cart from "./pages/OnlineShopPages/Cart/cart";
 import Product from "./pages/OnlineShopPages/Product/Product";
 import OnlineShop from "./pages/OnlineShopPages/OnlineShop/OnlineShop";
-import EmergencyIssue from "./pages/Emergency/emergencyIssue";
+import EmergencyIssue from "./pages/Emergency/EmergencyIssue";
 import ProductSearch from "./Components/OnlineShop/ProductSearch/ProductSearch";
 import FilteredProductsPage from "./pages/OnlineShopPages/filtered/FilteredProductsPage";
 import ProductCategory from "./pages/OnlineShopPages/ProductCategory/ProductCategory";

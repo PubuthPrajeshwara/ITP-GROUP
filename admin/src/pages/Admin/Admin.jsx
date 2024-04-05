@@ -32,7 +32,6 @@ const Admin = () => {
             <Route path='/payment' element={<Payment/>}/>
             <Route path='/onlineshop' element={<OnlineShop/>}/>
             <Route path='/customer' element={<Customer/>}/>
-
       </Routes>
     </div>
   )

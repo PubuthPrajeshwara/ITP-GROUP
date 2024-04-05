@@ -43,7 +43,7 @@ function Table() {
   return (
 
     <div className='booking'>
-       <div className='urlBar'><h3>Booking/Overview</h3></div>
+       <div className='urlBar'><h3>Booking / Overview</h3></div>
       
       <div className="tblContainer">
       <button onClick={handleAddRow}>Add Row</button>
