@@ -71,7 +71,7 @@ const ProductList = () => {
             <div className="ProductList">
                 <table className="ProductList-table">
                     <thead>
-                        <tr>
+                        <tr className='head'>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Category</th>
@@ -84,7 +84,7 @@ const ProductList = () => {
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='table-body'>
                         {filteredProducts.map((product, index) => (
                             <tr key={index}>
                                 <td>{product.id}</td>

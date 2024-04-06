@@ -3,14 +3,18 @@
     width: 85.3vw;
     background-color: white;
     height: 620px;
-    overflow-y: auto;
     font-family: sans-serif;
+    overflow-y: auto;
 }
 
 .ProductList-table {
     width: 100%;
     border-collapse: collapse;
-  }
+}
+
+.head {
+  position: relative;
+}
   
 .ProductList-table th, .ProductList-table td {
     border: 1px solid #7c7c7c;

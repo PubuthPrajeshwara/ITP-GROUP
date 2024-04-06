@@ -34,6 +34,9 @@ const Admin = () => {
             <Route path='/payment' element={<Payment/>}/>
             <Route path='/onlineshop' element={<OnlineShop/>}/>
             <Route path='/customer' element={<Customer/>}/>
+            <Route path='/Onlineshop/orders' element={<Orders/>}/>
+            <Route path='/Onlineshop/Alerts' element={<Alerts/>}/>
+            <Route path='/Onlineshop/products/addproduct' element={<AddProduct/>}/>
 
       </Routes>
     </div>
