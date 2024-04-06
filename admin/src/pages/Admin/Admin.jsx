@@ -13,7 +13,7 @@ import Employee from '../Employee/Employee'
 import Payment from '../Payment/Payment'
 import OnlineShop from '../OnlineShop/OnlineShop'
 import Customer from '../Customer/Customer'
-import Booking from '../Booking/Booking'
+import BookingRequest from '../Booking/BookingRequest'
 
 const Admin = () => {
   return (
@@ -24,7 +24,7 @@ const Admin = () => {
             <Route path='/home' element={<Home/>}/>
             <Route path='/users' element={<Users/>}/>
             <Route path='/service' element={<Service/>}/>
-            <Route path='/booking' element={<Booking/>}/>
+            <Route path='/booking' element={<BookingRequest/>}/>
             <Route path='/issue' element={<Issue/>}/>
             <Route path='/inventory' element={<Inventory/>}/>
             <Route path='/supplier' element={<Supplier/>}/>
