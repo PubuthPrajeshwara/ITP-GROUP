@@ -1,7 +1,8 @@
 import{useState} from 'react'
 import React from 'react'
 import Modal from '../../components/BookingComp/popUpform/Modal'
-import RequestTable from '../../components/BookingComp/BRequestTable/RequestTable'
+import RequestTable from '../../components/BookingComp/RequestTable'
+
 import './BookingRequest.css'
 
 
@@ -10,7 +11,7 @@ function BookingRequest() {
   return (
     <div className='wrapContent'>
       
-      <RequestTable  openModal={()=>{setModalOpen(true)}}/>
+      <RequestTable/>
       {modalOpen && <Modal closeModal={()=>{setModalOpen(false)}}
      />}
      

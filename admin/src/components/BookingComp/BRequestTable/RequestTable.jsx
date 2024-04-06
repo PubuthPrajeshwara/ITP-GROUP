@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RequestTable.css';
 
-function Table(openModal) {
+function Table() {
   const [data, setData] = useState([
     {
       id: 1,
