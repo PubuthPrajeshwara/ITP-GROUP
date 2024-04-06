@@ -6,6 +6,7 @@ import Dashboard from '../Dashboard/Dashboard'
 import Home from '../Home/Home'
 import Users from '../Users/Users'
 import Service from '../Service/Service'
+import Bookings from '../Booking/bookings'
 import Issue from '../Issue/Issue'
 import Inventory from '../Inventory/Inventory'
 import Supplier from '../Supplier/Supplier'
@@ -27,6 +28,7 @@ const Admin = () => {
             <Route path='/home' element={<Home/>}/>
             <Route path='/users' element={<Users/>}/>
             <Route path='/service' element={<Service/>}/>
+            <Route path='/booking' element={<Bookings/>}/>
             <Route path='/issue' element={<Issue/>}/>
             <Route path='/inventory' element={<Inventory/>}/>
             <Route path='/supplier' element={<Supplier/>}/>
