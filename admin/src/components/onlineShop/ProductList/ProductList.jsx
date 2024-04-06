@@ -13,6 +13,7 @@ const ProductList = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedBrand, setSelectedBrand] = useState('');
 
+    
     useEffect(() => {
         fetch('http://localhost:4000/allproducts')
             .then((res) => res.json())
@@ -56,11 +57,34 @@ const ProductList = () => {
         setFilteredProducts(filtered);
     };
 
+    const remove_product = async (id) => {
+        try {
+            const response = await fetch('http://localhost:4000/removeproduct', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: id }),
+            });
+    
+            if (response.ok) {
+                const updatedProducts = allProducts.filter(product => product.id !== id);
+                setAllProducts(updatedProducts);
+                setFilteredProducts(updatedProducts);
+            } else {
+                console.error('Failed to delete product');
+            }
+        } catch (error) {
+            console.error('Error deleting product:', error);
+        }
+    };
+    
+
     return (
         <div>
             <div className='Product-options'>
                 <div className='Product-options-left'>
-                    <Category onCategoryChange={handleCategoryChange} /> {/* Add the CategoryFilter component */}
+                    <Category onCategoryChange={handleCategoryChange} />
                 </div>
                 <div className='Product-options-right'>
                     <PopupFilter allProducts={allProducts} onFilterChange={handleFilterChange} />
@@ -100,7 +124,7 @@ const ProductList = () => {
                                 <td>{product.quantity}</td>
                                 <td>
                                     <UpdateIcon className="updateIcn" />
-                                    <DeleteOutlineIcon className="removeIcn" />
+                                    <DeleteOutlineIcon onClick={()=>{remove_product(product.id)}} className="removeIcn" />
                                 </td>
                             </tr>
                         ))}

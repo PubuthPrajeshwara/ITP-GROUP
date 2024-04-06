@@ -11,6 +11,7 @@
     flex-direction: column;
     gap: 60px;
     margin: 50px;
+    padding-top: 50px;
     padding-right: 50px;
     padding-bottom: 50px;
     box-sizing: border-box;
@@ -27,8 +28,11 @@
 .addproduct-item{
     width:100%;
     color: black;
-    font-size: 25px;
+    font-size: 13px;
     margin-left: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
 
 }
 
