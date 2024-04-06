@@ -4,11 +4,14 @@ import UpdateIcon from '@mui/icons-material/Update';
 import './ProdcutList.css';
 import SearchProduct from '../Search/Search';
 import Category from '../category/category';
+import PopupFilter from '../Filter/PopupFilter'
+import AddButton from '../AddButon/AddButton';
 
 const ProductList = () => {
     const [allProducts, setAllProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedBrand, setSelectedBrand] = useState('');
 
     useEffect(() => {
         fetch('http://localhost:4000/allproducts')
@@ -36,10 +39,35 @@ const ProductList = () => {
         }
     };
 
+    const handleFilterChange = (category, brand) => {
+        setSelectedCategory(category);
+        setSelectedBrand(brand);
+
+        let filtered = allProducts;
+
+        if (category !== '') {
+            filtered = filtered.filter((product) => product.category === category);
+        }
+
+        if (brand !== '') {
+            filtered = filtered.filter((product) => product.brand === brand);
+        }
+
+        setFilteredProducts(filtered);
+    };
+
     return (
         <div>
-            <SearchProduct onSearch={handleSearch} />
-            <Category onCategoryChange={handleCategoryChange} /> {/* Add the CategoryFilter component */}
+            <div className='Product-options'>
+                <div className='Product-options-left'>
+                    <Category onCategoryChange={handleCategoryChange} /> {/* Add the CategoryFilter component */}
+                </div>
+                <div className='Product-options-right'>
+                    <PopupFilter allProducts={allProducts} onFilterChange={handleFilterChange} />
+                    <SearchProduct onSearch={handleSearch} />
+                    <AddButton />
+                </div>
+            </div>
             <div className="ProductList">
                 <table className="ProductList-table">
                     <thead>

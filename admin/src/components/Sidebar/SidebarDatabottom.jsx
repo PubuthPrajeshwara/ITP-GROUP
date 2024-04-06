@@ -16,7 +16,7 @@ export const SidebarDatabottom = [
     link: "/service"
   },
   {
-    title: "Bokking",
+    title: "Booking",
     icon: <BookOnlineOutlinedIcon />,
     link: "/booking"
   },

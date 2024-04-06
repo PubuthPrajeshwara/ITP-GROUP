@@ -1,9 +1,10 @@
 .ProductList{
     margin: 10px;
-    width: 1620px;
+    width: 85.3vw;
     background-color: white;
-    height: 600px;
+    height: 620px;
     overflow-y: auto;
+    font-family: sans-serif;
 }
 
 .ProductList-table {
@@ -12,15 +13,19 @@
   }
   
 .ProductList-table th, .ProductList-table td {
-    border: 1px solid #dddddd;
+    border: 1px solid #7c7c7c;
     padding: 8px;
     text-align: left;
 }
   
 .ProductList-table th {
-    background-color: #d1d1d1;
+    background-color: #cfcfcf;
 }
-
+  
+.ProductList-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+  
 .ProductList-table tbody tr:hover {
     background-color: #dddddd;
 }
@@ -99,6 +104,18 @@
 .ProductList-table th:nth-child(10),
 .ProductList-table td:nth-child(10) {
   width: 5%;
+}
+
+.Product-options{
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  justify-content: space-between;
+}
+
+.Product-options-right{
+  display: flex;
+  gap: 10px;
 }
 
 

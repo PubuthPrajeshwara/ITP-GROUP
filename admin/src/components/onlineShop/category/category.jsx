@@ -1,25 +1,45 @@
 import React, { useState } from 'react';
+import './category.css';
 
-const category = ({ onCategoryChange }) => {
-    const [selectedCategory, setSelectedCategory] = useState('');
+const  category = ({ onCategoryChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
-    const handleCategoryChange = (e) => {
-        const category = e.target.value;
-        setSelectedCategory(category);
-        onCategoryChange(category);
-    };
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    setIsOpen(false);
+    onCategoryChange(category);
+  };
 
-    return (
-        <div>
-            <label htmlFor="category">Filter by Category: </label>
-            <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-                <option value="">All</option>
-                <option value="Interiour">Interior</option>
-                <option value="Exteriour">Exterior</option>
-                <option value="Car_care">Car Care</option>
-            </select>
-        </div>
-    );
+  const categories = [
+    { value: '', label: 'All' },
+    { value: 'Interiour', label: 'Interior' },
+    { value: 'Exteriour', label: 'Exterior' },
+    { value: 'Car_care', label: 'Car Care' }
+  ];
+
+  return (
+    <div className="category-dropdown-container">
+      <div className="category-dropdown-header" onClick={() => setIsOpen(!isOpen)}>
+        {selectedCategory || 'All'}
+        <span className={`category-dropdown-icon ${isOpen ? 'open' : ''}`}>&#9662;</span>
+      </div>
+      {isOpen && (
+        <ul className="category-dropdown-menu">
+          {categories.map((category, index) => (
+            <li
+              key={index}
+              className="category-dropdown-option"
+              onClick={() => handleCategoryChange(category.value)}
+            >
+              {category.label}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 export default category;
+

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     margin-left: 10px;
-    width: 1630px;
+    width: auto;
 }
 
 .options-right{

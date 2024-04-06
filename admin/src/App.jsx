@@ -1,12 +1,12 @@
 import React from 'react'
 import Header from './components/Header/Header'
 import Admin from './pages/Admin/Admin'
-import OnlineShop from './pages/OnlineShop/OnlineShop'
+import './App.css'
 
 const App = () => {
   return (
 
-      <div>
+      <div className='App'>
         <Header />
         <Admin/>
       </div>

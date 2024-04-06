@@ -1,6 +1,6 @@
 .Navbar{
     display: flex;
-    width: 1620px;
+    width: auto;
     background-color: #1e1e1e;
     margin: 10px;
     border-radius: 10px 10px 0px 0px;
@@ -9,7 +9,7 @@
 
 .NavbarList{
     display: flex;
-    width: 1630px;
+    width: 83.3vw;
     justify-content: space-around;
     
 }
