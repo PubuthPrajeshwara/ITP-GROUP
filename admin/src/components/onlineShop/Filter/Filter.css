@@ -17,12 +17,10 @@
     gap: 10px;
 }
 
-.Filter{
+.Filterbtn{
     background-color: #e14141;
     width: 150px;
-    font-size: 20px;
+    font-size: 15px;
     border: none;
-    color: white;
-    height: 30px;
-    
+    color: white;   
 }

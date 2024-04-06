@@ -61,7 +61,7 @@ const Filter = () => {
             </div>
         </div>
       <br />
-        <button className='Filter' onClick={handleFilter}>Filter</button>
+        <button className='Filterbtnrafce' onClick={handleFilter}>Filter</button>
     </div>
   );
 };

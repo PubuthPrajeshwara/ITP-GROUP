@@ -1,0 +1,106 @@
+.ProductList{
+    margin: 10px;
+    width: 1620px;
+    background-color: white;
+    height: 600px;
+    overflow-y: auto;
+}
+
+.ProductList-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+.ProductList-table th, .ProductList-table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+  
+.ProductList-table th {
+    background-color: #d1d1d1;
+}
+
+.ProductList-table tbody tr:hover {
+    background-color: #dddddd;
+}
+  
+.updateIcn {
+    cursor: pointer;
+    margin-right: 5px;
+    color: rgb(0, 132, 255);
+}
+
+.removeIcn {
+    cursor: pointer;
+    margin-right: 5px;
+    color: red;
+}
+
+.ProductList-format-image{
+    width: 80px;
+}
+
+.ProductList-table th, .ProductList-table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.ProductList-table td:nth-child(8){
+    text-align: left;
+}
+
+.ProductList-table th:nth-child(1),
+.ProductList-table td:nth-child(1) {
+  width: 5%;
+}
+
+.ProductList-table th:nth-child(2),
+.ProductList-table td:nth-child(2) {
+  width: 15%;
+}
+
+.ProductList-table th:nth-child(3),
+.ProductList-table td:nth-child(3) {
+  width: 10%;
+}
+
+.ProductList-table th:nth-child(4),
+.ProductList-table td:nth-child(4) {
+  width: 10%;
+}
+
+.ProductList-table th:nth-child(5),
+.ProductList-table td:nth-child(5) {
+  width: 10%;
+}
+
+.ProductList-table th:nth-child(6),
+.ProductList-table td:nth-child(6) {
+  width: 5%; 
+}
+
+.ProductList-table th:nth-child(7),
+.ProductList-table td:nth-child(7) {
+  width: 5%; 
+}
+
+.ProductList-table th:nth-child(8),
+.ProductList-table td:nth-child(8) {
+  width: 30%;
+}
+
+.ProductList-table th:nth-child(9),
+.ProductList-table td:nth-child(9) {
+  width: 5%;
+}
+
+.ProductList-table th:nth-child(10),
+.ProductList-table td:nth-child(10) {
+  width: 5%;
+}
+
+
+
+  
