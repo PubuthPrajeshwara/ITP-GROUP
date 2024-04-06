@@ -1,30 +1,26 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Search.css';
+import './Search.css'
 
-const Search = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
+const Search = ({ onSearch }) => {
+    const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = () => {
-    if (searchTerm.trim() !== '') {
-      navigate('/search-results', { state: { searchTerm } });
-    } else {
-      alert('Cannot search with an empty field');
-    }
-  };
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
 
-  return (
-    <div className='searchbar'>
-      <input
-        type="text"
-        placeholder="Search your product"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
-    </div>
-  );
+    const handleSearch = () => {
+        onSearch(searchTerm);
+    };
+
+    return (
+        <div className='searchbar'>
+            <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Search by product name" />
+            <button onClick={handleSearch}>Search</button>
+        </div>
+    );
 };
 
 export default Search;
+
+
+

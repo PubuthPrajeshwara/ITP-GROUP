@@ -92,35 +92,40 @@ const Product = mongoose.model("Product",{
 })
 
 app.post('/addproduct', async (req,res)=>{
-    let products = await Product.find({});
-    let id;
-    if(products.length>0){
-        let last_product_array = products.slice(-1);
-        let last_product = last_product_array[0];
-        id = last_product.id+1;
-    }else{
-        id=1;
-    }
-    const product = new Product({
-        id:id,
-        name:req.body.name,
-        category:req.body.category,
-        brand:req.body.brand,
-        image:req.body.image,
-        new_price:req.body.new_price,
-        old_price:req.body.old_price,
-        description:req.body.description,
-        quantity:Number(req.body.quantity),
+    try {
+        const products = await Product.find({});
+        let id = 1; // Default id
 
-    });
-    console.log(product);
-    await product.save();
-    console.log("Saved");
-    res.json({
-        success:true,
-        name:req.body.name,
-    })
+        if(products.length > 0) {
+            const lastProduct = products[products.length - 1];
+            id = lastProduct.id + 1; // Increment id based on the last product
+        }
+
+        const product = new Product({
+            id: id,
+            name: req.body.name,
+            category: req.body.category,
+            brand: req.body.brand,
+            image: req.body.image,
+            new_price: req.body.new_price,
+            old_price: req.body.old_price,
+            description: req.body.description,
+            quantity: Number(req.body.quantity),
+        });
+
+        console.log(product);
+        await product.save();
+        console.log("Saved");
+        res.json({
+            success: true,
+            name: req.body.name,
+        });
+    } catch (error) {
+        console.error("Error while adding product:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
 })
+
 
 // Creating API for deleting Product
 
@@ -136,7 +141,7 @@ app.post('/removeproduct',async (req,res)=>{
 // Creating API for getting all products
 
 app.get('/allproducts',async (req, res)=>{
-    let products = await Product.find({});
+    let products = await Product.find({})
     console.log("All Products Fetched");
     res.send(products);
 })

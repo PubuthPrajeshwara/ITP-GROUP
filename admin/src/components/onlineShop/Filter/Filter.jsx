@@ -1,70 +1,84 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import all_product from '../../../../../../ITP-GROUP/Client/src/assets/products/all_products';
-import './Filter.css'
+import "./Filter.css"
 
-const Filter = () => {
-  const [filters, setFilters] = useState({
-    category: '',
-    brand: '',
-  });
-  const Navigate = useNavigate();
+const Filter = ({ allProducts, onFilterChange }) => {
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedBrand, setSelectedBrand] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFilters({ ...filters, [name]: value });
-  };
+    const handleCategoryChange = (event) => {
+        const category = event.target.value;
+        setSelectedCategory(category);
+        onFilterChange(category, selectedBrand);
+    };
 
-  const handleFilter = () => {
-    const filteredProducts = all_product.filter((product) => {
-      return (
-        (filters.category === '' || product.category === filters.category) &&
-        (filters.brand === '' || product.brand === filters.brand)
-      );
-    });
-    // Pass filtered products to the next page
-    Navigate('/filtered-products', { state: { filteredProducts } });
-  };
+    const handleBrandChange = (event) => {
+        const brand = event.target.value;
+        setSelectedBrand(brand);
+        onFilterChange(selectedCategory, brand);
+    };
 
-  return (
-    <div className='FilterProduct'>
-        <div>
-            <h3>Category:</h3>
-            <div className='category-select'>
-                <label>
-                <input type="radio" name="category" value="" onChange={handleChange} checked={filters.category === ''} />
-                All
-                </label>
-                {[...new Set(all_product.map(product => product.category))].map((category, index) => (
-                <label key={index}>
-                    <input type="radio" name="category" value={category} onChange={handleChange} checked={filters.category === category} />
-                    {category}
-                </label>
-                ))}
+    // Get unique categories and brands from all products
+    const uniqueCategories = [...new Set(allProducts.map(product => product.category))];
+    const uniqueBrands = [...new Set(allProducts.map(product => product.brand))];
+
+    return (
+        <div className='filter-container'>
+            <div className='category-container'>
+                <span>Filter by Category:</span>
+                <div className='category-option'>
+                  <label>
+                    <input
+                      type="radio"
+                      name="category"
+                      value=""
+                      checked={selectedCategory === ''}
+                      onChange={handleCategoryChange}
+                    />
+                      All
+                  </label>
+                  {uniqueCategories.map((category, index) => (
+                      <label key={index}>
+                          <input
+                              type="radio"
+                              name="category"
+                              value={category}
+                              checked={selectedCategory === category}
+                              onChange={handleCategoryChange}
+                          />
+                          {category}
+                      </label>
+                  ))}
+                </div>
+            </div>
+            <div className='brand-container'>
+                <span>Filter by Brand:</span>
+                <div className='brand-option'>
+                  <label>
+                    <input
+                      type="radio"
+                      name="brand"
+                      value=""
+                      checked={selectedBrand === ''}
+                      onChange={handleBrandChange}
+                    />
+                    All
+                  </label>
+                  {uniqueBrands.map((brand, index) => (
+                      <label key={index}>
+                          <input
+                              type="radio"
+                              name="brand"
+                              value={brand}
+                              checked={selectedBrand === brand}
+                              onChange={handleBrandChange}
+                          />
+                          {brand}
+                      </label>
+                  ))}
+                </div>
             </div>
         </div>
-        <br />
-        <div>
-            <h3>Brand:</h3>
-            < div className='brand-select'>
-                <label>
-                <input type="radio" name="brand" value="" onChange={handleChange} checked={filters.brand === ''} />
-                All
-                </label>
-                {/* Add radio buttons for brands dynamically */}
-                {[...new Set(all_product.map(product => product.brand))].map((brand, index) => (
-                <label key={index}>
-                    <input type="radio" name="brand" value={brand} onChange={handleChange} checked={filters.brand === brand} />
-                    {brand}
-                </label>
-                ))}
-            </div>
-        </div>
-      <br />
-        <button className='Filter' onClick={handleFilter}>Filter</button>
-    </div>
-  );
+    );
 };
 
 export default Filter;
-

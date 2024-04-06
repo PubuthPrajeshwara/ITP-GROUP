@@ -1,54 +1,45 @@
-import React,{useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import './category.css';
 
-const category = () => {
+const  category = ({ onCategoryChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
-    const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
-  const navigate = useNavigate();
-
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
     setIsOpen(false);
-
-    // Navigate to the corresponding page based on the selected option
-    if (option === 'Interiour') {
-      navigate('/interiour');
-    } else if (option === 'Exteriour') {
-      navigate('/exteriour');
-    } else if (option === 'Car Care') {
-      navigate('/carcare');
-    }
+    onCategoryChange(category);
   };
 
-  const options = [
-    { value: 'option1', label: 'Interiour' },
-    { value: 'option2', label: 'Exteriour' },
-    { value: 'option3', label: 'Car Care' }
+  const categories = [
+    { value: '', label: 'All' },
+    { value: 'Interiour', label: 'Interior' },
+    { value: 'Exteriour', label: 'Exterior' },
+    { value: 'Car_care', label: 'Car Care' }
   ];
 
   return (
-    <div className="category-container">
-      <div className="category-header" onClick={() => setIsOpen(!isOpen)}>
-        {selectedOption || 'All'}
-        <span className={`category-icon ${isOpen ? 'open' : ''}`}>&#9662;</span>
+    <div className="category-dropdown-container">
+      <div className="category-dropdown-header" onClick={() => setIsOpen(!isOpen)}>
+        {selectedCategory || 'All'}
+        <span className={`category-dropdown-icon ${isOpen ? 'open' : ''}`}>&#9662;</span>
       </div>
       {isOpen && (
-        <ul className="category-menu">
-          {options.map((option, index) => (
+        <ul className="category-dropdown-menu">
+          {categories.map((category, index) => (
             <li
               key={index}
-              className="category-option"
-              onClick={() => handleOptionClick(option.label)}
+              className="category-dropdown-option"
+              onClick={() => handleCategoryChange(category.value)}
             >
-              {option.label}
+              {category.label}
             </li>
           ))}
         </ul>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default category
+export default category;
+

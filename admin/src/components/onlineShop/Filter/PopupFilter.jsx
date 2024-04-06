@@ -1,20 +1,20 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 import Filter from './Filter';
 import './PopupFilter.css'
 
-const PopupFilter = () => {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
+const FilterProduct = ({ allProducts, onFilterChange }) => {
+    const [isOpen, setIsOpen] = useState(false);
 
-    const togglePopup = () => {
-        setIsPopupOpen(!isPopupOpen);
-      };
-  
+    const toggleFilter = () => {
+        setIsOpen(!isOpen);
+    };
+
     return (
-    <div>
-        <button className='popup-btn' onClick={togglePopup}>Filter</button>
-        {isPopupOpen && <Filter />}
-    </div>
-  )
-}
+        <div>
+            <button className='popup-btn' onClick={toggleFilter}>Filter</button>
+            {isOpen && <Filter allProducts={allProducts} onFilterChange={onFilterChange} />}
+        </div>
+    );
+};
 
-export default PopupFilter
+export default FilterProduct;

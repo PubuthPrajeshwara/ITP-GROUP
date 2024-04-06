@@ -1,12 +1,13 @@
 import React from 'react'
 import Navbar from '../../components/onlineShop/Navbar/Navbar'
-import ProductOptions from '../../components/onlineShop/productOptions/ProductOptions'
+import ProductList from '../../components/onlineShop/ProductList/ProductList'
+import './Online.css'
 
 const OnlineShop = () => {
   return (
-    <div>
+    <div className='OlineShop'>
       <Navbar/>
-      <ProductOptions/>
+      <ProductList/>
     </div>
   )
 }
