@@ -1,8 +1,8 @@
-// Form.js
-import React, { useState } from 'react';
-import './BookingForm.css'; // Import your CSS file
+import React from 'react'
+import './Modal.css'
+import { useState } from 'react';
 
-const Form = () => {
+const modal = ({closeModal}) => {
   const [formData, setFormData] = useState({
     ownerName: '',
     email: '',
@@ -28,12 +28,14 @@ const Form = () => {
     // Handle form submission logic here
   };
 
+
   return (
-    <div className="form-container">
-      <h2>Booking Form</h2>
+    <div className='modal-container' onClick={closeModal}>
+     <div className="form-container">
+      <p >Booking ID: B001</p>
       <div className="form-columns">
         <div className="form-column">
-          <h3>OWNER DETAILS</h3>
+          <h3 style={{color:'#007CB1'}}>OWNER DETAILS</h3>
           <label>Name:</label>
           <input
             type="text"
@@ -69,7 +71,7 @@ const Form = () => {
 
 
         <div className="form-column">
-          <h3>VEHICLE DETAILS</h3>
+          <h3 style={{color:'#007CB1'}}>VEHICLE DETAILS</h3>
           <label>Location:</label>
         <input
           type="text"
@@ -120,9 +122,13 @@ const Form = () => {
         />
         </div>
       </div>
-      <button type="submit">Book Now</button>
+        <div class="button-container">
+          <button type="submit">Book Now</button>
+          
+        </div>
     </div>
-  );
-};
+</div>
+  )
+}
 
-export default Form;
+export default modal;
