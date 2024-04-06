@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './RequestTable.css';
 
-function Table() {
+
+function Table({openModal}) {
   const [data, setData] = useState([
     {
       id: 1,
@@ -47,7 +48,6 @@ function Table() {
       
       <div className="tblContainer">
       <button onClick={handleAddRow}>Add Row</button>
-      <button onClick={openModal}>Open Modal</button>
       <table>
         <thead>
           <tr>
@@ -74,7 +74,8 @@ function Table() {
               <td>{row.Time}</td>
               <td>{row.Status}</td>
               <td>
-                
+              
+              <button className='view' onClick={openModal}>View</button>
               <button className='accept' onClick={() => handleDeleteRow(row.id)}>Accept</button>
                 <button className='delete' onClick={() => handleDeleteRow(row.id)}>Delete</button>
                 {/* You can add more actions here like edit/update */}

@@ -32,9 +32,7 @@ const Admin = () => {
             <Route path='/payment' element={<Payment/>}/>
             <Route path='/onlineshop' element={<OnlineShop/>}/>
             <Route path='/customer' element={<Customer/>}/>
-            <Route path='/onlineshop/orders' element={<Orders/>}/>
-            <Route path='/onlineshop/Alerts' element={<Alerts/>}/>
-            <Route path='/onlineshop/products/addproduct' element={<AddProduct/>}/>
+
       </Routes>
     </div>
   )
