@@ -13,7 +13,10 @@ import Employee from '../Employee/Employee'
 import Payment from '../Payment/Payment'
 import OnlineShop from '../OnlineShop/OnlineShop'
 import Customer from '../Customer/Customer'
-import BookingRequest from '../Booking/BookingRequest'
+import Orders from '../../components/onlineShop/Orders/Orders'
+import Alerts from '../../components/onlineShop/Alerts/Alerts'
+import AddProduct from '../../components/onlineShop/AddProduct/AddProduct'
+
 
 const Admin = () => {
   return (
@@ -24,7 +27,6 @@ const Admin = () => {
             <Route path='/home' element={<Home/>}/>
             <Route path='/users' element={<Users/>}/>
             <Route path='/service' element={<Service/>}/>
-            <Route path='/booking' element={<BookingRequest/>}/>
             <Route path='/issue' element={<Issue/>}/>
             <Route path='/inventory' element={<Inventory/>}/>
             <Route path='/supplier' element={<Supplier/>}/>
