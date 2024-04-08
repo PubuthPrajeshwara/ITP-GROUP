@@ -1,5 +1,6 @@
 .ProductList{
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     width: 85.3vw;
     background-color: white;
     height: 620px;
@@ -119,6 +120,8 @@
 
 .Product-options-right{
   display: flex;
+  flex-direction: row;
+  margin-right: -7px;
   gap: 10px;
 }
 

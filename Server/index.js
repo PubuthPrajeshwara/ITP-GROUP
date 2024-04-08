@@ -153,3 +153,55 @@ app.listen(port,(error)=>{
         console.log("Error : " + errror)
     }
 })
+
+// Creating API for update product
+app.put('/updateproduct/:id', async (req, res) => {
+    try {
+        const productId = req.params.id;
+        
+        // Find the product by ID
+        const product = await Product.findOne({ id: productId });
+
+        if (!product) {
+            return res.status(404).json({ success: false, error: 'Product not found' });
+        }
+
+        // Update product fields with new values
+        product.name = req.body.name || product.name;
+        product.category = req.body.category || product.category;
+        product.brand = req.body.brand || product.brand;
+        product.image = req.body.image || product.image;
+        product.new_price = req.body.new_price || product.new_price;
+        product.old_price = req.body.old_price || product.old_price;
+        product.description = req.body.description || product.description;
+        product.quantity = req.body.quantity || product.quantity;
+
+        // Save the updated product
+        await product.save();
+
+        console.log("Updated Product:", product);
+        res.json({ success: true, product });
+    } catch (error) {
+        console.error("Error while updating product:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+// Creating API for getting a specific product by ID
+app.get('/product/:id', async (req, res) => {
+    try {
+        const productId = req.params.id;
+        
+        // Find the product by ID
+        const product = await Product.findOne({ id: productId });
+
+        if (!product) {
+            return res.status(404).json({ success: false, error: 'Product not found' });
+        }
+
+        res.json({ success: true, product });
+    } catch (error) {
+        console.error("Error while fetching product:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
