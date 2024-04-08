@@ -1,0 +1,35 @@
+.f-container {
+    max-width: 750px;
+    width: auto;
+    margin: auto;
+    height: 520px;
+    border: 1px solid #1a1818;
+    border-radius: 10px;
+    padding: 1em;
+    font-family: Arial, sans-serif;
+    background-color: rgb(231, 231, 231);
+   
+  }
+  
+  .s-image {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .import-button {
+    display: block;
+    margin-top: 10px;
+    margin-left: 9rem;
+  }
+  
+  input, textarea, button {
+     margin-top:10px;
+  }
+  
+  .buttons button{
+     margin-right:10px;
+  }
+  .buttons{
+    margin-left: 6rem;
+  }
