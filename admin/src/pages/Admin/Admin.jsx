@@ -18,6 +18,7 @@ import Orders from '../../components/onlineShop/Orders/Orders'
 import Alerts from '../../components/onlineShop/Alerts/Alerts'
 import AddProduct from '../../components/onlineShop/AddProduct/AddProduct'
 import UpdateProduct from '../../components/onlineShop/UpdateProduct/UpdateProduct'
+import AddService from '../../components/serviceComp/AddService/AddService'
 
 
 const Admin = () => {

@@ -1,6 +1,7 @@
 .productDisplay{
     display:flex;
     margin: 0px 170px;
+    gap: 20px;
 }
 
 .productDisplay-left{

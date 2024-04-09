@@ -1,9 +1,18 @@
-import React from 'react'
-import all_product from '../../../assets/products/all_products';
+import React, { useEffect, useState } from 'react';
 import Item from '../../../Components/OnlineShop/item/item';
 import './ProductCategory.css';
 
 const ProductCategory = (props) => {
+
+    const [all_product,setAll_product] = useState([]);
+
+    useEffect(()=>{
+        fetch('http://localhost:4000/allproducts')
+        .then((response)=>response.json())
+        .then((data)=>setAll_product(data))
+     },[])
+
+
     let category = props.category;
 
     if(category === 'Car_care'){
