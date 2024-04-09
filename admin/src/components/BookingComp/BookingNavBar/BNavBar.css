@@ -5,7 +5,6 @@
     margin-top: 10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-bottom: 10px;
-
 }
 
 .NavBarList {
@@ -39,6 +38,5 @@
 
 .NavBarList #active {
     background-color: #007cb1;
-    border-radius: 5px;
-    margin: 0px;
+
 }

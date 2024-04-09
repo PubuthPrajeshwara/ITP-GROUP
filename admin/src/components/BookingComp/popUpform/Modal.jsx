@@ -30,7 +30,9 @@ const modal = ({closeModal}) => {
 
 
   return (
-    <div className='modal-container' onClick={closeModal}>
+    <div className='modal-container' onClick={(e) =>{
+      if(e.target.className==='modal-container')closeModal();
+    }}>
      <div className="form-container">
       <p >Booking ID: B001</p>
       <div className="form-columns">

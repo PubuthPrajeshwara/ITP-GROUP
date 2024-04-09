@@ -17,6 +17,8 @@ import Customer from '../Customer/Customer'
 import Orders from '../../components/onlineShop/Orders/Orders'
 import Alerts from '../../components/onlineShop/Alerts/Alerts'
 import AddProduct from '../../components/onlineShop/AddProduct/AddProduct'
+import AddService from '../../components/serviceComp/AddService/AddService'
+
 
 
 const Admin = () => {
@@ -39,6 +41,8 @@ const Admin = () => {
             <Route path='/Onlineshop/orders' element={<Orders/>}/>
             <Route path='/Onlineshop/Alerts' element={<Alerts/>}/>
             <Route path='/Onlineshop/products/addproduct' element={<AddProduct/>}/>
+            <Route path='/service/add' element={<AddService/>}/>
+            <Route path='/service' element={<Service/>}/>
 
       </Routes>
     </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import './ManageService.css';
+import './ServiceForm.css';
 
 function AddService({ selectedService }) {
     return (
