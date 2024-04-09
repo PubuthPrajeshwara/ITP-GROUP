@@ -1,14 +1,11 @@
 .filter-container{
-    position: fixed;
+    position: absolute;
     z-index: 1;
-    background: white;
-    width: 450px;
-    box-shadow: 1px 4px 4px 4px rgba(0, 0, 0, 0.15);
+    background-color: white;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    align-items: left;
-    padding:10px;
-    font-family: sans-serif;
+    box-shadow: 1px 4px 4px 4px rgba(0, 0, 0, 0.15);
 }
 
 .category-container{
@@ -17,21 +14,18 @@
     gap: 10px;
 }
 
-.category-option{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 20px;
-}
-
 .brand-container{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 20px;
+}
+
+.category-option{
+    display: flex;
+    flex-direction: column;
 }
 
 .brand-option{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
 }

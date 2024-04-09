@@ -6,12 +6,20 @@ import SearchProduct from '../Search/Search';
 import Category from '../category/category';
 import PopupFilter from '../Filter/PopupFilter'
 import AddButton from '../AddButon/AddButton';
+import { useNavigate } from 'react-router-dom';
 
 const ProductList = () => {
     const [allProducts, setAllProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedBrand, setSelectedBrand] = useState('');
+
+    const Navigate = useNavigate();
+
+    const naigateToUpdate = (productId) =>{
+        Navigate(`/Onlineshop/products/updateproduct/${productId}`)
+    }
+
 
     
     useEffect(() => {
@@ -123,7 +131,7 @@ const ProductList = () => {
                                 <td>{product.description}</td>
                                 <td>{product.quantity}</td>
                                 <td>
-                                    <UpdateIcon className="updateIcn" />
+                                    <UpdateIcon onClick={() => naigateToUpdate(product.id)} className="updateIcn" />
                                     <DeleteOutlineIcon onClick={()=>{remove_product(product.id)}} className="removeIcn" />
                                 </td>
                             </tr>
