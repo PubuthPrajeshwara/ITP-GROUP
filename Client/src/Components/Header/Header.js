@@ -23,9 +23,11 @@ const {getTotalCartItems} = useContext(ProductContext);
             {getTotalCartItems()}
           </div>
           </div>
-          <Link to='/loginSignup'>
+          {localStorage.getItem('auth-token')
+          ?<button className='login_btn' onClick={() =>{localStorage.removeItem('auth-token');window.location.replace('/')}}>Log Out</button>
+          :<Link to='/loginSignup'>
           <button className='login_btn'>Log In</button>
-          </Link>
+          </Link>}
         </div>
     </div>
   )

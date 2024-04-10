@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import all_product from '../../assets/products/all_products';
 import './Sort.css'
 
 const Sort = () => {
+
+  const [all_product,setAll_product] = useState([]);
+
+    useEffect(()=>{
+        fetch('http://localhost:4000/allproducts')
+        .then((response)=>response.json())
+        .then((data)=>setAll_product(data))
+     },[])
+
   const [filters, setFilters] = useState({
     category: '',
     brand: '',
