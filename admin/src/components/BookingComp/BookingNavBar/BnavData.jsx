@@ -3,6 +3,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import BookOnlineIcon from '@mui/icons-material/BookOnline';
 import GridViewRoundedIcon from '@mui/icons-material/GridViewRounded';
+import NotificationAddRoundedIcon from '@mui/icons-material/NotificationAddRounded';
 
 export const BNavData = [
     {
@@ -24,6 +25,10 @@ export const BNavData = [
         title: 'Add Bookings',
         icon: <AddCircleOutlineIcon />,
         link: '/booking/add',       
+    },
+    {
+        title: 'Reminders',
+        icon: <NotificationAddRoundedIcon />,
+        link: '/booking/reminders',       
     }
-
 ]

@@ -2,7 +2,7 @@ import React from 'react';
 import './ServiceTable.css';
  
 
-const ServiceTable = () => {
+const ServiceTable = ({openPop}) => {
     const services = [
         { title: 'Body Wash',image:'img', hour: '1h - 2h', description: 'Specifically targeted at all entry level vehicle range covering the Auto Miraj exclusive 17-point inspection checklist which ...' },
         { title: 'Engine Tune ups',image:'img', hour: '2h-3h', description: 'If you are searching for a long-lasting ride barring any problems and to preserve your car’s/vehicle’s emissions low and gas effectivity high, engine tune-ups are essential.' },
@@ -33,7 +33,7 @@ const ServiceTable = () => {
                         <td >{service.description}</td>
                         <td style={{width:'8.5rem'}}>
             
-                       <button className='accept' >Update</button>
+                       <button className='accept' onClick={openPop}>Update</button>
                        <button className='delete' >Delete</button>
                
                        </td>
