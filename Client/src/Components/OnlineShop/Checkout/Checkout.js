@@ -20,9 +20,9 @@ const Checkout = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
-            // Create an array to store the items in the cart
+            const totalAmount = getTotalCartAmount().toFixed(2);
             const items = Object.keys(cartItems).map((itemId) => {
                 const itemQuantity = cartItems[itemId];
                 if (itemQuantity > 0) {
@@ -37,29 +37,46 @@ const Checkout = () => {
                 }
                 return null;
             }).filter(Boolean);
-
-            // Send checkout data to backend API
-            const response = await axios.post('http://localhost:4000/checkout', {
-                ...formData,
-                items,
-            });
-
-            // Reset form after successful submission
-            setFormData({
-                fullName: '',
-                email: '',
-                address: '',
-                contact: '',
-                paymentMethod: 'Credit Card',
-            });
-
-            // Handle success response, e.g., show confirmation message to the user
-            console.log('Order placed successfully. Order ID:', response.data.orderId);
+    
+            // Display confirmation box
+            const confirmed = window.confirm('Are you sure you want to place this order?');
+            
+            if (confirmed) {
+                const authToken = localStorage.getItem('auth-token');
+                if (authToken) {
+                    const response = await axios.post('http://localhost:4000/checkout', {
+                        ...formData,
+                        totalAmount,
+                        items,
+                    }, {
+                        headers: {
+                            'auth-token': authToken
+                        }
+                    });
+    
+                    setFormData({
+                        fullName: '',
+                        email: '',
+                        address: '',
+                        contact: '',
+                        paymentMethod: 'Cash On Delivery',
+                    });
+    
+                    console.log('Order placed successfully. Order ID:', response.data.orderId);
+                    window.location.replace("/onlineshop");
+                } else {
+                    console.error('No authentication token found.');
+                    // Handle case where authentication token is missing
+                }
+            } else {
+                console.log('Order placement cancelled by user.');
+            }
         } catch (error) {
-            // Handle error response, e.g., show error message to the user
             console.error('Error while placing order:', error.response.data.error);
         }
     };
+    
+    
 
     return (
         <div className='Checkout'>
@@ -121,7 +138,6 @@ const Checkout = () => {
                 />
                 {/* Dropdown for payment method */}
                 <select name='paymentMethod' value={formData.paymentMethod} onChange={handleChange}>
-                    <option value='Credit Card'>Credit Card</option>
                     <option value='Cash On Delivery'>Cash On Delivery</option>
                 </select>
                 <div className='checkout-total'>

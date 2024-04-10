@@ -301,13 +301,21 @@ const fetchUser = async (req,res,next)=>{
     }
 }
 
-app.post('/addtocart',fetchUser,async (req,res)=>{
-    console.log("Addeded",req.body.itemId);
-    let userData = await Users.findOne({_id:req.user.id});
-    userData.cartData[req.body.itemId] +=1;
-    await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
-    res.send("Added")
-})
+app.post('/addtocart', fetchUser, async (req, res) => {
+    try {
+        console.log("Added", req.body.itemId);
+        let userData = await Users.findOne({ _id: req.user.id });
+        userData.cartData[req.body.itemId] += 1;
+        await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
+        
+        // Send a JSON response indicating success
+        res.json({ success: true, message: "Item added to cart successfully" });
+    } catch (error) {
+        console.error("Error while adding item to cart:", error);
+        // Send a JSON response indicating failure
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
 
 app.post('/removefromcart',fetchUser,async(req,res)=>{
     console.log("Removed",req.body.itemId);
@@ -335,6 +343,15 @@ function generateOrderId() {
     }
     return orderId;
 }
+
+const clearCart = async (userId) => {
+    try {
+        await Users.findByIdAndUpdate(userId, { cartData: {} });
+        console.log("Cart cleared for user:", userId);
+    } catch (error) {
+        console.error("Error while clearing cart:", error);
+    }
+};
 
 
 // Import necessary modules
@@ -367,6 +384,10 @@ const Order = mongoose.model("Order", {
         type: Array,
         required: true,
     },
+    totalAmount: {
+        type: Number,
+        required: true,
+    },
     orderDate: {
         type: Date,
         default: Date.now,
@@ -378,10 +399,10 @@ const Order = mongoose.model("Order", {
 });
 
 // Create API endpoint for handling checkout form submission
-app.post('/checkout', async (req, res) => {
+app.post('/checkout',fetchUser, async (req, res) => {
     try {
         // Extract order data from request body
-        const { fullName, email, address, contact, paymentMethod, items } = req.body;
+        const { fullName, email, address, contact, paymentMethod, items, totalAmount } = req.body;
 
         // Generate a unique order ID (you can use any method you prefer)
         const orderId = generateOrderId();
@@ -395,10 +416,15 @@ app.post('/checkout', async (req, res) => {
             contact,
             paymentMethod,
             items,
+            totalAmount,
         });
 
         // Save the order to the database
         await order.save();
+
+        const userId = req.user.id;
+
+        await clearCart(userId);
 
         // Return success response
         res.json({ success: true, orderId });
