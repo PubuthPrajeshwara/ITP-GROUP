@@ -323,3 +323,87 @@ app.post('/getcart',fetchUser,async (req,res) =>{
     let userData = await Users.findOne({_id:req.user.id});
     res.json(userData.cartData)
 })
+
+// Function to generate a unique order ID
+function generateOrderId() {
+    // Generate a random string of characters for the order ID
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const length = 8;
+    let orderId = '';
+    for (let i = 0; i < length; i++) {
+        orderId += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return orderId;
+}
+
+
+// Import necessary modules
+const Order = mongoose.model("Order", {
+    orderId: {
+        type: String,
+        required: true,
+    },
+    fullName: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+    },
+    address: {
+        type: String,
+        required: true,
+    },
+    contact: {
+        type: String,
+        required: true,
+    },
+    paymentMethod: {
+        type: String,
+        required: true,
+    },
+    items: {
+        type: Array,
+        required: true,
+    },
+    orderDate: {
+        type: Date,
+        default: Date.now,
+    },
+    status: {
+        type: String,
+        default: "processing",
+    },
+});
+
+// Create API endpoint for handling checkout form submission
+app.post('/checkout', async (req, res) => {
+    try {
+        // Extract order data from request body
+        const { fullName, email, address, contact, paymentMethod, items } = req.body;
+
+        // Generate a unique order ID (you can use any method you prefer)
+        const orderId = generateOrderId();
+
+        // Create a new order instance
+        const order = new Order({
+            orderId,
+            fullName,
+            email,
+            address,
+            contact,
+            paymentMethod,
+            items,
+        });
+
+        // Save the order to the database
+        await order.save();
+
+        // Return success response
+        res.json({ success: true, orderId });
+    } catch (error) {
+        console.error("Error while saving order:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});

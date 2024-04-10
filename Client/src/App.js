@@ -16,6 +16,7 @@ import Sort from "./Components/Sort/Sort";
 import LoginSignup from "./pages/login/loginSignup";
 import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
+import Checkout from "./Components/OnlineShop/Checkout/Checkout";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path="/search-results" element={<FilteredProductsPage />} />
           <Route path="/" element={<Sort />} />
           <Route path="/filtered-products" element={<SortedProduct />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
         <Footer />
       </div>

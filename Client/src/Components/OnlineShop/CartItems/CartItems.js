@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import './CartItems.css';
 import { ProductContext } from '../../../Context/ProductContext';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { Link } from 'react-router-dom';
 
 const CartItems = () => {
     const { getTotalCartAmount,all_product, cartItems, removeFromCart } = useContext(ProductContext);
@@ -55,7 +56,9 @@ const CartItems = () => {
                             <h3>Rs.{getTotalCartAmount().toFixed(2)}</h3>
                         </div>
                     </div>
-                    <button>PROCEED TO CHECKOUT</button>
+                    <Link to='/checkout'>
+                        <button>PROCEED TO CHECKOUT</button>
+                    </Link>
                 </div>
                 <div className='cartitems-promocode'>
                     <p>If you have a promo code, Enter it here</p>
