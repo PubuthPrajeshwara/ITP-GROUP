@@ -4,6 +4,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import Home from "./pages/Home";
 import Header from "./Components/Header/Header";
 import BookingForm from "./pages/BookingPage/BookingForm";
+import InsertProduct from "./pages/InventoryPage/InsertProduct";
 import Cart from "./pages/OnlineShopPages/Cart/cart";
 import Product from "./pages/OnlineShopPages/Product/Product";
 import OnlineShop from "./pages/OnlineShopPages/OnlineShop/OnlineShop";
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/booking' element={<BookingForm/>}/>
+          <Route path='/inventory' element={<InsertProduct/>}/>
           <Route path='/onlineShop' element={<OnlineShop/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/emergency' element={<EmergencyIssue/>}/>

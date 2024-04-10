@@ -1,9 +1,17 @@
+import{useState} from 'react'
 import React from 'react'
+import Products from '../../components/InventoryComp/Products'
 
-const Inventory = () => {
+
+function InventoryRequest() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
-    <div></div>
-  )
+    <div className='wrapContent'>
+      <RequestTable openModal={() => { setModalOpen(true); }} />
+      {modalOpen && <InventoryModal closeModal={() => { setModalOpen(false); }} />}
+    </div>
+  );
 }
 
-export default Inventory
+export default InventoryRequest
