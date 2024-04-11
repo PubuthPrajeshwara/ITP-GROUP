@@ -49,7 +49,6 @@ const Admin = () => {
             <Route path='/booking/add' element={<AddBooking/>}/>
             <Route path='/booking/all' element={<AllBooking/>}/>
 
-
       </Routes>
     </div>
   )
