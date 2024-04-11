@@ -309,7 +309,26 @@ app.post('/addtocart', fetchUser, async (req, res) => {
             return res.status(400).json({ success: false, error: 'Invalid item ID' });
         }
 
+        // Find the product by ID
+        const product = await Product.findOne({ id: itemId });
+
+        // Check if the product exists
+        if (!product) {
+            return res.status(404).json({ success: false, error: 'Product not found' });
+        }
+
+        // Check if the product is available
+        if (product.quantity <= 0) {
+            return res.status(400).json({ success: false, error: 'Product out of stock' });
+        }
+
+        // Update product quantity and save
+        product.quantity -= 1;
+        await product.save();
+
         console.log("Added", itemId);
+
+        // Update user's cart data
         let userData = await Users.findOne({ _id: req.user.id });
         userData.cartData[itemId] += 1;
         await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
@@ -323,14 +342,45 @@ app.post('/addtocart', fetchUser, async (req, res) => {
     }
 });
 
-app.post('/removefromcart',fetchUser,async(req,res)=>{
-    console.log("Removed",req.body.itemId);
-    let userData = await Users.findOne({_id:req.user.id});
-    if(userData.cartData[req.body.itemId]>0)
-    userData.cartData[req.body.itemId] -=1;
-    await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
-    res.send("Removed")
-})
+
+app.post('/removefromcart', fetchUser, async (req, res) => {
+    try {
+        const itemId = Number(req.body.itemId);
+
+        if (isNaN(itemId)) {
+            return res.status(400).json({ success: false, error: 'Invalid item ID' });
+        }
+
+        let userData = await Users.findOne({ _id: req.user.id });
+
+        // Check if the item is present in the user's cart
+        if (userData.cartData[itemId] > 0) {
+            // Decrease the item count in the user's cart
+            userData.cartData[itemId] -= 1;
+            
+            // Find the product associated with the item ID
+            const product = await Product.findOne({ id: itemId });
+
+            // Increase the product quantity
+            product.quantity += 1;
+
+            // Save the updated product quantity
+            await product.save();
+            
+            // Save the updated cart data for the user
+            await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
+
+            console.log("Removed", itemId);
+            res.json({ success: true, message: "Item removed from cart successfully" });
+        } else {
+            res.status(400).json({ success: false, error: "Item not found in cart" });
+        }
+    } catch (error) {
+        console.error("Error while removing item from cart:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
 
 app.post('/getcart',fetchUser,async (req,res) =>{
     console.log("GetCart");
@@ -448,3 +498,24 @@ app.post('/checkout',fetchUser, async (req, res) => {
         res.status(500).json({ success: false, error: "Internal server error" });
     }
 });
+
+// Creating API for getting the quantity of a specific product
+app.get('/product/quantity/:id', async (req, res) => {
+    try {
+        const productId = req.params.id;
+
+        // Find the product by ID
+        const product = await Product.findOne({ id: productId });
+
+        if (!product) {
+            return res.status(404).json({ success: false, error: 'Product not found' });
+        }
+
+        // Send the product quantity in the response
+        res.json({ success: true, quantity: product.quantity });
+    } catch (error) {
+        console.error("Error while fetching product quantity:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
