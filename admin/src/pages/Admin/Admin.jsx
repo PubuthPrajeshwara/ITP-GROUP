@@ -19,6 +19,8 @@ import Alerts from '../../components/onlineShop/Alerts/Alerts'
 import AddProduct from '../../components/onlineShop/AddProduct/AddProduct'
 import UpdateProduct from '../../components/onlineShop/UpdateProduct/UpdateProduct'
 import AddService from '../../components/serviceComp/AddService/AddService'
+import AddBooking from '../../components/BookingComp/AddBooking/AddBooking'
+import AllBooking from '../../components/BookingComp/AllBookings/AllBooking'
 
 
 const Admin = () => {
@@ -44,6 +46,8 @@ const Admin = () => {
             <Route path='/service/add' element={<AddService/>}/>
             <Route path='/service' element={<Service/>}/>
             <Route exact path="/Onlineshop/products/updateproduct/:id" element={<UpdateProduct />} />
+            <Route path='/booking/add' element={<AddBooking/>}/>
+            <Route path='/booking/all' element={<AllBooking/>}/>
 
 
       </Routes>

@@ -1,8 +1,8 @@
-import React from 'react'
-import './BookingForm.css'
-import { useState } from 'react';
+// Form.js
+import React, { useState } from 'react';
+import './BookingForm.css'; // Import your CSS file
 
-const BookingForm = ({closeModal}) => {
+const BookingForm = () => {
   const [formData, setFormData] = useState({
     ownerName: '',
     email: '',
@@ -28,21 +28,17 @@ const BookingForm = ({closeModal}) => {
     // Handle form submission logic here
   };
 
-
   return (
-    <div className='modal-container' onClick={(e) =>{
-      if(e.target.className==='modal-container')closeModal();
-    }}>
-     <div className="form-container">
-      <p >Booking ID: B001</p>
+    <div className="form-container">
+     
       <div className="form-columns">
         <div className="form-column">
-          <h3 style={{color:'#007CB1'}}>OWNER DETAILS</h3>
+          <h3>OWNER DETAILS</h3>
           <label>Name:</label>
           <input
             type="text"
             name="ownerName"
-            placeholder="Name"
+            placeholder="Enter Name"
             value={formData.ownerName}
             onChange={handleInputChange}
           />
@@ -50,6 +46,7 @@ const BookingForm = ({closeModal}) => {
         <input
           type="email"
           name="email"
+          placeholder="Ex: pathum@gmail.com"
           value={formData.email}
           onChange={handleInputChange}
           required
@@ -58,6 +55,7 @@ const BookingForm = ({closeModal}) => {
         <input
           type="tel"
           name="phone"
+          placeholder="+94 "
           value={formData.phone}
           onChange={handleInputChange}
           required
@@ -73,35 +71,47 @@ const BookingForm = ({closeModal}) => {
 
 
         <div className="form-column">
-          <h3 style={{color:'#007CB1'}}>VEHICLE DETAILS</h3>
+          <h3>VEHICLE DETAILS</h3>
           <label>Location:</label>
-        <input
-          type="text"
-          name="location"
-          value={formData.location}
-          onChange={handleInputChange}
-          required
-        />
+          <select
+            name="location"
+            value={formData.location}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="">Select Location</option>
+            <option value="Location 1">Location 1</option>
+            <option value="Location 2">Location 2</option>
+            <option value="Location 3">Location 3</option>
+            {/* Add more options as needed */}
+          </select>
         <label>Service Type:</label>
-        <input
-          type="text"
-          name="serviceType"
-          value={formData.serviceType}
-          onChange={handleInputChange}
-          required
-        />
+        <select
+            name="ServiceType"
+            value={formData.serviceType}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="">Select Service</option>
+            <option value="Location 1">Service 1</option>
+            <option value="Location 2">Service 2</option>
+            <option value="Location 3">Service 3</option>
+            {/* Add more options as needed */}
+          </select>
         <label>Vehicle Model:</label>
          <input 
           type="text"
           name="vehicleModel"
+          placeholder='Ex: Toyota Corolla'
           value={formData.vehicleModel} 
           onChange={handleInputChange}
           required
         />
-        <label>Vehicle Model:</label>
+        <label>Vehicle Number</label>
          <input 
           type="text"
           name="vehicleNumber"
+          placeholder='Ex: WP CA-1234'
           value={formData.vehicleNumber} 
           onChange={handleInputChange}
           required
@@ -124,13 +134,9 @@ const BookingForm = ({closeModal}) => {
         />
         </div>
       </div>
-        <div class="button-container">
-          <button type="submit">Book Now</button>
-          
-        </div>
+      <button type="submit">Add Booking</button>
     </div>
-</div>
-  )
-}
+  );
+};
 
 export default BookingForm;

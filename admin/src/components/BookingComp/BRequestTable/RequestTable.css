@@ -1,5 +1,4 @@
-body{
-    background-color: #efefef;
+
 .booking{
     display: flex;
     flex-direction: column;
@@ -8,25 +7,11 @@ body{
     margin: 0 auto;
     padding-right: 1em;
 }    
-
-}
-.urlBar{
-    display: flex;
-    align-items: center;
-    margin: 1em;
-    height: 45px;
-    margin-bottom: 0;
-    padding-left: 1em;
-    border: 1px solid #ccc;
-    background-color: #ffffff;
-    border-radius: 10px;
-    font-family: Arial, sans-serif;
-}
-
 .tblContainer{
     height: 100%;
-    margin: 1em;
-    padding: 1.5em;
+    margin: 0.2em;
+    padding: 1em;
+    padding-top: 0.2em;
     border: 1px solid #ccc;
     background-color: #ffffff;
     border-radius: 10px;
@@ -98,3 +83,18 @@ table {
     background-color: #45a049;
   }
 
+  .line-one{
+    display: flex;
+    justify-content: left;
+    margin-bottom: 0.1em;
+  }
+  .gReportbtn{
+    background-color: #005D84;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-weight: bold;
+    margin-left: 43rem;
+  }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './RequestTable.css';
+import Search from '../Search/Search';
+import DescriptionIcon from '@mui/icons-material/Description';
 
 
 function Table({openModal}) {
@@ -15,7 +17,17 @@ function Table({openModal}) {
       Time: '10:00 AM',
       Status: 'Accepted'
     },
-    // Add more initial data as needed
+    {
+      id: 2,
+      Bid: '002',
+      Name: 'Dilshan',
+      ServiceType: 'Cleaning',
+      Phone: '123-456-7890',
+      Email: 'john@example.com',
+      Date: '2024-04-04',
+      Time: '10:00 AM',
+      Status: 'Accepted'
+    }
   ]);
 
   const handleAddRow = () => {
@@ -33,6 +45,18 @@ function Table({openModal}) {
     setData([...data, newRow]);
   };
 
+  const [filteredData, setFilteredData] = useState(data);
+
+  const handleSearch = (searchTerm) => {
+    const filteredRows = data.filter((row) => {
+      // Customize this logic based on your search requirements
+      return Object.values(row).some(
+        (value) => value.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+      );
+    });
+    setFilteredData(filteredRows);
+  };
+
   const handleDeleteRow = (id) => {
     setData(data.filter(row => row.id !== id));
   };
@@ -40,12 +64,16 @@ function Table({openModal}) {
   const handleUpdateRow = (id, newData) => {
     setData(data.map(row => (row.id === id ? { ...row, ...newData } : row)));
   };
-
+  
   return (
 
     <div className='booking'>
       <div className="tblContainer">
+        <div className='line-one'>
       <button onClick={handleAddRow}>Add Row</button>
+      <Search handleSearch={handleSearch}/>
+      <button className='gReportbtn'>Generate Report</button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -61,7 +89,7 @@ function Table({openModal}) {
           </tr>
         </thead>
         <tbody>
-          {data.map(row => (
+          {filteredData.map((row) => (
               <tr key={row.id}>
               <td>{row.Bid}</td>
               <td>{row.Name}</td>

@@ -1,4 +1,4 @@
-.NavBar {
+.BNavBar {
     width: 79rem;
     background-color: #3d3c3c;
     color: rgb(255, 255, 255);
@@ -7,7 +7,7 @@
     margin-bottom: 10px;
 }
 
-.NavBarList {
+.BNavBarList {
     display: flex;
     justify-content: left;
     align-items: left;
@@ -16,12 +16,12 @@
     margin: 0;
 }
 
-.NavBarList li {
+.BNavBarList li {
     padding: 10px;
     cursor: pointer;
 }
 
-.NavBarList li:hover {
+.BNavBarList li:hover {
     background-color: #555;
 }
 
@@ -36,7 +36,6 @@
     color: white;
 }
 
-.NavBarList #active {
+.BNavBarList #active {
     background-color: #007cb1;
-
 }

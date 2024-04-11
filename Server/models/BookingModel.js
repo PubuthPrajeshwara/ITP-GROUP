@@ -3,45 +3,45 @@ const Schema = mongoose.Schema;
 
 const bookingSchema = new Schema({
     name:{
-        type:String, //data type
-        require:true //validate
+        type:String,
+        require:true 
     },
     email:{
-        type:String, //data type
-        require:true //validate
+        type:String, 
+        require:true 
     },
     phone:{
-        type:Number, //data type
-        require:true //validate
+        type:Number, 
+        require:true 
     },
     notes:{
-        type:String, //data type
-        require:true //validate
+        type:String, 
+        require:true 
     },
     location:{
-        type:String, //data type
-        require:true //validate
+        type:String, 
+        require:true 
     },
     serviceTyep:{
-        type:String, //data type
-        require:true, //validate
+        type:String, 
+        require:true, 
         enum:['Car Wash','Car Repair','Car Paint','Car Service']
     },
     vModel:{
-        type:String, //data type
-        require:true //validate
+        type:String,
+        require:true 
     },
     date:{
-        type:Date, //data type
-        require:true //validate
+        type:Date, 
+        require:true 
     },
     time:{
-        type:TimeRanges, //data type
-        require:true //validate
+        type:TimeRanges,
+        require:true 
     }
 });
 
 module.exports = mongoose.model(
-    "BookingModel",//file name
+    'BookingModel',//file name
     bookingSchema //function schema
     )

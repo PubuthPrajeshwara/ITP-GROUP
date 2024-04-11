@@ -7,8 +7,8 @@ function BNavBar() {
     const location = useLocation();
   return (
     
-       <div className="NavBar">
-      <ul className="NavBarList">
+       <div className="BNavBar">
+      <ul className="BNavBarList">
         {BNavData.map((val, key) => (
           <li
             key={key}
