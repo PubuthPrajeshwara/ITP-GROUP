@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+/*import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import '../Product.css';
+import './Product.css';
 
 export default function Products() {
     const [productData, setProductData] = useState([]);
@@ -177,3 +177,4 @@ export default function Products() {
         </div></>
     );
 }
+*/

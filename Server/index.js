@@ -301,25 +301,221 @@ const fetchUser = async (req,res,next)=>{
     }
 }
 
-app.post('/addtocart',fetchUser,async (req,res)=>{
-    console.log("Addeded",req.body.itemId);
-    let userData = await Users.findOne({_id:req.user.id});
-    userData.cartData[req.body.itemId] +=1;
-    await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
-    res.send("Added")
-})
+app.post('/addtocart', fetchUser, async (req, res) => {
+    try {
+        // Check if itemId is a valid number
+        const itemId = Number(req.body.itemId);
+        if (isNaN(itemId)) {
+            return res.status(400).json({ success: false, error: 'Invalid item ID' });
+        }
 
-app.post('/removefromcart',fetchUser,async(req,res)=>{
-    console.log("Removed",req.body.itemId);
-    let userData = await Users.findOne({_id:req.user.id});
-    if(userData.cartData[req.body.itemId]>0)
-    userData.cartData[req.body.itemId] -=1;
-    await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
-    res.send("Removed")
-})
+        // Find the product by ID
+        const product = await Product.findOne({ id: itemId });
+
+        // Check if the product exists
+        if (!product) {
+            return res.status(404).json({ success: false, error: 'Product not found' });
+        }
+
+        // Check if the product is available
+        if (product.quantity <= 0) {
+            return res.status(400).json({ success: false, error: 'Product out of stock' });
+        }
+
+        // Update product quantity and save
+        product.quantity -= 1;
+        await product.save();
+
+        console.log("Added", itemId);
+
+        // Update user's cart data
+        let userData = await Users.findOne({ _id: req.user.id });
+        userData.cartData[itemId] += 1;
+        await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
+        
+        // Send a JSON response indicating success
+        res.json({ success: true, message: "Item added to cart successfully" });
+    } catch (error) {
+        console.error("Error while adding item to cart:", error);
+        // Send a JSON response indicating failure
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+
+app.post('/removefromcart', fetchUser, async (req, res) => {
+    try {
+        const itemId = Number(req.body.itemId);
+
+        if (isNaN(itemId)) {
+            return res.status(400).json({ success: false, error: 'Invalid item ID' });
+        }
+
+        let userData = await Users.findOne({ _id: req.user.id });
+
+        // Check if the item is present in the user's cart
+        if (userData.cartData[itemId] > 0) {
+            // Decrease the item count in the user's cart
+            userData.cartData[itemId] -= 1;
+            
+            // Find the product associated with the item ID
+            const product = await Product.findOne({ id: itemId });
+
+            // Increase the product quantity
+            product.quantity += 1;
+
+            // Save the updated product quantity
+            await product.save();
+            
+            // Save the updated cart data for the user
+            await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
+
+            console.log("Removed", itemId);
+            res.json({ success: true, message: "Item removed from cart successfully" });
+        } else {
+            res.status(400).json({ success: false, error: "Item not found in cart" });
+        }
+    } catch (error) {
+        console.error("Error while removing item from cart:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
 
 app.post('/getcart',fetchUser,async (req,res) =>{
     console.log("GetCart");
     let userData = await Users.findOne({_id:req.user.id});
     res.json(userData.cartData)
 })
+
+// Function to generate a unique order ID
+function generateOrderId() {
+    // Generate a random string of characters for the order ID
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const length = 8;
+    let orderId = '';
+    for (let i = 0; i < length; i++) {
+        orderId += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return orderId;
+}
+
+const getDefaultCart = () =>{
+    let cart = {};
+    for (let index = 0; index < 300 + 1; index++){
+        cart[index]=0;
+    }
+    return cart;
+}
+
+const clearCart = async (userId) => {
+    try {
+        const defaultCart = getDefaultCart();
+        await Users.findByIdAndUpdate(userId, {cartData : defaultCart });
+        console.log("Cart cleared for user:", userId);
+    } catch (error) {
+        console.error("Error while clearing cart:", error);
+    }
+};
+
+
+// Import necessary modules
+const Order = mongoose.model("Order", {
+    orderId: {
+        type: String,
+        required: true,
+    },
+    fullName: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+    },
+    address: {
+        type: String,
+        required: true,
+    },
+    contact: {
+        type: String,
+        required: true,
+    },
+    paymentMethod: {
+        type: String,
+        required: true,
+    },
+    items: {
+        type: Array,
+        required: true,
+    },
+    totalAmount: {
+        type: Number,
+        required: true,
+    },
+    orderDate: {
+        type: Date,
+        default: Date.now,
+    },
+    status: {
+        type: String,
+        default: "processing",
+    },
+});
+
+// Create API endpoint for handling checkout form submission
+app.post('/checkout',fetchUser, async (req, res) => {
+    try {
+        // Extract order data from request body
+        const { fullName, email, address, contact, paymentMethod, items, totalAmount } = req.body;
+
+        // Generate a unique order ID (you can use any method you prefer)
+        const orderId = generateOrderId();
+
+        // Create a new order instance
+        const order = new Order({
+            orderId,
+            fullName,
+            email,
+            address,
+            contact,
+            paymentMethod,
+            items,
+            totalAmount,
+        });
+
+        // Save the order to the database
+        await order.save();
+
+        const userId = req.user.id;
+
+        await clearCart(userId);
+
+        // Return success response
+        res.json({ success: true, orderId });
+    } catch (error) {
+        console.error("Error while saving order:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+// Creating API for getting the quantity of a specific product
+app.get('/product/quantity/:id', async (req, res) => {
+    try {
+        const productId = req.params.id;
+
+        // Find the product by ID
+        const product = await Product.findOne({ id: productId });
+
+        if (!product) {
+            return res.status(404).json({ success: false, error: 'Product not found' });
+        }
+
+        // Send the product quantity in the response
+        res.json({ success: true, quantity: product.quantity });
+    } catch (error) {
+        console.error("Error while fetching product quantity:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
