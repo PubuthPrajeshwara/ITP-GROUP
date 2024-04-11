@@ -18,6 +18,7 @@ const ProductSearch = () => {
     <div className='searchbar'>
       <input
         type="text"
+        className='search'
         placeholder="Search your product"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}

@@ -38,11 +38,11 @@ const NavBar = () => {
             BOOK NOW
           </Link>
         </li>
-        <li className="nav-item" id="book">
+        {/*<li className="nav-item" id="book">
           <Link to="/inventory" className="nav-link">
             VIEW INVENTORY
           </Link>
-        </li>
+  </li>*/}
         <li className="nav-item" id="shop">
           <Link to="/onlineShop" className="nav-link">
             SHOP NOW

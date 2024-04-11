@@ -2,10 +2,21 @@ import React, { useContext } from 'react';
 import './CartItems.css';
 import { ProductContext } from '../../../Context/ProductContext';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Import useHistory for programmatic navigation
 
 const CartItems = () => {
-    const { getTotalCartAmount,all_product, cartItems, removeFromCart } = useContext(ProductContext);
+    const Navigate = useNavigate(); // Initialize useHistory hook
+    const { getTotalCartAmount, all_product, cartItems, removeFromCart } = useContext(ProductContext);
+
+    const handleProceedToCheckout = () => {
+        if (localStorage.getItem('auth-token')) {
+            Navigate('/checkout'); // Navigate to checkout page
+        } else {
+            // You can implement your own logic here, like showing a login modal or redirecting to the login page.
+            // For example:
+            Navigate('/loginSignup'); // Redirect to the login page
+        }
+    };
 
     return (
         <div className='CartItems'>
@@ -21,7 +32,7 @@ const CartItems = () => {
             {all_product.map((e) => {
                 if (cartItems[e.id] > 0) {
                     return (
-                        <div key={e.id}> {/* Add unique key prop */}
+                        <div key={e.id}>
                             <div className='cartitems-format cartitems-format-main'>
                                 <img src={e.image} alt="" className='carticon-product-icon' />
                                 <p>{e.name}</p>
@@ -56,9 +67,7 @@ const CartItems = () => {
                             <h3>Rs.{getTotalCartAmount().toFixed(2)}</h3>
                         </div>
                     </div>
-                    <Link to='/checkout'>
-                        <button>PROCEED TO CHECKOUT</button>
-                    </Link>
+                    <button onClick={handleProceedToCheckout}>PROCEED TO CHECKOUT</button>
                 </div>
                 <div className='cartitems-promocode'>
                     <p>If you have a promo code, Enter it here</p>

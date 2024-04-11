@@ -1,6 +1,6 @@
 import{useState} from 'react'
 import React from 'react'
-import Products from '../../components/InventoryComp/Products'
+//import Products from '../../components/InventoryComp/Products'
 
 
 function InventoryRequest() {

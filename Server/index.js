@@ -303,9 +303,15 @@ const fetchUser = async (req,res,next)=>{
 
 app.post('/addtocart', fetchUser, async (req, res) => {
     try {
-        console.log("Added", req.body.itemId);
+        // Check if itemId is a valid number
+        const itemId = Number(req.body.itemId);
+        if (isNaN(itemId)) {
+            return res.status(400).json({ success: false, error: 'Invalid item ID' });
+        }
+
+        console.log("Added", itemId);
         let userData = await Users.findOne({ _id: req.user.id });
-        userData.cartData[req.body.itemId] += 1;
+        userData.cartData[itemId] += 1;
         await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
         
         // Send a JSON response indicating success
@@ -344,9 +350,18 @@ function generateOrderId() {
     return orderId;
 }
 
+const getDefaultCart = () =>{
+    let cart = {};
+    for (let index = 0; index < 300 + 1; index++){
+        cart[index]=0;
+    }
+    return cart;
+}
+
 const clearCart = async (userId) => {
     try {
-        await Users.findByIdAndUpdate(userId, { cartData: {} });
+        const defaultCart = getDefaultCart();
+        await Users.findByIdAndUpdate(userId, {cartData : defaultCart });
         console.log("Cart cleared for user:", userId);
     } catch (error) {
         console.error("Error while clearing cart:", error);

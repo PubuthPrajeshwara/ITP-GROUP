@@ -64,6 +64,7 @@ const Checkout = () => {
     
                     console.log('Order placed successfully. Order ID:', response.data.orderId);
                     window.location.replace("/onlineshop");
+                    window.alert("Your order placed successfully");
                 } else {
                     console.error('No authentication token found.');
                     // Handle case where authentication token is missing
