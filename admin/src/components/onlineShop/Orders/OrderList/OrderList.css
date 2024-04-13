@@ -1,0 +1,56 @@
+.orders-table-container {
+    height: 700px;
+    margin: 10px;
+    overflow-y: auto;
+    width: 85vw;
+}
+
+.order-filter{
+    display: flex;
+    gap: 40px;
+}
+
+.orders-table {
+    width: 85vw;
+    border-collapse: collapse;
+}
+
+.orders-table th {
+    background-color: #8f8f8f;
+    text-align: left;
+    padding: 8px;
+}
+
+.order-row:nth-child(even) {
+    background-color: #eceaea;
+}
+
+.orders-table td {
+    padding: 5px;
+}
+
+.action-column {
+    width: 80px;
+}
+
+
+.update-icon {
+    cursor: pointer;
+    margin-right: 5px;
+    color: blue;
+}
+
+.delete-icon {
+    cursor: pointer;
+    margin-right: 5px;
+    color: red;
+}
+
+.item-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.item {
+    margin-bottom: 5px;
+}

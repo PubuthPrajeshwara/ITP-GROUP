@@ -7,6 +7,7 @@ import Category from '../category/category';
 import PopupFilter from '../Filter/PopupFilter'
 import AddButton from '../AddButon/AddButton';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../Navbar/Navbar'
 
 const ProductList = () => {
     const [allProducts, setAllProducts] = useState([]);
@@ -90,6 +91,7 @@ const ProductList = () => {
 
     return (
         <div>
+            <Navbar />
             <div className='Product-options'>
                 <div className='Product-options-left'>
                     <Category onCategoryChange={handleCategoryChange} />

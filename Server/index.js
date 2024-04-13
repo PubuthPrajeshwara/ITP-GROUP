@@ -94,11 +94,11 @@ const Product = mongoose.model("Product",{
 app.post('/addproduct', async (req,res)=>{
     try {
         const products = await Product.find({});
-        let id = 1; // Default id
+        let id = 1;
 
         if(products.length > 0) {
             const lastProduct = products[products.length - 1];
-            id = lastProduct.id + 1; // Increment id based on the last product
+            id = lastProduct.id + 1;
         }
 
         const product = new Product({
@@ -158,15 +158,13 @@ app.listen(port,(error)=>{
 app.put('/updateproduct/:id', async (req, res) => {
     try {
         const productId = req.params.id;
-        
-        // Find the product by ID
+
         const product = await Product.findOne({ id: productId });
 
         if (!product) {
             return res.status(404).json({ success: false, error: 'Product not found' });
         }
 
-        // Update product fields with new values
         product.name = req.body.name || product.name;
         product.category = req.body.category || product.category;
         product.brand = req.body.brand || product.brand;
@@ -176,7 +174,6 @@ app.put('/updateproduct/:id', async (req, res) => {
         product.description = req.body.description || product.description;
         product.quantity = req.body.quantity || product.quantity;
 
-        // Save the updated product
         await product.save();
 
         console.log("Updated Product:", product);
@@ -303,41 +300,33 @@ const fetchUser = async (req,res,next)=>{
 
 app.post('/addtocart', fetchUser, async (req, res) => {
     try {
-        // Check if itemId is a valid number
         const itemId = Number(req.body.itemId);
         if (isNaN(itemId)) {
             return res.status(400).json({ success: false, error: 'Invalid item ID' });
         }
 
-        // Find the product by ID
         const product = await Product.findOne({ id: itemId });
 
-        // Check if the product exists
         if (!product) {
             return res.status(404).json({ success: false, error: 'Product not found' });
         }
 
-        // Check if the product is available
         if (product.quantity <= 0) {
             return res.status(400).json({ success: false, error: 'Product out of stock' });
         }
 
-        // Update product quantity and save
         product.quantity -= 1;
         await product.save();
 
         console.log("Added", itemId);
 
-        // Update user's cart data
         let userData = await Users.findOne({ _id: req.user.id });
         userData.cartData[itemId] += 1;
         await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
         
-        // Send a JSON response indicating success
         res.json({ success: true, message: "Item added to cart successfully" });
     } catch (error) {
         console.error("Error while adding item to cart:", error);
-        // Send a JSON response indicating failure
         res.status(500).json({ success: false, error: "Internal server error" });
     }
 });
@@ -353,21 +342,18 @@ app.post('/removefromcart', fetchUser, async (req, res) => {
 
         let userData = await Users.findOne({ _id: req.user.id });
 
-        // Check if the item is present in the user's cart
+
         if (userData.cartData[itemId] > 0) {
-            // Decrease the item count in the user's cart
+
             userData.cartData[itemId] -= 1;
             
-            // Find the product associated with the item ID
             const product = await Product.findOne({ id: itemId });
 
-            // Increase the product quantity
+
             product.quantity += 1;
 
-            // Save the updated product quantity
             await product.save();
-            
-            // Save the updated cart data for the user
+
             await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
 
             console.log("Removed", itemId);
@@ -463,16 +449,14 @@ const Order = mongoose.model("Order", {
     },
 });
 
-// Create API endpoint for handling checkout form submission
+
 app.post('/checkout',fetchUser, async (req, res) => {
     try {
-        // Extract order data from request body
+
         const { fullName, email, address, contact, paymentMethod, items, totalAmount } = req.body;
 
-        // Generate a unique order ID (you can use any method you prefer)
         const orderId = generateOrderId();
 
-        // Create a new order instance
         const order = new Order({
             orderId,
             fullName,
@@ -484,14 +468,12 @@ app.post('/checkout',fetchUser, async (req, res) => {
             totalAmount,
         });
 
-        // Save the order to the database
         await order.save();
 
         const userId = req.user.id;
 
         await clearCart(userId);
 
-        // Return success response
         res.json({ success: true, orderId });
     } catch (error) {
         console.error("Error while saving order:", error);
@@ -504,14 +486,12 @@ app.get('/product/quantity/:id', async (req, res) => {
     try {
         const productId = req.params.id;
 
-        // Find the product by ID
         const product = await Product.findOne({ id: productId });
 
         if (!product) {
             return res.status(404).json({ success: false, error: 'Product not found' });
         }
 
-        // Send the product quantity in the response
         res.json({ success: true, quantity: product.quantity });
     } catch (error) {
         console.error("Error while fetching product quantity:", error);
@@ -519,3 +499,31 @@ app.get('/product/quantity/:id', async (req, res) => {
     }
 });
 
+// Define route for fetching all orders data
+app.get('/orders', async (req, res) => {
+    try {
+
+        const orders = await Order.find({});
+
+        res.json({ success: true, orders });
+    } catch (error) {
+        console.error("Error while fetching orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+// Define route for delete order
+app.delete('/order/:id', async (req, res) => {
+    try {
+        const orderId = req.params.id;
+        const deletedOrder = await Order.findOneAndDelete({ orderId });
+        if (!deletedOrder) {
+            return res.status(404).json({ success: false, error: 'Order not found' });
+        }
+
+        res.json({ success: true, message: 'Order deleted successfully' });
+    } catch (error) {
+        console.error("Error while deleting order:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
