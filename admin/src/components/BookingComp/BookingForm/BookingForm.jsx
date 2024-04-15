@@ -81,7 +81,7 @@ const BookingForm = () => {
           >
             <option value="">Select Location</option>
             <option value="Location 1">Location 1</option>
-            <option value="Location 2">Location 2</option>
+            <option value="Location 2">Locati    on 2</option>
             <option value="Location 3">Location 3</option>
             {/* Add more options as needed */}
           </select>
