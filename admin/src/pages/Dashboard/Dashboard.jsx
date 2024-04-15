@@ -3,7 +3,7 @@ import './Dashboard.css'
 
 const Dashboard = () => {
   return (
-    <div className='dashboard'>Welcome</div>
+    <div className='dashboard'>Pubuth Ponnaya</div>
   )
 }
 
