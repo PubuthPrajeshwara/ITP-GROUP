@@ -7,6 +7,9 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const { log } = require("console");
+const Product = require("./models/OnlineShopModels/Product");
+const Users = require("./models/OnlineShopModels/Users");
+const Order = require("./models/OnlineShopModels/Order");
 
 app.use(express.json());
 app.use(cors());
@@ -43,7 +46,7 @@ app.post("/upload",upload.single('product'),(req,res)=>{
 
 //Schema for Creating Products
 
-const Product = mongoose.model("Product",{
+/*const Product = mongoose.model("Product",{
     id:{
         type: Number,
         required:true,
@@ -89,7 +92,7 @@ const Product = mongoose.model("Product",{
         type:Boolean,
         default:true,
     }
-})
+})*/
 
 app.post('/addproduct', async (req,res)=>{
     try {
@@ -203,7 +206,7 @@ app.get('/product/:id', async (req, res) => {
     }
 });
 
-const Users = mongoose.model('Users',{
+/*const Users = mongoose.model('Users',{
     name:{
         type:String,
     },
@@ -221,7 +224,7 @@ const Users = mongoose.model('Users',{
         type:Date,
         default:Date.now,
     }
-})
+})*/
 
 app.post('/signup',async (req,res) =>{
 
@@ -406,7 +409,7 @@ const clearCart = async (userId) => {
 
 
 // Import necessary modules
-const Order = mongoose.model("Order", {
+/*const Order = mongoose.model("Order", {
     orderId: {
         type: String,
         required: true,
@@ -447,7 +450,7 @@ const Order = mongoose.model("Order", {
         type: String,
         default: "processing",
     },
-});
+});*/
 
 
 app.post('/checkout',fetchUser, async (req, res) => {
@@ -526,4 +529,27 @@ app.delete('/order/:id', async (req, res) => {
         console.error("Error while deleting order:", error);
         res.status(500).json({ success: false, error: "Internal server error" });
     }
+});
+
+//Pathum,s routes
+
+const Booking = require('./models/BookingModel');
+
+app.post('/addbooking', async (req, res) => {
+  try {
+    // Extract form data from request body
+    const formData = req.body;
+
+    // Create a new booking instance
+    const newBooking = new Booking(formData);
+
+    // Save the booking to the database
+    await newBooking.save();
+    console.log("booking added");
+
+    res.status(201).json({ message: 'Booking saved successfully' });
+  } catch (error) {
+    console.error('Error saving booking:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
