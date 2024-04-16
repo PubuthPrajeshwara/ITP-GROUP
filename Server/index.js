@@ -553,3 +553,17 @@ app.post('/addbooking', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+
+// 3. Create API endpoint to retrieve data
+app.get('/allBookingRequest', async (req, res) => {
+    try {
+      const data = await Booking.find();
+      res.json(data);
+      console.log("All Booking Requests Fetched");
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });

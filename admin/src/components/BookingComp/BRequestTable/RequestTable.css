@@ -1,4 +1,9 @@
+.scroll{
+    overflow: auto;
+    height: 700px;
+    width: auto;
 
+}
 .booking{
     display: flex;
     flex-direction: column;

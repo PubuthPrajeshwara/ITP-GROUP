@@ -1,16 +1,25 @@
-import React from 'react'
-import BNavBar from '../BookingNavBar/BNavBar'
-import RequestTable from '../BRequestTable/RequestTable'
-import './AllBooking.css'
+import React from 'react';
+import { useState } from 'react';
+import BNavBar from '../BookingNavBar/BNavBar';
+import AllBookingTable from '../../AllBookingTable/AllBookingTable';
+import './AllBooking.css';
+import Modal from '../popUpform/Modal';
 
 function AllBooking() {
-  return (
-         <div className='wrapContent'>
-         <BNavBar/>
-         <RequestTable />    
-    </div>
+  const [modalOpen, setModalOpen] = useState(false);
+  const [rowData, setRowData] = useState(null); // State to hold row data
 
-  )
+  return (
+    <div className='wrapContent'>
+      <BNavBar />
+      <AllBookingTable openModal={(rowData) => { // Pass rowData to openModal
+        setRowData(rowData); // Set rowData state
+        setModalOpen(true);
+      }} />
+      {/* Pass rowData to Modal component */}
+      {modalOpen && <Modal closeModal={() => { setModalOpen(false) }} rowData={rowData} />}
+    </div>
+  );
 }
 
-export default AllBooking
+export default AllBooking;

@@ -1,18 +1,18 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './RequestTable.css';
-import Search from '../Search/Search';
+import Search from '../BookingComp/Search/Search';
+import DescriptionIcon from '@mui/icons-material/Description';
 
-function Table() {
-  const [data, setData] = useState([]);
+function Table({ openModal }) {
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:4000/allBookingRequest');
-        setData(response.data);
-        setFilteredData(response.data); // Initialize filteredData with all data
+        const acceptedData = response.data.filter(row => row.status === 'accepted');
+        setFilteredData(acceptedData);
       } catch (error) {
         console.error(error);
       }
@@ -21,33 +21,18 @@ function Table() {
     fetchData();
   }, []);
 
-  const handleSearch = (searchTerm) => {
-    const filteredRows = data.filter((row) => {
-      // Customize this logic based on your search requirements
-      return (
-        row.ownerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        row.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        row.email.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    });
-    setFilteredData(filteredRows);
+  // Function to handle opening the modal with row data
+  const handleOpenModal = (rowData) => {
+    openModal(rowData); // Pass the row data to openModal function
   };
 
-  const handleDeleteRow = (id) => {
-    setData(data.filter(row => row.id !== id));
-  };
-
-  const handleUpdateStatus = (id) => {
-    // Implement logic to update the status of a booking request with the provided id
-    // You might need to make an API call to update the status in your backend
-  };
 
   return (
     <div className='booking'>
       <div className="tblContainer">
         <div className='line-one'>
           <button>Add Row</button>
-          <Search handleSearch={handleSearch}/>
+          <Search />
           <button className='gReportbtn'>Generate Report</button>
         </div>
         <div className='scroll'>
@@ -77,8 +62,8 @@ function Table() {
                   <td>{row.time}</td>
                   <td>{row.status}</td>
                   <td>
-                    <button className='accept' onClick={() => handleUpdateStatus(row.id)}>Accept</button>
-                    <button className='delete' onClick={() => handleDeleteRow(row.id)}>Delete</button>
+                    <button className='update' onClick={openModal}>Update</button>
+                    <button className='delete' onClick={() => handleDeleteRow(row._id)}>Delete</button>
                   </td>
                 </tr>
               ))}
