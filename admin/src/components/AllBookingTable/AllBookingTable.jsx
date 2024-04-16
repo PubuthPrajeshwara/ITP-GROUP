@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Search from '../BookingComp/Search/Search';
@@ -62,7 +61,7 @@ function Table({ openModal }) {
                   <td>{row.time}</td>
                   <td>{row.status}</td>
                   <td>
-                    <button className='update' onClick={openModal}>Update</button>
+                  <button className='update' onClick={() => handleOpenModal(row)}>Update</button>
                     <button className='delete' onClick={() => handleDeleteRow(row._id)}>Delete</button>
                   </td>
                 </tr>

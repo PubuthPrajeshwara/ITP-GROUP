@@ -24,6 +24,10 @@ const Modal = ({ closeModal, rowData }) => {
     }
   }, [rowData]);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -125,8 +129,7 @@ const Modal = ({ closeModal, rowData }) => {
           </div>
         </div>
         <div className="button-container">
-          <button type="submit">Update</button>
-          <button type="submit">Cancel</button>
+          <button type="submit">Book Now</button>
         </div>
       </div>
     </div>
