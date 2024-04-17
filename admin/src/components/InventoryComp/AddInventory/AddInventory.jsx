@@ -1,7 +1,7 @@
 import React from 'react';
 import InventoryNavBar from '../InventoryNavBar/INavBar';
 import './AddInventory.css'; 
-import InventoryForm from '../InventoryForm/InventoryForm'; // Update the import path if needed
+import InventoryForm from '../InventoryForm/InventoryForm'; 
 
 function AddInventory() {  
   return (
