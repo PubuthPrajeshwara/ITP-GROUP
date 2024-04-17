@@ -1,7 +1,8 @@
+
 .navbar {
   background-color: rgba(0, 124, 177, 0.95);
   height: 80px;
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   position: relative;

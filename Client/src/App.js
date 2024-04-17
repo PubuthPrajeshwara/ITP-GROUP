@@ -18,11 +18,12 @@ import LoginSignup from "./pages/login/loginSignup";
 import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
 import Checkout from "./Components/OnlineShop/Checkout/Checkout";
+import "./App.css";
 
 function App() {
   return (
     <Router>
-      <div >
+      <div className="app" >
         <Header />
         <NavBar className="navBar"/>
        
