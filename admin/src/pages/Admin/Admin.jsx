@@ -21,6 +21,10 @@ import UpdateProduct from '../../components/onlineShop/UpdateProduct/UpdateProdu
 import AddService from '../../components/serviceComp/AddService/AddService'
 import AddBooking from '../../components/BookingComp/AddBooking/AddBooking'
 import AllBooking from '../../components/BookingComp/AllBookings/AllBooking'
+import CreateIssue from '../../components/IssueComp/CreateIssues';
+import ShowIssue from '../../components/IssueComp/ShowIssue';
+import EditIssue from '../../components/IssueComp/EditIssue';
+import DeleteIssue from '../../components/IssueComp/DeleteIssue';
 
 
 const Admin = () => {
@@ -48,6 +52,10 @@ const Admin = () => {
             <Route exact path="/Onlineshop/products/updateproduct/:id" element={<UpdateProduct />} />
             <Route path='/booking/add' element={<AddBooking/>}/>
             <Route path='/booking/all' element={<AllBooking/>}/>
+            <Route path='/issues/create' element={<CreateIssue />} />
+            <Route path='/issues/details/:id' element={<ShowIssue />} />
+            <Route path='/issues/edit/:id' element={<EditIssue />} />
+            <Route path='/issues/delete/:id' element={<DeleteIssue />} />
 
       </Routes>
     </div>

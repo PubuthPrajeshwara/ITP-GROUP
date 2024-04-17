@@ -1,5 +1,5 @@
 import React from 'react';
-import './ServicePopUp.css';
+import './ServicePopUP.css';
 
 function SpopUp({closePop}) {
     return (
