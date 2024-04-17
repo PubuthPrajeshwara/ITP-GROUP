@@ -13,12 +13,12 @@ const EditIssue = () => {
   const [Cstatus, setCstatus] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     setLoading(true);
     axios.get(`http://localhost:4000/issues/${id}`)
-    .then((response) => {
+      .then((response) => {
         setcid(response.data.cid);
         setCname(response.data.Cname)
         setCnic(response.data.Cnic)
@@ -28,11 +28,10 @@ const EditIssue = () => {
         setLoading(false);
       }).catch((error) => {
         setLoading(false);
-        alert('An error happened. Please Chack console');
+        alert('An error happened. Please Check console');
         console.log(error);
       });
-    }, [])
-
+  }, []);
 
   const handleEditIssue = () => {
     const data = {
@@ -48,83 +47,121 @@ const EditIssue = () => {
       .put(`http://localhost:4000/issues/${id}`, data)
       .then(() => {
         setLoading(false);
-        //enqueueSnackbar('Issue Created successfully', { variant: 'success' });
         navigate('/issue');
       })
       .catch((error) => {
         setLoading(false);
-        alert('An error happened. Please Chack console');
-        //enqueueSnackbar('Error', { variant: 'error' });
+        alert('An error happened. Please Check console');
         console.log(error);
       });
   };
 
   return (
-<div className='p-4'>
+    <div style={styles.container}>
       <BackButton />
-      <h1 className='text-3xl my-4'>Update Issue</h1>
+      <h1 style={styles.title}>Update Issue</h1>
       {loading ? <Spinner /> : ''}
-      <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Issue ID</label>
+      <div style={styles.formContainer}>
+        <div style={styles.formField}>
+          <label style={styles.label}>Issue ID</label>
           <input
             type='text'
             value={cid}
             onChange={(e) => setcid(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            style={styles.input}
           />
         </div>
-         
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Customer Name</label>
+        <div style={styles.formField}>
+          <label style={styles.label}>Customer Name</label>
           <input
             type='text'
             value={Cname}
             onChange={(e) => setCname(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2  w-full '
+            style={styles.input}
           />
         </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'> NIC </label>
+        <div style={styles.formField}>
+          <label style={styles.label}>NIC</label>
           <input
             type='text'
             value={Cnic}
             onChange={(e) => setCnic(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2  w-full '
+            style={styles.input}
           />
         </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'> Contact Number</label>
+        <div style={styles.formField}>
+          <label style={styles.label}>Contact Number</label>
           <input
             type='text'
             value={Ccontact}
             onChange={(e) => setCcontact(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2  w-full '
+            style={styles.input}
           />
         </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Location </label>
+        <div style={styles.formField}>
+          <label style={styles.label}>Location</label>
           <input
             type='text'
             value={Clocation}
             onChange={(e) => setClocation(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2  w-full '
+            style={styles.input}
           />
         </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'> Status</label>
+        <div style={styles.formField}>
+          <label style={styles.label}>Status</label>
           <input
             type='text'
             value={Cstatus}
             onChange={(e) => setCstatus(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2  w-full '
+            style={styles.input}
           />
         </div>
-        <button className='p-2 bg-sky-300 m-8' onClick={handleEditIssue}>
+        <button style={styles.saveButton} onClick={handleEditIssue}>
           Save
         </button>
       </div>
-    </div>  )
-}
+    </div>
+  );
+};
 
-export default EditIssue
+const styles = {
+  container: {
+    padding: '1rem',
+  },
+  title: {
+    fontSize: '1.875rem',  // Equivalent to 30px
+    marginBottom: '1rem',
+  },
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    border: '2px solid #90cdf4',
+    borderRadius: '0.5rem',
+    width: '600px',
+    padding: '1rem',
+    margin: 'auto',
+  },
+  formField: {
+    marginBottom: '1rem',
+  },
+  label: {
+    fontSize: '1.25rem',  // Equivalent to 20px
+    marginRight: '0.5rem',
+    color: '#4a5568',
+  },
+  input: {
+    border: '2px solid #cbd5e0',
+    padding: '0.5rem',
+    width: '100%',
+    borderRadius: '0.25rem',
+  },
+  saveButton: {
+    padding: '0.5rem 1rem',
+    backgroundColor: '#90cdf4',
+    borderRadius: '0.25rem',
+    margin: '0.5rem 0',
+    cursor: 'pointer',
+  },
+};
+
+export default EditIssue;

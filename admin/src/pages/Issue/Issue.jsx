@@ -13,7 +13,6 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
 
-
   useEffect(() => {
     setLoading(true);
     axios
@@ -29,25 +28,25 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='p-4'>
-      <div className='flex justify-center items-center gap-x-4'>
+    <div style={styles.container}>
+      <div style={styles.buttonGroup}>
         <button
-          className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
+          style={styles.button}
           onClick={() => setShowType('table')}
         >
           Table
         </button>
         <button
-          className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
+          style={styles.button}
           onClick={() => setShowType('card')}
         >
           Card
         </button>
       </div>
-      <div className='flex justify-between items-center'>
-        <h1 className='text-3xl my-8'>Issues List</h1>
+      <div style={styles.header}>
+        <h1 style={styles.title}>Emergency Issues </h1>
         <Link to='/issues/create'>
-          <MdOutlineAddBox className='text-sky-800 text-4xl' />
+          <MdOutlineAddBox style={styles.addButton} />
         </Link>
       </div>
       
@@ -59,7 +58,46 @@ const Home = () => {
         <IssueCard issues={issues} />
       )}
     </div>
-  )
+  );
 }
 
-export default Home
+const styles = {
+  container: {
+    padding: '40px',
+    backgroundColor: '#f4f4f4',
+    borderRadius: '8px',
+    margin: '1px,'
+},
+  buttonGroup: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '0.5rem',
+    marginBottom: '1rem',
+  },
+  button: {
+    backgroundColor: '#90cdf4',
+    hover: {
+      backgroundColor: '#4299e1',
+    },
+    padding: '0.5rem 1rem',
+    borderRadius: '0.25rem',
+    cursor: 'pointer',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '1rem',
+  },
+  title: {
+    fontSize: '1.875rem',  // Equivalent to 30px
+    margin: '0',
+  },
+  addButton: {
+    color: '#2c5282',
+    fontSize: '2.5rem',  // Equivalent to 40px
+  },
+};
+
+export default Home;

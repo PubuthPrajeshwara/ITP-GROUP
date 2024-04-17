@@ -4,7 +4,6 @@ import Spinner from '../../components/IssueComp/Spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
-
 const DeleteIssue = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -16,33 +15,65 @@ const DeleteIssue = () => {
       .delete(`http://localhost:4000/issues/${id}`)
       .then(() => {
         setLoading(false);
-        //enqueueSnackbar('Book Deleted successfully', { variant: 'success' });
-        navigate('/');
+        navigate('/issue');
       })
       .catch((error) => {
         setLoading(false);
-        alert('An error happened. Please Chack console');
-        //enqueueSnackbar('Error', { variant: 'error' });
+        alert('An error happened. Please Check console');
         console.log(error);
       });
   };
 
   return (
-<div className='p-4'>
+    <div style={styles.container}>
       <BackButton />
-      <h1 className='text-3xl my-4'>Delete Issue</h1>
+      <h1 style={styles.title}>Delete Issue</h1>
       {loading ? <Spinner /> : ''}
-      <div className='flex flex-col items-center border-2 border-sky-400 rounded-xl w-[600px] p-8 mx-auto'>
-        <h3 className='text-2xl'>Are You Sure You want to delete this Issue?</h3>
+      <div style={styles.deleteBox}>
+        <h3 style={styles.confirmText}>Are You Sure You want to delete this Issue?</h3>
 
         <button
-          className='p-4 bg-red-600 text-white m-8 w-full'
+          style={styles.deleteButton}
           onClick={handleDeleteIssue}
         >
           Yes, Delete it
         </button>
       </div>
-    </div>  )
-}
+    </div>
+  );
+};
 
-export default DeleteIssue
+const styles = {
+  container: {
+    padding: '16px',
+  },
+  title: {
+    fontSize: '1.875rem',
+    margin: '16px 0',
+  },
+  deleteBox: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    border: '2px solid #00BFFF',
+    borderRadius: '0.5rem',
+    width: '600px',
+    padding: '32px',
+    margin: 'auto',
+  },
+  confirmText: {
+    fontSize: '1.25rem',
+    marginBottom: '32px',
+  },
+  deleteButton: {
+    padding: '16px',
+    backgroundColor: '#FF0000',
+    color: '#FFFFFF',
+    margin: '8px',
+    width: '100%',
+    cursor: 'pointer',
+    borderRadius: '0.5rem',
+  },
+};
+
+export default DeleteIssue;

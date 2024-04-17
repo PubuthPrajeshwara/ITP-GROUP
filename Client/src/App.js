@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from "./Components/NavBar/NavBar";
 import Home from "./pages/Home";
 import Header from "./Components/Header/Header";
@@ -18,16 +18,14 @@ import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
 import Checkout from "./Components/OnlineShop/Checkout/Checkout";
 // import InventoryPage from "./pages/InventoryPage/InventoryPage";
-import InventoryNavBar from "../../admin/src/components/InventoryComp/InventoryNavBar/INavBar";
+//import InventoryNavBar from "../../admin/src/components/InventoryComp/InventoryNavBar/INavBar";
 
 function App() {
-  const location = useLocation();
-
   return (
     <Router>
       <div >
         <Header />
-        {location.pathname.startsWith('/inventory') ? <InventoryNavBar className="navBar" /> : <NavBar className="navBar" />}
+        {/*{location.pathname.startsWith('/inventory') ? <InventoryNavBar className="navBar" /> : <NavBar className="navBar" />}*/}
        
         <Routes>
           <Route path='/' element={<Home/>}/>
@@ -50,7 +48,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           
           {/* Add Route for Inventory Page */}
-          <Route path="/inventory" element={<InventoryPage />} />
+          {/*<Route path="/inventory" element={<InventoryPage />} />*/}
         </Routes>
         <Footer />
       </div>

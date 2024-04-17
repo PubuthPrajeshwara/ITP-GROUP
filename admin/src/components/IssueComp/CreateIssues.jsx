@@ -4,6 +4,7 @@ import Spinner from '../../components/IssueComp/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 const CreateIssues = () => {
   const [cid, setcid] = useState('');
   const [Cname, setCname] = useState('');
@@ -85,83 +86,128 @@ const CreateIssues = () => {
   };
 
   return (
-    <div className='p-4'>
+    <div style={styles.container}>
       <BackButton />
-      <h1 className='text-3xl my-4'>Create Issue</h1>
+      <h1 style={styles.title}>Create Issue</h1>
       {loading ? <Spinner /> : ''}
-      <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Issue ID</label>
+      <div style={styles.formContainer}>
+        <div style={styles.formField}>
+          <label style={styles.label}>Issue ID</label>
           <input
             type='text'
             value={cid}
             onChange={(e) => setcid(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            style={styles.input}
           />
-          {errors.cid && <p className='text-red-500'>{errors.cid}</p>}
+          {errors.cid && <p style={styles.error}>{errors.cid}</p>}
         </div>
          
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Customer Name</label>
+        <div style={styles.formField}>
+          <label style={styles.label}>Customer Name</label>
           <input
             type='text'
             value={Cname}
             onChange={(e) => setCname(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            style={styles.input}
           />
-          {errors.Cname && <p className='text-red-500'>{errors.Cname}</p>}
+          {errors.Cname && <p style={styles.error}>{errors.Cname}</p>}
         </div>
         
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>NIC</label>
+        <div style={styles.formField}>
+          <label style={styles.label}>NIC</label>
           <input
             type='text'
             value={Cnic}
             onChange={(e) => setCnic(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            style={styles.input}
           />
-          {errors.Cnic && <p className='text-red-500'>{errors.Cnic}</p>}
+          {errors.Cnic && <p style={styles.error}>{errors.Cnic}</p>}
         </div>
         
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Contact Number</label>
+        <div style={styles.formField}>
+          <label style={styles.label}>Contact Number</label>
           <input
             type='text'
             value={Ccontact}
             onChange={(e) => setCcontact(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            style={styles.input}
           />
-          {errors.Ccontact && <p className='text-red-500'>{errors.Ccontact}</p>}
+          {errors.Ccontact && <p style={styles.error}>{errors.Ccontact}</p>}
         </div>
         
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Location</label>
+        <div style={styles.formField}>
+          <label style={styles.label}>Location</label>
           <input
             type='text'
             value={Clocation}
             onChange={(e) => setClocation(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            style={styles.input}
           />
-          {errors.Clocation && <p className='text-red-500'>{errors.Clocation}</p>}
+          {errors.Clocation && <p style={styles.error}>{errors.Clocation}</p>}
         </div>
         
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Status</label>
+        <div style={styles.formField}>
+          <label style={styles.label}>Status</label>
           <input
             type='text'
             value={Cstatus}
             onChange={(e) => setCstatus(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            style={styles.input}
           />
-          {errors.Cstatus && <p className='text-red-500'>{errors.Cstatus}</p>}
+          {errors.Cstatus && <p style={styles.error}>{errors.Cstatus}</p>}
         </div>
         
-        <button className='p-2 bg-sky-300 m-8' onClick={handleSaveIssue}>
+        <button style={styles.saveButton} onClick={handleSaveIssue}>
           Save
         </button>
       </div>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    padding: '1rem',
+  },
+  title: {
+    fontSize: '1.875rem',  // Equivalent to 30px
+    marginBottom: '1rem',
+  },
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    border: '2px solid #90cdf4',
+    borderRadius: '0.5rem',
+    width: '600px',
+    padding: '1rem',
+    margin: 'auto',
+  },
+  formField: {
+    marginBottom: '1rem',
+  },
+  label: {
+    fontSize: '1.25rem',  // Equivalent to 20px
+    marginRight: '0.5rem',
+    color: '#4a5568',
+  },
+  input: {
+    border: '2px solid #cbd5e0',
+    padding: '0.5rem',
+    width: '100%',
+    borderRadius: '0.25rem',
+  },
+  error: {
+    color: '#e53e3e',
+    fontSize: '0.875rem',  // Equivalent to 14px
+    marginTop: '0.5rem',
+  },
+  saveButton: {
+    padding: '0.5rem 1rem',
+    backgroundColor: '#90cdf4',
+    borderRadius: '0.25rem',
+    margin: '0.5rem 0',
+    cursor: 'pointer',
+  },
 };
 
 export default CreateIssues;

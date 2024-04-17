@@ -6,16 +6,21 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineDelete } from 'react-icons/md';
 import IssueSingleCard from './IssueSingleCard';
 
-
 const IssueCard = ({ issues }) => {
     return (
-        <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+        <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+            gap: '1rem',
+            padding: '1rem',
+            maxWidth: '120px',
+            margin: 'auto',
+        }}>
             {issues.map((item) => (
                 <IssueSingleCard key={item._id} issues={item} />
-
             ))}
         </div>
-    )
-}
+    );
+};
 
-export default IssueCard
+export default IssueCard;

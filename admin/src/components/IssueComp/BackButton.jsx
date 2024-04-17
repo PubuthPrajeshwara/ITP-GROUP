@@ -1,14 +1,38 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
 
 const BackButton = ({ destination = '/issue' }) => {
+  const styles = {
+    backButton: {
+      backgroundColor: '#2C7A7B', // Sky color
+      color: '#FFFFFF', // White color for text
+      padding: '8px 16px', // Padding for better spacing
+      borderRadius: '8px', // Rounded corners
+      display: 'inline-flex', // Display as inline-flex to fit content
+      alignItems: 'center', // Align items to center vertically
+      textDecoration: 'none', // Remove underline
+      transition: 'background-color 0.3s ease', // Smooth transition for background color
+    },
+    backButtonHover: {
+      backgroundColor: '#4299E1', // Lighter sky color on hover
+    },
+    arrowIcon: {
+      fontSize: '24px', // Icon size
+      marginRight: '8px', // Margin right for spacing between icon and text
+    },
+  };
+
   return (
-    <div className='flex'>
-      <Link
-        to={destination}
-        className='bg-sky-800 text-white px-4 py-1 rounded-lg w-fit'
+    <div>
+      <Link 
+        to={destination} 
+        style={styles.backButton}
+        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#112f30'} // Change background color on hover
+        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#256768'} // Reset background color on mouse out
       >
-        <BsArrowLeft className='text-2xl' />
+        <BsArrowLeft style={styles.arrowIcon} />
+        Back
       </Link>
     </div>
   );

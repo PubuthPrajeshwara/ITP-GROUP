@@ -1,69 +1,123 @@
 import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import { MdOutlineDelete } from 'react-icons/md';
+import { useState } from 'react';
 
-const IssuesTable = ( {issues }) => {
+const IssuesTable = ({ issues }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Filter issues based on search term
+  const filteredIssues = issues.filter(issue => 
+    issue.cid.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <table className='w-full border-separate border-spacing-2'>
-    <thead>
-      <tr>
-        <th className='border border-slate-600 rounded-md'>No</th>
-        <th className='border border-slate-600 rounded-md'>Issue Id</th>
-        <th className='border border-slate-600 rounded-md max-md:hidden'>
-          Customer Name
-        </th>
-        <th className='border border-slate-600 rounded-md max-md:hidden'>
-           NIC
-        </th>
-        <th className='border border-slate-600 rounded-md'>Contact Number</th>
-        <th className='border border-slate-600 rounded-md'>Location</th>
-        <th className='border border-slate-600 rounded-md'>Status</th>
-        <th className='border border-slate-600 rounded-md'>Operations</th>
+    <div>
+      <input
+        type="text"
+        placeholder="Search by Issue ID..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={styles.searchInput}
+      />
+      <table style={styles.table}>
+        <thead>
+          <tr>
+            <th style={styles.th}>No</th>
+            <th style={styles.th}>Issue Id</th>
+            <th style={styles.th}>Customer Name</th>
+            <th style={styles.th}>NIC</th>
+            <th style={styles.th}>Contact Number</th>
+            <th style={styles.th}>Location</th>
+            <th style={styles.th}>Status</th>
+            <th style={styles.th}>Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredIssues.map((issue, index) => (
+            <tr key={issue._id} style={styles.tr}>
+              <td style={styles.td}>{index + 1}</td>
+              <td style={styles.td}>{issue.cid}</td>
+              <td style={styles.td}>{issue.Cname}</td>
+              <td style={styles.td}>{issue.Cnic}</td>
+              <td style={styles.td}>{issue.Ccontact}</td>
+              <td style={styles.td}>{issue.Clocation}</td>
+              <td style={styles.td}>{issue.Cstatus}</td>
+              <td style={styles.td}>
+                <div style={styles.iconsContainer}>
+                  <Link to={`/issues/details/${issue._id}`} style={styles.iconLink}>
+                    <BsInfoCircle style={styles.infoIcon} />
+                  </Link>
+                  <Link to={`/issues/edit/${issue._id}`} style={styles.iconLink}>
+                    <AiOutlineEdit style={styles.editIcon} />
+                  </Link>
+                  <Link to={`/issues/delete/${issue._id}`} style={styles.iconLink}>
+                    <MdOutlineDelete style={styles.deleteIcon} />
+                  </Link>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
-      </tr>
-    </thead>
-    <tbody>
-      {issues.map((issue, index) => (
-        <tr key={issue._id} className='h-8'>
-          <td className='border border-slate-700 rounded-md text-center'>
-            {index + 1}
-          </td>
-          <td className='border border-slate-700 rounded-md text-center'>
-            {issue.cid}
-          </td>
-          <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-            {issue.Cname}
-          </td>
-          <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-            {issue.Cnic}
-          </td>
-          <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-            {issue.Ccontact}
-          </td>
-          <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-            {issue.Clocation}
-          </td>
-          <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-            {issue.Cstatus}
-          </td>
-          <td className='border border-slate-700 rounded-md text-center'>
-            <div className='flex justify-center gap-x-4'>
-              <Link to={`/issues/details/${issue._id}`}>
-                <BsInfoCircle className='text-2xl text-green-800' />
-              </Link>
-              <Link to={`/issues/edit/${issue._id}`}>
-                <AiOutlineEdit className='text-2xl text-yellow-600' />
-              </Link>
-              <Link to={`/issues/delete/${issue._id}`}>
-                <MdOutlineDelete className='text-2xl text-red-600' />
-              </Link>
-            </div>
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>  )
-}
+const styles = {
+  table: {
+    width: '120%',
+    borderCollapse: 'collapse',
+  },
+  th: {
+    border: '1px solid #4A5568',
+    padding: '8px',
+    textAlign: 'center',
+  },
+  tr: {
+    height: '40px',
+  },
+  td: {
+    border: '1px solid #4A5568',
+    padding: '8px',
+    textAlign: 'center',
+  },
+  iconsContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '8px',
+  },
+  iconLink: {
+    textDecoration: 'none',
+    transition: 'color 0.3s ease',
+  },
+  infoIcon: {
+    fontSize: '20px',
+    verticalAlign: 'middle',
+    color: '#4299E1',
+    transition: 'transform 0.3s ease',
+  },
+  editIcon: {
+    fontSize: '20px',
+    verticalAlign: 'middle',
+    color: '#F6E05E',
+    transition: 'transform 0.3s ease',
+  },
+  deleteIcon: {
+    fontSize: '20px',
+    verticalAlign: 'middle',
+    color: '#E53E3E',
+    transition: 'transform 0.3s ease',
+  },
+  searchInput: {
+    width: '35%',
+    padding: '0.5rem',
+    marginBottom: '1rem',
+    border: '2px solid #cbd5e0',
+    borderRadius: '0.25rem',
+    fontSize: '1rem',
+  },
+};
 
-export default IssuesTable
+export default IssuesTable;
