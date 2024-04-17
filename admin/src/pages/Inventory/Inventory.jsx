@@ -1,17 +1,16 @@
-import{useState} from 'react'
-import React from 'react'
-//import Products from '../../components/InventoryComp/Products'
-
+import React from 'react';
+import './Inventory.css';
+import InventoryNavBar from '../../components/InventoryComp/InventoryNavBar/INavBar';
+ 
 
 function InventoryRequest() {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  return (
-    <div className='wrapContent'>
-      <RequestTable openModal={() => { setModalOpen(true); }} />
-      {modalOpen && <InventoryModal closeModal={() => { setModalOpen(false); }} />}
-    </div>
-  );
+    return (
+        <div className='inventory-request-container'> {/* Ensure class name matches the CSS */}
+            <InventoryNavBar /> {/* Correct the component name */}
+            {/* Add your InventoryRequestTable component here */}
+        </div>
+    );
 }
 
-export default InventoryRequest
+export default InventoryRequest;
+ 

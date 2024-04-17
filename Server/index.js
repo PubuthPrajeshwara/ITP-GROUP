@@ -582,3 +582,46 @@ app.delete('/deleteBookingRequest/:id', async (req, res) => {
       res.status(500).send('Internal server error');
     }
   });
+
+
+// Creating API for adding inventory item
+app.post('/addInventory', async (req, res) => {
+    try {
+        // Create a new inventory item instance
+        const newInventoryItem = new Inventory(req.body);
+
+        // Save the inventory item to the database
+        await newInventoryItem.save();
+
+        res.status(201).json({ success: true, message: 'Inventory item added successfully' });
+    } catch (error) {
+        console.error('Error adding inventory item:', error);
+        res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+});
+
+// Creating API for removing inventory item
+app.delete('/removeInventory/:id', async (req, res) => {
+    const inventoryItemId = req.params.id;
+  
+    try {
+        // Find the inventory item by ID and delete it
+        await Inventory.findByIdAndDelete(inventoryItemId);
+        res.status(200).json({ success: true, message: 'Inventory item deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting inventory item:', error);
+        res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+});
+
+// Creating API for getting all inventory items
+app.get('/allInventory', async (req, res) => {
+    try {
+        // Fetch all inventory items from the database
+        const inventoryItems = await Inventory.find({});
+        res.status(200).json({ success: true, inventoryItems });
+    } catch (error) {
+        console.error('Error fetching inventory items:', error);
+        res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+});
