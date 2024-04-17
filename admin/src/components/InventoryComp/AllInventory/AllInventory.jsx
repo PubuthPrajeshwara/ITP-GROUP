@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export default function Products() {
     const [productData, setProductData] = useState([
@@ -99,7 +99,6 @@ export default function Products() {
 
     return (
         <>
-            <div className='urlBar'><h3>Iventory / Overview</h3></div>
             <div className='container-fluid p-5'>
                 <h1 className="mb-4">All Stocks</h1>
                 <div className="mb-3">

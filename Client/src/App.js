@@ -19,6 +19,9 @@ import Footer from "./Components/Footer/Footer";
 import Checkout from "./Components/OnlineShop/Checkout/Checkout";
 // import InventoryPage from "./pages/InventoryPage/InventoryPage";
 import InventoryNavBar from "../../admin/src/components/InventoryComp/InventoryNavBar/INavBar";
+import Products from "../../admin/src/components/Products";
+import InsertProduct from "../../admin/src/components/InsertProduct";
+import UpdateProduct from "../../admin/src/components/UpdateProduct";
 
 function App() {
   const location = useLocation();
@@ -48,7 +51,17 @@ function App() {
           <Route path="/" element={<Sort />} />
           <Route path="/filtered-products" element={<SortedProduct />} />
           <Route path="/checkout" element={<Checkout />} />
+ 
+
+
+ 
+          <Route path="/products" element={<Products />} />
+          <Route path="/insertproduct" element={<InsertProduct />} />
+          <Route path="/updateproduct/:id" element={<UpdateProduct />} />
           
+
+        
+
           {/* Add Route for Inventory Page */}
           <Route path="/inventory" element={<InventoryPage />} />
         </Routes>

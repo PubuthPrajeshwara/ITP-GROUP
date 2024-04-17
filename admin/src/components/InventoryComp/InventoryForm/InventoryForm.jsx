@@ -1,133 +1,156 @@
-import React, { useState } from "react";
-import axios from "axios";
-import "./InventoryForm.css";
+import React, { useState } from 'react';
+import './InventoryForm.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { NavLink, useNavigate } from 'react-router-dom';
 
-const InventoryForm = () => {
-  const [formData, setFormData] = useState({
-    itemName: "",
-    itemType: "",
-    vendor: "",
-    unitPrice: "",
-    description: "",
-  });
+export default function InsertProduct() {
+    const [itemName, setItemName] = useState("");
+    const [itemType, setItemType] = useState("");
+    const [vendor, setVendor] = useState("");
+    const [unitPrice, setUnitPrice] = useState("");
+    const [description, setDescription] = useState("");
+    const [itemID, setItemID] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      if (!validateForm()) return;
-
-      await axios.post("http://localhost:4000/allInventory", formData);
-      alert("Inventory item added successfully!");
-      setFormData({
-        itemName: "",
-        itemType: "",
-        vendor: "",
-        unitPrice: "",
-        description: "",
-      });
-    } catch (error) {
-      console.error("Error adding inventory item:", error);
-      alert("An error occurred while adding the inventory item.");
-    }
-  };
-
-  const validateForm = () => {
-    const { itemName, itemType, vendor, unitPrice, description } = formData;
-
-    if (!itemName || !itemType || !vendor || !unitPrice || !description) {
-      alert("Please fill in all fields.");
-      return false;
+    const setName = (e) => {
+        const value = e.target.value;
+        if (/^[a-zA-Z\s]*$/.test(value) || value === "") {
+            setItemName(value);
+            setError("");
+        } else {
+            setError("* Only alphabets are allowed for Name");
+        }
     }
 
-    if (!/^[a-zA-Z\s]*$/.test(itemName)) {
-      alert("Item Name should only contain letters and spaces.");
-      return false;
+    const setType = (e) => {
+        const value = e.target.value;
+        if (/^[a-zA-Z\s]*$/.test(value) || value === "") {
+            setItemType(value);
+            setError("");
+        } else {
+            setError("* Only alphabets are allowed for Item Type");
+        }
     }
 
-    if (!/^[a-zA-Z\s]*$/.test(itemType)) {
-      alert("Item Type should only contain letters and spaces.");
-      return false;
+    const setVendorName = (e) => {
+        const value = e.target.value;
+        if (/^[a-zA-Z\s]*$/.test(value) || value === "") {
+            setVendor(value);
+            setError("");
+        } else {
+            setError("* Only alphabets are allowed for Vendor");
+        }
     }
 
-    if (!/^[a-zA-Z\s]*$/.test(vendor)) {
-      alert("Vendor should only contain letters and spaces.");
-      return false;
+    const setPrice = (e) => {
+        setUnitPrice(e.target.value);
     }
 
-    if (isNaN(unitPrice) || unitPrice <= 0) {
-      alert("Unit Price should be a valid positive number.");
-      return false;
+    const setDescriptionValue = (e) => {
+        setDescription(e.target.value);
+    };
+
+    const setItemIDValue = (e) => {
+        setItemID(e.target.value);
+    };
+
+    const addProduct = async (e) => {
+        e.preventDefault();
+
+        // Validation
+        if (!itemName || !itemType || !vendor || !unitPrice || !description || !itemID) {
+            setError("*Please fill in all the required fields");
+            return;
+        }
+
+        // Validate itemID 
+        if (!/^d\d{1,4}$/i.test(itemID)) {
+            setError("*Item ID must start with 'd' followed by three digits (e.g., d123)");
+            return;
+        }
+
+        // Validate unitPrice
+        if (isNaN(unitPrice)) {
+            setError("*Unit Price must be a number");
+            return;
+        }
+
+        try {
+            const res = await fetch("http://localhost:3001/insertproduct", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ "ItemID": itemID, "ItemName": itemName, "ItemType": itemType, "Vendor": vendor, "UnitPrice": unitPrice, "Description": description })
+            });
+
+            await res.json();
+
+            if (res.status === 201) {
+                alert("Product Added Successfully !");
+                setItemID("");
+                setItemName("");
+                setItemType("");
+                setVendor("");
+                setUnitPrice("");
+                setDescription("");
+                navigate('/products');
+            }
+            else if (res.status === 422) {
+                alert("Already a Product is added with the same product ID.");
+            }
+            else {
+                setError("Something went wrong. Please try again.");
+            }
+        } catch (err) {
+            setError("An error occurred. Please try again later.");
+            console.log(err);
+        } finally {
+            setLoading(false);
+        }
     }
 
-    return true;
-  };
-
-  return (
-    <div className="inventory-form-container">
-      <h2>Inventory Form</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Item Name:</label>
-          <input
-            type="text"
-            name="itemName"
-            value={formData.itemName}
-            onChange={handleInputChange}
-            required
-          />
+    return (
+        <div className='container-fluid p-5'>
+            <h1 className='text-center mb-5 d-md-none'>Enter Product Information</h1>
+            <div className="row justify-content-start align-items-start">
+                <div className="col-lg-6 col-md-6 col-12">
+                    <h1 className='text-center mb-5 d-none d-md-block'>Enter Product Information</h1>
+                    {error && <div className="alert alert-danger">{error}</div>}
+                    <div className="row">
+                        <div className="col-12">
+                            <label htmlFor="item_id" className="form-label fw-bold">Item ID</label>
+                            <input type="text" onChange={setItemIDValue} value={itemID} className="form-control" id="item_id" placeholder="Enter Item ID" required />
+                        </div>
+                        <div className="col-12 mt-3">
+                            <label htmlFor="item_name" className="form-label fw-bold">Item Name</label>
+                            <input type="text" onChange={setName} value={itemName} className="form-control" id="item_name" placeholder="Enter Item Name" required />
+                        </div>
+                        <div className="col-12 mt-3">
+                            <label htmlFor="item_type" className="form-label fw-bold">Item Type</label>
+                            <input type="text" onChange={setType} value={itemType} className="form-control" id="item_type" placeholder="Enter Item Type" required />
+                        </div>
+                        <div className="col-12 mt-3">
+                            <label htmlFor="vendor" className="form-label fw-bold">Vendor</label>
+                            <input type="text" onChange={setVendorName} value={vendor} className="form-control" id="vendor" placeholder="Enter Vendor" required />
+                        </div>
+                        <div className="col-12 mt-3">
+                            <label htmlFor="unit_price" className="form-label fw-bold">Unit Price</label>
+                            <input type="number" onChange={setPrice} value={unitPrice} className="form-control" id="unit_price" placeholder="Enter Unit Price" required />
+                        </div>
+                        <div className="col-12 mt-3">
+                            <label htmlFor="description" className="form-label fw-bold">Description</label>
+                            <textarea onChange={setDescriptionValue} value={description} className="form-control" id="description" placeholder="Enter Description" required />
+                        </div>
+                    </div>
+                    <div className='d-flex justify-content-end mt-3'>
+                        <NavLink to="/products" className='btn btn-secondary me-3'>Cancel</NavLink>
+                        <button type="submit" onClick={addProduct} className="btn btn-primary" disabled={loading}>{loading ? 'Inserting...' : 'Insert'}</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className="form-group">
-          <label>Item Type:</label>
-          <input
-            type="text"
-            name="itemType"
-            value={formData.itemType}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Vendor:</label>
-          <input
-            type="text"
-            name="vendor"
-            value={formData.vendor}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Unit Price:</label>
-          <input
-            type="number"
-            name="unitPrice"
-            value={formData.unitPrice}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Description:</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-            required
-          ></textarea>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  );
-};
-
-export default InventoryForm;
+    )
+}
