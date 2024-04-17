@@ -531,6 +531,29 @@ app.delete('/order/:id', async (req, res) => {
     }
 });
 
+// Define route for updating order status
+app.put('/order/:id', async (req, res) => {
+    try {
+        const orderId = req.params.id;
+        const newStatus = req.body.status;
+        const updatedOrder = await Order.findOneAndUpdate(
+            { orderId: orderId },
+            { status: newStatus },
+            { new: true }
+        );
+
+        if (!updatedOrder) {
+            return res.status(404).json({ success: false, error: 'Order not found' });
+        }
+        
+        res.json({ success: true, order: updatedOrder });
+    } catch (error) {
+        console.error("Error while updating order status:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+
 //Pathum,s routes
 
 const Booking = require('./models/BookingModel');
