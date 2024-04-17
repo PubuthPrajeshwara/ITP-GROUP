@@ -26,7 +26,7 @@ export default function Products() {
 
     const getProducts = async () => {
         try {
-            const res = await fetch("http://localhost:3001/products", {
+            const res = await fetch("http://localhost:3001/items", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -47,7 +47,7 @@ export default function Products() {
 
     const deleteProduct = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3001/deleteproduct/${id}`, {
+            const response = await fetch(`http://localhost:3001/deleteitem/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -122,7 +122,7 @@ export default function Products() {
                 <input type="text" className="form-control" placeholder="Search by Item ID" onChange={handleSearch} />
             </div>
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <NavLink to="/insertproduct" className='btn btn-primary fs-5 text-white'>
+                <NavLink to="/items" className='btn btn-primary fs-5 text-white'>
                     <i className="fa-solid fa-plus me-2"></i>Add New Product
                 </NavLink>
                 <button className="btn btn-success fs-5" onClick={handleGenerateReport}>
@@ -156,7 +156,7 @@ export default function Products() {
                                 <td>{product.UnitPrice}</td>
                                 <td>{product.Description}</td>
                                 <td className="text-center">
-                                    <NavLink to={`/updateproduct/${product._id}`} className="btn btn-warning me-1">
+                                    <NavLink to={`/updateitem/${product._id}`} className="btn btn-warning me-1">
                                         <i className="fa-solid fa-pen-to-square"></i> Update
                                     </NavLink>
                                     <button className="btn btn-danger" onClick={() => deleteProduct(product._id)}>

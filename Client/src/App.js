@@ -18,6 +18,9 @@ import Sort from "./Components/Sort/Sort";
 import LoginSignup from "./pages/login/loginSignup";
 import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
+import Items from './components/InsertItem';
+import InsertItem from './components/Items';
+import UpdateItem from './components/UpdateItem';
 
 function App() {
   return (
@@ -29,8 +32,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/booking' element={<BookingForm/>}/>
-          <Route path='/inventory' element={<InsertProduct/>}/>
-          <Route path='/inventory1' element={<UpdateProduct/>}/>
+          <Route path="/items" element={<Items />} />
+          <Route path="/insertitem" element={<InsertItem />} />
+          <Route path="/updateitem/:id" element={<UpdateItem />} />
           <Route path='/onlineShop' element={<OnlineShop/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/emergency' element={<EmergencyIssue/>}/>
