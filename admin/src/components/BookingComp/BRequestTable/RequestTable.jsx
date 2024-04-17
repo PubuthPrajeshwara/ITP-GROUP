@@ -33,9 +33,26 @@ function Table() {
     setFilteredData(filteredRows);
   };
 
-  const handleDeleteRow = (id) => {
-    setData(data.filter(row => row.id !== id));
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   };
+  const handleDeleteRow = async (id) => {
+    try {
+      // Send a DELETE request to your backend API endpoint
+      await axios.delete(`http://localhost:4000/deleteBookingRequest/${id}`);
+  
+      // If the request is successful, update the state to remove the deleted row
+      setData(data.filter(row => row._id !== id));
+      setFilteredData(filteredData.filter(row => row._id !== id));
+    } catch (error) {
+      console.error('Error deleting row:', error);
+    }
+  };
+  
 
   const handleUpdateStatus = (id) => {
     // Implement logic to update the status of a booking request with the provided id
@@ -46,7 +63,14 @@ function Table() {
     <div className='booking'>
       <div className="tblContainer">
         <div className='line-one'>
-          <button>Add Row</button>
+        <select className='myselect'
+          name="Filter" >
+          <option value="">All</option>
+          <option value="accepted">accepted</option>
+          <option value="ongoing">ongoing</option>
+          <option value="completed">completed</option>
+          <option value="cancelled">cancelled</option>
+        </select>
           <Search handleSearch={handleSearch}/>
           <button className='gReportbtn'>Generate Report</button>
         </div>
@@ -73,12 +97,12 @@ function Table() {
                   <td>{row.serviceType}</td>
                   <td>{row.phone}</td>
                   <td>{row.email}</td>
-                  <td>{row.date}</td>
+                  <td>{formatDate(row.date)}</td>
                   <td>{row.time}</td>
                   <td>{row.status}</td>
                   <td>
                     <button className='accept' onClick={() => handleUpdateStatus(row.id)}>Accept</button>
-                    <button className='delete' onClick={() => handleDeleteRow(row.id)}>Delete</button>
+                    <button className='delete' onClick={() => handleDeleteRow(row._id)}>Delete</button>
                   </td>
                 </tr>
               ))}

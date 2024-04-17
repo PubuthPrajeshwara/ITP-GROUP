@@ -30,7 +30,14 @@ function Table({ openModal }) {
     <div className='booking'>
       <div className="tblContainer">
         <div className='line-one'>
-          <button>Add Row</button>
+        <select className='myselect'
+          name="Filter" >
+          <option value="">All</option>
+          <option value="accepted">accepted</option>
+          <option value="ongoing">ongoing</option>
+          <option value="completed">completed</option>
+          <option value="cancelled">cancelled</option>
+        </select>
           <Search />
           <button className='gReportbtn'>Generate Report</button>
         </div>

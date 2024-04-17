@@ -567,3 +567,18 @@ app.get('/allBookingRequest', async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   });
+
+
+  // Define route for deleting booking requests
+app.delete('/deleteBookingRequest/:id', async (req, res) => {
+    const requestId = req.params.id;
+  
+    try {
+      // Find the booking request by ID and delete it
+      await Booking.findByIdAndDelete(requestId);
+      res.status(200).send('Booking request deleted successfully');
+    } catch (error) {
+      console.error('Error deleting booking request:', error);
+      res.status(500).send('Internal server error');
+    }
+  });

@@ -103,3 +103,18 @@ table {
     font-weight: bold;
     margin-left: 43rem;
   }
+  .myselect{
+    background-color: #b12525;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+    font-weight: bold;
+    height: 2.5rem;
+    width: 8rem;
+    border-radius: 5px;
+    text-align: center;
+    
+  }
