@@ -1,10 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from "./Components/NavBar/NavBar";
 import Home from "./pages/Home";
 import Header from "./Components/Header/Header";
 import BookingForm from "./pages/BookingPage/BookingForm";
-//import InsertProduct from "./pages/InventoryPage/InsertProduct";
 import Cart from "./pages/OnlineShopPages/Cart/cart";
 import Product from "./pages/OnlineShopPages/Product/Product";
 import OnlineShop from "./pages/OnlineShopPages/OnlineShop/OnlineShop";
@@ -18,6 +17,12 @@ import LoginSignup from "./pages/login/loginSignup";
 import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
 import Checkout from "./Components/OnlineShop/Checkout/Checkout";
+// import InventoryPage from "./pages/InventoryPage/InventoryPage";
+import InventoryNavBar from "../../admin/src/components/InventoryComp/InventoryNavBar/INavBar";
+import Products from "../../admin/src/components/Products";
+import InsertProduct from "../../admin/src/components/InsertProduct";
+import UpdateProduct from "../../admin/src/components/UpdateProduct";
+//import InventoryNavBar from "../../admin/src/components/InventoryComp/InventoryNavBar/INavBar";
 import "./App.css";
 
 function App() {
@@ -25,12 +30,11 @@ function App() {
     <Router>
       <div className="app" >
         <Header />
-        <NavBar className="navBar"/>
+        {/*{location.pathname.startsWith('/inventory') ? <InventoryNavBar className="navBar" /> : <NavBar className="navBar" />}*/}
        
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/booking' element={<BookingForm/>}/>
-          {/*<Route path='/inventory' element={<InsertProduct/>}/>*/}
           <Route path='/onlineShop' element={<OnlineShop/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/emergency' element={<EmergencyIssue/>}/>
@@ -47,6 +51,19 @@ function App() {
           <Route path="/" element={<Sort />} />
           <Route path="/filtered-products" element={<SortedProduct />} />
           <Route path="/checkout" element={<Checkout />} />
+ 
+
+
+ 
+          <Route path="/products" element={<Products />} />
+          <Route path="/insertproduct" element={<InsertProduct />} />
+          <Route path="/updateproduct/:id" element={<UpdateProduct />} />
+          
+
+        
+
+          {/* Add Route for Inventory Page */}
+          {/*<Route path="/inventory" element={<InventoryPage />} />*/}
         </Routes>
         <Footer />
       </div>
@@ -54,4 +71,3 @@ function App() {
   );
 };
 export default App;
-

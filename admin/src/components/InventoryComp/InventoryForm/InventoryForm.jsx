@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './InventoryForm.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function InsertProduct() {
@@ -147,9 +149,6 @@ export default function InsertProduct() {
                         <NavLink to="/products" className='btn btn-secondary me-3'>Cancel</NavLink>
                         <button type="submit" onClick={addProduct} className="btn btn-primary" disabled={loading}>{loading ? 'Inserting...' : 'Insert'}</button>
                     </div>
-                </div>
-                <div className="col-lg-6 col-md-6 col-12">
-                    <img className="img-fluid w-100" src="images/img1.jpg" alt="productimage" style={{ margin: 0 }} />
                 </div>
             </div>
         </div>
