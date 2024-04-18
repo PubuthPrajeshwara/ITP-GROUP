@@ -5,7 +5,6 @@ import html2canvas from 'html2canvas';
 import './Product.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 export default function Items() {
     const [itemData, setItemData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -117,7 +116,7 @@ export default function Items() {
     const filteredItems = itemData.filter(item => item.ItemID.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return (
-        <> 
+        <><div className='urlBar'><h3>Inventory / Overview</h3></div>
         <div className='container-fluid p-5'>
             <h1 className="mb-4">All Items</h1>
             <div className="mb-3">

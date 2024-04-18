@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
-import './Product.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../Product.css';
 
-export default function UpdateItem() {
+export default function UpdateProduct() {
     const [itemName, setItemName] = useState("");
     const [itemType, setItemType] = useState("");
     const [vendor, setVendor] = useState("");
@@ -15,12 +14,12 @@ export default function UpdateItem() {
     const { id } = useParams();
 
     useEffect(() => {
-        getItem();
+        getProduct();
     }, [id]);
 
-    const getItem = async () => {
+    const getProduct = async () => {
         try {
-            const res = await fetch(`http://localhost:3001/items/${id}`, {
+            const res = await fetch(`http://localhost:3001/products/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -43,7 +42,7 @@ export default function UpdateItem() {
         }
     };
 
-    const updateItem = async (e) => {
+    const updateProduct = async (e) => {
         e.preventDefault();
 
         // Validation
@@ -56,7 +55,7 @@ export default function UpdateItem() {
         setError("");
 
         try {
-            const response = await fetch(`http://localhost:3001/updateitem/${id}`, {
+            const response = await fetch(`http://localhost:3001/updateproduct/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -65,8 +64,8 @@ export default function UpdateItem() {
             });
 
             if (response.ok) {
-                alert("Item Details Updated Successfully");
-                navigate('/items');
+                alert("Product Details Updated Successfully");
+                navigate('/products');
             }
             else {
                 setError("Something went wrong. Please try again.");
@@ -83,7 +82,7 @@ export default function UpdateItem() {
         <div className='container-fluid p-0'>
             <div className='container d-flex justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
                 <div className='update-form'>
-                    <h3 className='text-center'>Update Item Information</h3>
+                    <h3 className='text-center'>Update Product Information</h3>
                     <div className="row mt-3">
                         <div className="col-lg-6 col-md-6 col-12">
                             <label htmlFor="item_name" className="form-label fs-4 fw-bold">Item Name</label>
@@ -111,8 +110,8 @@ export default function UpdateItem() {
                         </div>
                     </div>
                     <div className='d-flex justify-content-center mt-5'>
-                        <NavLink to="/items" className='btn btn-secondary me-3 fs-4'>Cancel</NavLink>
-                        <button type="submit" onClick={updateItem} className="btn btn-primary fs-4" disabled={loading}>{loading ? 'Updating...' : 'Update'}</button>
+                        <NavLink to="/products" className='btn btn-secondary me-3 fs-4'>Cancel</NavLink>
+                        <button type="submit" onClick={updateProduct} className="btn btn-primary fs-4" disabled={loading}>{loading ? 'Updating...' : 'Update'}</button>
                     </div>
                     <div className="col text-center mt-3">
                         {error && <div className="text-danger mt-3 fs-5 fw-bold">{error}</div>}
