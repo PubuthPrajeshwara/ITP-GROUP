@@ -4,8 +4,9 @@
     justify-content: center;
 }
 
-.searchbar input {
+.search {
     width: 500px;
+    height: 40px;
     font-size: 22px;
     border-radius: 0px;
 }

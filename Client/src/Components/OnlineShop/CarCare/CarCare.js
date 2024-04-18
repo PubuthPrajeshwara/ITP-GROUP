@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './CarCare.css';
 import Item from '../item/item';
-import all_product from '../../../assets/products/all_products';
 import { Link } from 'react-router-dom';
 
 const CarCare = () => {
+
+    const [all_product,setAll_product] = useState([]);
+
+    useEffect(()=>{
+        fetch('http://localhost:4000/allproducts')
+        .then((response)=>response.json())
+        .then((data)=>setAll_product(data))
+     },[])
+
     const CarCareProducts = all_product.filter(product => product.category === 'Car_care');
     const firstFourItems = CarCareProducts.slice(0, 4);
     

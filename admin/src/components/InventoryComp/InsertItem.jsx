@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function InsertProduct() {
+
+export default function InsertItem() {
     const [itemName, setItemName] = useState("");
     const [itemType, setItemType] = useState("");
     const [vendor, setVendor] = useState("");
@@ -76,7 +78,7 @@ export default function InsertProduct() {
         }
 
         try {
-            const res = await fetch("http://localhost:3001/insertitem", {
+            const res = await fetch("http://localhost:4000/insertitem", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

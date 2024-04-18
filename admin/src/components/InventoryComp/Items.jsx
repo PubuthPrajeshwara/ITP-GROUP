@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import '../Product.css';
+import './Product.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Products() {
-    const [productData, setProductData] = useState([]);
+export default function Items() {
+    const [itemData, setItemData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [deleteAlert, setDeleteAlert] = useState(false);
     const [deletedItemId, setDeletedItemId] = useState('');
 
     useEffect(() => {
-        getProducts();
+        getItems();
     }, []);
 
     useEffect(() => {
@@ -24,9 +25,9 @@ export default function Products() {
         }
     }, [deleteAlert]);
 
-    const getProducts = async () => {
+    const getItems = async () => {
         try {
-            const res = await fetch("http://localhost:3001/items", {
+            const res = await fetch("http://localhost:4000/items", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -36,7 +37,7 @@ export default function Products() {
             if (res.ok) {
                 console.log("Data Retrieved.");
                 const data = await res.json();
-                setProductData(data);
+                setItemData(data);
             } else {
                 console.log("Something went wrong. Please try again.");
             }
@@ -45,9 +46,9 @@ export default function Products() {
         }
     };
 
-    const deleteProduct = async (id) => {
+    const deleteItem = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3001/deleteitem/${id}`, {
+            const response = await fetch(`http://localhost:4000/deleteitem/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -55,12 +56,12 @@ export default function Products() {
             });
 
             if (response.ok) {
-                console.log("Product deleted");
+                console.log("Item deleted");
                 setDeletedItemId(id);
                 setDeleteAlert(true);
-                getProducts();
+                getItems();
             } else {
-                console.log("Error deleting product");
+                console.log("Error deleting item");
             }
         } catch (err) {
             console.log(err);
@@ -73,7 +74,7 @@ export default function Products() {
 
     const handleDownloadInvoice = (itemId) => {
         console.log("Downloading invoice for item ID:", itemId);
-        window.location.href = `http://localhost:3001/invoice/${itemId}`;
+        window.location.href = `http://localhost:4000/invoice/${itemId}`;
     };
 
     const handleGenerateReport = () => {
@@ -112,18 +113,18 @@ export default function Products() {
         });
     };
 
-    const filteredProducts = productData.filter(product => product.ItemID.toLowerCase().includes(searchTerm.toLowerCase()));
+    const filteredItems = itemData.filter(item => item.ItemID.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return (
-        <><div className='urlBar'><h3>Iventory / Overview</h3></div>
+        <><div className='urlBar'><h3>Inventory / Overview</h3></div>
         <div className='container-fluid p-5'>
-            <h1 className="mb-4">All Stocks</h1>
+            <h1 className="mb-4">All Items</h1>
             <div className="mb-3">
                 <input type="text" className="form-control" placeholder="Search by Item ID" onChange={handleSearch} />
             </div>
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <NavLink to="/items" className='btn btn-primary fs-5 text-white'>
-                    <i className="fa-solid fa-plus me-2"></i>Add New Product
+                <NavLink to="/insertitem" className='btn btn-primary fs-5 text-white'>
+                    <i className="fa-solid fa-plus me-2"></i>Add New Item
                 </NavLink>
                 <button className="btn btn-success fs-5" onClick={handleGenerateReport}>
                     <i className="fa-solid fa-file me-2"></i>Generate Report
@@ -143,23 +144,23 @@ export default function Products() {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredProducts.map((product, index) => (
+                        {filteredItems.map((item, index) => (
                             <tr key={index}>
                                 <td>
-                                    <button className="btn btn-link" onClick={() => handleDownloadInvoice(product.ItemID)}>
-                                        {product.ItemID}
+                                    <button className="btn btn-link" onClick={() => handleDownloadInvoice(item.ItemID)}>
+                                        {item.ItemID}
                                     </button>
                                 </td>
-                                <td>{product.ItemType}</td>
-                                <td>{product.ItemName}</td>
-                                <td>{product.Vendor}</td>
-                                <td>{product.UnitPrice}</td>
-                                <td>{product.Description}</td>
+                                <td>{item.ItemType}</td>
+                                <td>{item.ItemName}</td>
+                                <td>{item.Vendor}</td>
+                                <td>{item.UnitPrice}</td>
+                                <td>{item.Description}</td>
                                 <td className="text-center">
-                                    <NavLink to={`/updateitem/${product._id}`} className="btn btn-warning me-1">
+                                    <NavLink to={`/updateitem/${item._id}`} className="btn btn-warning me-1">
                                         <i className="fa-solid fa-pen-to-square"></i> Update
                                     </NavLink>
-                                    <button className="btn btn-danger" onClick={() => deleteProduct(product._id)}>
+                                    <button className="btn btn-danger" onClick={() => deleteItem(item._id)}>
                                         <i className="fa-solid fa-trash"></i> Delete
                                     </button>
                                 </td>
@@ -170,7 +171,7 @@ export default function Products() {
             </div>
             {deleteAlert && (
                 <div className="alert alert-success alert-dismissible fade show mt-4" role="alert">
-                    Product deleted successfully!
+                    Item deleted successfully!
                     <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setDeleteAlert(false)}></button>
                 </div>
             )}

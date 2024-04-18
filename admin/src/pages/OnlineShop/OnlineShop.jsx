@@ -6,7 +6,6 @@ import './Online.css'
 const OnlineShop = () => {
   return (
     <div className='OlineShop'>
-      <Navbar/>
       <ProductList/>
     </div>
   )

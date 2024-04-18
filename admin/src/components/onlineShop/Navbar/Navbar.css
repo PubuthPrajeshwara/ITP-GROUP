@@ -2,7 +2,9 @@
     display: flex;
     width: auto;
     background-color: #1e1e1e;
-    margin: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     border-radius: 10px 10px 0px 0px;
     overflow: hidden;
 }

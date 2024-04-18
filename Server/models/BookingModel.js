@@ -1,47 +1,20 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-const bookingSchema = new Schema({
-    name:{
-        type:String, //data type
-        require:true //validate
-    },
-    email:{
-        type:String, //data type
-        require:true //validate
-    },
-    phone:{
-        type:Number, //data type
-        require:true //validate
-    },
-    notes:{
-        type:String, //data type
-        require:true //validate
-    },
-    location:{
-        type:String, //data type
-        require:true //validate
-    },
-    serviceTyep:{
-        type:String, //data type
-        require:true, //validate
-        enum:['Car Wash','Car Repair','Car Paint','Car Service']
-    },
-    vModel:{
-        type:String, //data type
-        require:true //validate
-    },
-    date:{
-        type:Date, //data type
-        require:true //validate
-    },
-    time:{
-        type:TimeRanges, //data type
-        require:true //validate
-    }
+const bookingSchema = new mongoose.Schema({
+  ownerName: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true },
+  specialNotes: { type: String },
+  status: { type: String, default: 'pending' }, // Set default value to 'pending'
+  mechanic: { type: String },
+  location: { type: String, required: true },
+  serviceType: { type: String, required: true },
+  vehicleModel: { type: String, required: true },
+  vehicleNumber: { type: String, required: true },
+  date: { type: Date, required: true },
+  time: { type: String, required: true },
 });
 
-module.exports = mongoose.model(
-    "BookingModel",//file name
-    bookingSchema //function schema
-    )
+const Booking = mongoose.model('Booking', bookingSchema);
+
+module.exports = Booking;

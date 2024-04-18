@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+import './Inventory.css';
+import InventoryNavBar from '../../components/InventoryComp/InventoryNavBar/INavBar';
+ 
 
-const Inventory = () => {
-  return (
-    <div></div>
-  )
+function InventoryRequest() {
+    return (
+        <div className='inventory-request-container'> {/* Ensure class name matches the CSS */}
+            <InventoryNavBar /> {/* Correct the component name */}
+            {/* Add your InventoryRequestTable component here */}
+        </div>
+    );
 }
 
-export default Inventory
+export default InventoryRequest;
+ 

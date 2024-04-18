@@ -8,7 +8,7 @@ const Form = () => {
     email: '',
     phone: '',
     specialNotes: '',
-    status: '',
+    status: 'Pending',
     mechanic: '',
     location: '',
     serviceType: '',

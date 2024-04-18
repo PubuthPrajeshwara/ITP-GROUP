@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
-import '../Product.css';
+import './Product.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function UpdateItem() {
     const [itemName, setItemName] = useState("");

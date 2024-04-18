@@ -1,33 +1,52 @@
 import React, { useState } from "react";
-import "./BookingForm.css"; // Import CSS file for styling
+import axios from "axios";
+//import "./BookingForm.css"; // Import CSS file for styling
 
 const BookingForm = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    ownerName: "",
     email: "",
     phone: "",
-    notes: "",
     location: "",
+    specialNotes: "",
     serviceType: "",
-    vModel: "",
+    vehicleModel: "",
     date: "",
-    time: "",
+    time: ""
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: value
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
-  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
+    try {
+      // Send form data to backend server
+      await axios.post("http://localhost:4000/addbooking", formData);
+      alert("Booking submitted successfully!");
+      // Optionally, reset the form after submission
+      setFormData({
+        ownerName: "",
+        email: "",
+        phone: "",
+        location: "",
+        specialNotes: "",
+        serviceType: "",
+        vehicleModel: "",
+        date: "",
+        time: ""
+      });
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      alert("An error occurred while submitting the booking.");
+    }
+  };
   return (
     <div className="booking-form-container">
       <h2>Booking Form</h2>
@@ -37,9 +56,9 @@ const BookingForm = () => {
             <label>Name:</label>
             <input
               type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
+              name="ownerName"
+              value={formData.ownerName}
+              onChange={handleInputChange}
               required
             />
           </div>
@@ -49,7 +68,7 @@ const BookingForm = () => {
               type="email"
               name="email"
               value={formData.email}
-              onChange={handleChange}
+              onChange={handleInputChange}
               required
             />
           </div>
@@ -59,7 +78,7 @@ const BookingForm = () => {
               type="tel"
               name="phone"
               value={formData.phone}
-              onChange={handleChange}
+              onChange={handleInputChange}
               required
             />
           </div>
@@ -69,7 +88,7 @@ const BookingForm = () => {
               type="text"
               name="location"
               value={formData.location}
-              onChange={handleChange}
+              onChange={handleInputChange}
               required
             />
           </div>
@@ -78,9 +97,9 @@ const BookingForm = () => {
           <div className="form-group">
             <label>Notes:</label>
             <textarea
-              name="notes"
-              value={formData.notes}
-              onChange={handleChange}
+              name="specialNotes"
+              value={formData.specialNotes}
+              onChange={handleInputChange}
               required
             ></textarea>
           </div>
@@ -90,7 +109,7 @@ const BookingForm = () => {
               type="text"
               name="serviceType"
               value={formData.serviceType}
-              onChange={handleChange}
+              onChange={handleInputChange}
               required
             />
           </div>
@@ -98,9 +117,9 @@ const BookingForm = () => {
             <label>Vehicle Model:</label>
             <input
               type="text"
-              name="vModel"
-              value={formData.vModel}
-              onChange={handleChange}
+              name="vehicleModel"
+              value={formData.vehicleModel}
+              onChange={handleInputChange}
               required
             />
           </div>
@@ -110,17 +129,7 @@ const BookingForm = () => {
               type="date"
               name="date"
               value={formData.date}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Time:</label>
-            <input
-              type="time"
-              name="time"
-              value={formData.time}
-              onChange={handleChange}
+              onChange={handleInputChange}
               required
             />
           </div>
