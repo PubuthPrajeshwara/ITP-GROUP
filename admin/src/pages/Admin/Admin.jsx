@@ -25,6 +25,9 @@ import CreateIssue from '../../components/IssueComp/CreateIssues';
 import ShowIssue from '../../components/IssueComp/ShowIssue';
 import EditIssue from '../../components/IssueComp/EditIssue';
 import DeleteIssue from '../../components/IssueComp/DeleteIssue';
+import InsertItem from '../../components/InventoryComp/InsertItem';
+import UpdateItem from './../../components/InventoryComp/UpdateItem';
+import Items from './../../components/InventoryComp/Items';
 
 
 const Admin = () => {
@@ -56,6 +59,9 @@ const Admin = () => {
         <Route path='/issues/details/:id' element={<ShowIssue />} />
         <Route path='/issues/edit/:id' element={<EditIssue />} />
         <Route path='/issues/delete/:id' element={<DeleteIssue />} />
+        <Route path="/items" element={<Items />} />
+        <Route path="/insertitem" element={<InsertItem />} />
+        <Route path="/updateitem/:id" element={<UpdateItem />} />
 
       </Routes>
     </div>

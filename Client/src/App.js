@@ -16,14 +16,14 @@ import Sort from "./Components/Sort/Sort";
 import LoginSignup from "./pages/login/loginSignup";
 import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
-import Checkout from "./Components/OnlineShop/Checkout/Checkout";
-// import InventoryPage from "./pages/InventoryPage/InventoryPage";
-import InventoryNavBar from "../../admin/src/components/InventoryComp/InventoryNavBar/INavBar";
+import Checkout from "./Components/OnlineShop/Checkout/Checkout"; 
 import Products from "../../admin/src/components/Products";
 import InsertProduct from "../../admin/src/components/InsertProduct";
 import UpdateProduct from "../../admin/src/components/UpdateProduct";
-//import InventoryNavBar from "../../admin/src/components/InventoryComp/InventoryNavBar/INavBar";
 import "./App.css";
+import InsertItem from './components/InventoryComp/InsertItem';
+import UpdateItem from './components/InventoryComp/UpdateItem';
+import Items from './components/InventoryComp/Items';
 
 function App() {
   return (
@@ -41,7 +41,7 @@ function App() {
           <Route path='/service' element={<Service/>}/>
           <Route path='/loginSignup' element={<LoginSignup/>}/>
           <Route path='/product' element={<Product/>}>
-            <Route path=':productId' element={<Product/>}/>
+          <Route path=':productId' element={<Product/>}/>
           </Route>
           <Route path="/interiour" element={<ProductCategory category="Interiour"/>} />
           <Route path="/exteriour" element={<ProductCategory category="Exteriour"/>} />
@@ -59,11 +59,9 @@ function App() {
           <Route path="/insertproduct" element={<InsertProduct />} />
           <Route path="/updateproduct/:id" element={<UpdateProduct />} />
           
-
-        
-
-          {/* Add Route for Inventory Page */}
-          {/*<Route path="/inventory" element={<InventoryPage />} />*/}
+          <Route path="/items" element={<Items />} />
+          <Route path="/insertitem" element={<InsertItem />} />
+          <Route path="/updateitem/:id" element={<UpdateItem />} />
         </Routes>
         <Footer />
       </div>

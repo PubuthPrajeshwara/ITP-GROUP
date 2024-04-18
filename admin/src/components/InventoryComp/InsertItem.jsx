@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './InventoryForm.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { NavLink, useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function InsertProduct() {
+
+export default function InsertItem() {
     const [itemName, setItemName] = useState("");
     const [itemType, setItemType] = useState("");
     const [vendor, setVendor] = useState("");
@@ -78,7 +78,7 @@ export default function InsertProduct() {
         }
 
         try {
-            const res = await fetch("http://localhost:3001/insertproduct", {
+            const res = await fetch("http://localhost:4000/insertitem", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -96,7 +96,7 @@ export default function InsertProduct() {
                 setVendor("");
                 setUnitPrice("");
                 setDescription("");
-                navigate('/products');
+                navigate('/items');
             }
             else if (res.status === 422) {
                 alert("Already a Product is added with the same product ID.");
@@ -146,9 +146,12 @@ export default function InsertProduct() {
                         </div>
                     </div>
                     <div className='d-flex justify-content-end mt-3'>
-                        <NavLink to="/products" className='btn btn-secondary me-3'>Cancel</NavLink>
+                        <NavLink to="/items" className='btn btn-secondary me-3'>Cancel</NavLink>
                         <button type="submit" onClick={addProduct} className="btn btn-primary" disabled={loading}>{loading ? 'Inserting...' : 'Insert'}</button>
                     </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-12">
+                    <img className="img-fluid w-100" src="images/img1.jpg" alt="productimage" style={{ margin: 0 }} />
                 </div>
             </div>
         </div>
