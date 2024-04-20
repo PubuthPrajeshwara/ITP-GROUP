@@ -554,6 +554,36 @@ app.put('/order/:id', async (req, res) => {
 });
 
 
+
+
+//Pathum,s Booking routes
+
+const Booking = require('./models/BookingModel');
+
+app.post('/addbooking', async (req, res) => {
+// Define route for updating order status
+app.put('/order/:id', async (req, res) => {
+    try {
+        const orderId = req.params.id;
+        const newStatus = req.body.status;
+        const updatedOrder = await Order.findOneAndUpdate(
+            { orderId: orderId },
+            { status: newStatus },
+            { new: true }
+        );
+
+        if (!updatedOrder) {
+            return res.status(404).json({ success: false, error: 'Order not found' });
+        }
+        
+        res.json({ success: true, order: updatedOrder });
+    } catch (error) {
+        console.error("Error while updating order status:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+
   // Update booking status route
   app.put('/updateBookingStatus/:id', async (req, res) => {
     try {
@@ -630,6 +660,22 @@ app.get('/allServices', async (req, res) => {
       console.error(error);
       res.status(500).json({ message: 'Server error' });
     }
+  });
+
+
+  // Define route for deleting booking requests
+app.delete('/deleteBookingRequest/:id', async (req, res) => {
+    const requestId = req.params.id;
+  
+    try {
+      // Find the booking request by ID and delete it
+      await Booking.findByIdAndDelete(requestId);
+      res.status(200).send('Booking request deleted successfully');
+    } catch (error) {
+      console.error('Error deleting booking request:', error);
+      res.status(500).send('Internal server error');
+    }
+  });
   });
 
 
