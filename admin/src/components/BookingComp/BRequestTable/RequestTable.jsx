@@ -1,25 +1,25 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import './RequestTable.css';
-// import Search from '../Search/Search';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './RequestTable.css';
+import Search from '../Search/Search';
 
-// function Table() {
-//   const [data, setData] = useState([]);
-//   const [filteredData, setFilteredData] = useState([]);
+function Table() {
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await axios.get('http://localhost:4000/allBookingRequest');
-//         setData(response.data);
-//         setFilteredData(response.data); // Initialize filteredData with all data
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/allBookingRequest');
+        setData(response.data);
+        setFilteredData(response.data); // Initialize filteredData with all data
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-//     fetchData();
-//   }, []);
+    fetchData();
+  }, []);
 
   const handleSearch = (searchTerm) => {
     const filteredRows = data.filter((row) => {
@@ -33,25 +33,25 @@
     setFilteredData(filteredRows);
   };
 
-//   const formatDate = (dateString) => {
-//     const date = new Date(dateString);
-//     const day = date.getDate();
-//     const month = date.getMonth() + 1;
-//     const year = date.getFullYear();
-//     return `${day}/${month}/${year}`;
-//   };
-//   const handleDeleteRow = async (id) => {
-//     try {
-//       // Send a DELETE request to your backend API endpoint
-//       await axios.delete(`http://localhost:4000/deleteBookingRequest/${id}`);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  const handleDeleteRow = async (id) => {
+    try {
+      // Send a DELETE request to your backend API endpoint
+      await axios.delete(`http://localhost:4000/deleteBookingRequest/${id}`);
   
-//       // If the request is successful, update the state to remove the deleted row
-//       setData(data.filter(row => row._id !== id));
-//       setFilteredData(filteredData.filter(row => row._id !== id));
-//     } catch (error) {
-//       console.error('Error deleting row:', error);
-//     }
-//   };
+      // If the request is successful, update the state to remove the deleted row
+      setData(data.filter(row => row._id !== id));
+      setFilteredData(filteredData.filter(row => row._id !== id));
+    } catch (error) {
+      console.error('Error deleting row:', error);
+    }
+  };
   
 
   const handleUpdateStatus = (id) => {
@@ -114,4 +114,4 @@
   );
 }
 
-// export default Table;
+export default Table;
