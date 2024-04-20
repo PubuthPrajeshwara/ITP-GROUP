@@ -6,11 +6,29 @@ const LoginSignup = () => {
   const [formData, setFormData] = useState({
     name: "",
     password: "",
-    email: ""
+    email: "",
+    errors: {}
   });
 
   const changeHandler = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    let errors = { ...formData.errors };
+    
+    switch (name) {
+      case "name":
+        errors.name = value.length < 3 ? "Name must be at least 3 characters long" : "";
+        break;
+      case "email":
+        errors.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "" : "Email address is invalid";
+        break;
+      case "password":
+        errors.password = value.length < 6 ? "Password must be at least 6 characters long" : "";
+        break;
+      default:
+        break;
+    }
+    
+    setFormData({ ...formData, [name]: value, errors });
   };
 
   const login = async () => {
@@ -68,13 +86,16 @@ const LoginSignup = () => {
       <div className='loginSignup-container'>
         <h1>{state}</h1>
         <div className='loginSignup-field'>
-          {state === "Sign Up" ? <input className='textby' type="text" name="name" value={formData.name} onChange={changeHandler} placeholder='Your Name' /> : <></>}
+          {state === "Sign Up" ? <input className='textby' type="text" name="name" value={formData.name} onChange={changeHandler} placeholder='Your Name' required/> : <></>}
+          {formData.errors.name && <p className="error">{formData.errors.name}</p>} {/* Display name error */}
           <input className='textby' type='email' name="email" value={formData.email} onChange={changeHandler} placeholder='Email Address' />
-          <input className='textby' type='password' name="password" value={formData.password} onChange={changeHandler} placeholder='Password' />
+          {formData.errors.email && <p className="error">{formData.errors.email}</p>} {/* Display email error */}
+          <input className='textby' type='password' name="password" value={formData.password} onChange={changeHandler} placeholder='Password' required/>
+          {formData.errors.password && <p className="error">{formData.errors.password}</p>} {/* Display password error */}
         </div>
         <div className='loginSignup-agree'>
           <>
-            <input className='checkbox' type='checkbox' name='' id='' />
+            <input className='checkbox' type='checkbox' name='' id='' required/>
             <p>By clicking continue, I agree to the terms & conditions</p>
           </>
         </div>

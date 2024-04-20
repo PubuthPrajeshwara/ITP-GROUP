@@ -1,9 +1,9 @@
-.scroll{
+.scrolltbl{
     overflow: auto;
-    height: 700px;
+    height: 550px;
     width: auto;
-
 }
+
 .booking{
     display: flex;
     flex-direction: column;
@@ -102,4 +102,19 @@ table {
     margin-right: 5px;
     font-weight: bold;
     margin-left: 43rem;
+  }
+  .myselect{
+    background-color: #282828;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+    font-weight: bold;
+    height: 2.5rem;
+    width: 10rem;
+    border-radius: 5px;
+    text-align: center;
+    
   }
