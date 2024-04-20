@@ -556,7 +556,7 @@ app.put('/order/:id', async (req, res) => {
 
 
 
-//Pathum,s Booking routes
+//Pathum's Booking routes
 
 const Booking = require('./models/BookingModel');
 
