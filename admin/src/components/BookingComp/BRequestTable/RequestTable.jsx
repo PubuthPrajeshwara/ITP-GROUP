@@ -26,6 +26,7 @@ function Table() {
       // Customize this logic based on your search requirements
       return (
         row.ownerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        row.serviceType.toLowerCase().includes(searchTerm.toLowerCase()) ||
         row.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
         row.email.toLowerCase().includes(searchTerm.toLowerCase())
       );
@@ -54,9 +55,23 @@ function Table() {
   };
   
 
-  const handleUpdateStatus = (id) => {
-    // Implement logic to update the status of a booking request with the provided id
-    // You might need to make an API call to update the status in your backend
+  const handleUpdateStatus = async (id) => {
+    try {
+      // Send a PUT request to update the status of the booking
+      await axios.put(`http://localhost:4000/updateBookingStatus/${id}`);
+
+      // If the request is successful, update the status in the state
+      const updatedData = data.map(row => {
+        if (row._id === id) {
+          return { ...row, status: 'accepted' };
+        }
+        return row;
+      });
+      setData(updatedData);
+      setFilteredData(updatedData);
+    } catch (error) {
+      console.error('Error updating status:', error);
+    }
   };
 
   return (
@@ -67,14 +82,13 @@ function Table() {
           name="Filter" >
           <option value="">All</option>
           <option value="accepted">accepted</option>
-          <option value="ongoing">ongoing</option>
-          <option value="completed">completed</option>
-          <option value="cancelled">cancelled</option>
+          <option value="ongoing">pending</option>
+          <option value="completed">rejected</option>
         </select>
           <Search handleSearch={handleSearch}/>
           <button className='gReportbtn'>Generate Report</button>
         </div>
-        <div className='scroll'>
+        <div className='scrolltbl'>
           <table>
             <thead>
               <tr>
@@ -92,7 +106,7 @@ function Table() {
             <tbody>
               {filteredData.map((row) => (
                 <tr key={row._id}>
-                  <td>{row._id}</td>
+                  <td>{row.bookingId}</td>
                   <td>{row.ownerName}</td>
                   <td>{row.serviceType}</td>
                   <td>{row.phone}</td>
@@ -101,8 +115,8 @@ function Table() {
                   <td>{row.time}</td>
                   <td>{row.status}</td>
                   <td>
-                    <button className='accept' onClick={() => handleUpdateStatus(row.id)}>Accept</button>
-                    <button className='delete' onClick={() => handleDeleteRow(row._id)}>Delete</button>
+                  <button className='accept' onClick={() => handleUpdateStatus(row._id)}>Accept</button>
+                    <button className='delete' onClick={() => handleDeleteRow(row._id)}>Reject</button>
                   </td>
                 </tr>
               ))}
