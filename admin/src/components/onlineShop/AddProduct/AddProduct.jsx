@@ -22,10 +22,36 @@ const AddProduct = () => {
   }
 
   const changeHandler = (e) =>{
+    if (e.target.name === "old_price" || e.target.name === "new_price" || e.target.name === "quantity") {
+      if (isNaN(e.target.value)) {
+        alert("Please enter a numerical value for Old Price, New Price, and Product Quantity.");
+        return;
+      }
+    }
     setProductDetails({...productDetails,[e.target.name]:e.target.value})
   }
 
-  const Add_product = async ()=>{
+  const validateForm = () => {
+    if (
+      !productDetails.name ||
+      !productDetails.category ||
+      !productDetails.new_price ||
+      !productDetails.old_price ||
+      !productDetails.description ||
+      !productDetails.quantity ||
+      !productDetails.brand ||
+      !image
+    ) {
+      alert("Please fill in all fields and upload an image.");
+      return false;
+    }
+    return true;
+  }
+
+  const Add_product = async () => {
+    if (!validateForm()) {
+      return;
+    }
     console.log(productDetails);
 
     let responseData;
@@ -87,7 +113,7 @@ const AddProduct = () => {
               <textarea value={productDetails.description} onChange={changeHandler} id="description" name="description" rows="4" cols="50" />
             </div>
             <div className='addproduct-item'>
-              <p>Prodcut Category</p>
+              <p>Product Category</p>
               <select name="category" className='add-product-selector' value={productDetails.category} onChange={changeHandler}>
                 <option value="Interiour">Interiour</option>
                 <option value="Exteriour">Exteriour</option>
@@ -105,10 +131,10 @@ const AddProduct = () => {
               <input onChange={imageHandler} type='file' name='image' id='file-input' hidden={true} />
             </div>
           </div>
-          <button onClick={() =>{Add_product()}} className='addproduct-btn'>Add Product</button>
+          <button onClick={Add_product} className='addproduct-btn'>Add Product</button>
         </div>
     </div>
   )
 }
 
-export default AddProduct
+export default AddProduct;
