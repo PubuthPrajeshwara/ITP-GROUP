@@ -15,6 +15,7 @@ const AddService = ({closePop}) => {
         setService({ ...service, [name]: value });
       };
     
+    
       const handleSubmit = async (event) => {
         event.preventDefault();
     
