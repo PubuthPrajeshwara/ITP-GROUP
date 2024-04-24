@@ -20,9 +20,10 @@ import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
 import Checkout from "./Components/OnlineShop/Checkout/Checkout"; 
 import "./App.css";
-import InsertItem from './components/InventoryComp/InsertItem';
-import UpdateItem from './components/InventoryComp/UpdateItem';
-import Items from './components/InventoryComp/Items';
+import InsertInventory from './Components/InventoryComp/InsertInventory';
+import UpdateInventory from './Components/InventoryComp/UpdateInventory';
+import Inventory from './Components/InventoryComp/Inventory';
+
 
 function App() {
   return (
@@ -34,16 +35,16 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/booking" element={<BookingForm />} />
-          <Route path="/items" element={<Items />} />
-          <Route path="/insertitem" element={<InsertItem />} />
-          <Route path="/updateitem/:id" element={<UpdateItem />} />
           <Route path="/onlineShop" element={<OnlineShop />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/emergency" element={<EmergencyIssue />} />
           <Route path="/service" element={<Service />} />
           <Route path="/loginSignup" element={<LoginSignup />} />
           <Route path="/product" element={<Product />}>
-            <Route path=":productId" element={<Product />} />
+          <Route path=":productId" element={<Product />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/insertinventory" element={<InsertInventory />} />
+          <Route path="/updateinventory/:id" element={<UpdateInventory />} />
           </Route>
           <Route path="/interiour" element={<ProductCategory category="Interiour" />} />
           <Route path="/exteriour" element={<ProductCategory category="Exteriour" />} />

@@ -3,13 +3,13 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-export default function InsertItem() {
-    const [itemName, setItemName] = useState("");
-    const [itemType, setItemType] = useState("");
+export default function InsertInventory() {  
+    const [inventoryName, setInventoryName] = useState("");
+    const [inventoryType, setInventoryType] = useState("");
     const [vendor, setVendor] = useState("");
     const [unitPrice, setUnitPrice] = useState("");
     const [description, setDescription] = useState("");
-    const [itemID, setItemID] = useState("");
+    const [inventoryID, setInventoryID] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function InsertItem() {
     const setName = (e) => {
         const value = e.target.value;
         if (/^[a-zA-Z\s]*$/.test(value) || value === "") {
-            setItemName(value);
+            setInventoryName(value);
             setError("");
         } else {
             setError("* Only alphabets are allowed for Name");
@@ -27,7 +27,7 @@ export default function InsertItem() {
     const setType = (e) => {
         const value = e.target.value;
         if (/^[a-zA-Z\s]*$/.test(value) || value === "") {
-            setItemType(value);
+            setInventoryType(value);
             setError("");
         } else {
             setError("* Only alphabets are allowed for Item Type");
@@ -52,22 +52,22 @@ export default function InsertItem() {
         setDescription(e.target.value);
     };
 
-    const setItemIDValue = (e) => {
-        setItemID(e.target.value);
+    const setInventoryIDValue = (e) => {
+        setInventoryID(e.target.value);
     };
 
-    const addProduct = async (e) => {
+    const addInventory = async (e) => { // Changed function name
         e.preventDefault();
 
         // Validation
-        if (!itemName || !itemType || !vendor || !unitPrice || !description || !itemID) {
+        if (!inventoryName || !inventoryType || !vendor || !unitPrice || !description || !inventoryID) {
             setError("*Please fill in all the required fields");
             return;
         }
 
-        // Validate itemID 
-        if (!/^d\d{1,4}$/i.test(itemID)) {
-            setError("*Item ID must start with 'd' followed by three digits (e.g., d123)");
+        // Validate inventoryID 
+        if (!/^d\d{1,4}$/i.test(inventoryID)) {
+            setError("*Inventory ID must start with 'd' followed by three digits (e.g., d123)");
             return;
         }
 
@@ -78,25 +78,25 @@ export default function InsertItem() {
         }
 
         try {
-            const res = await fetch("http://localhost:4000/insertitem", {
+            const res = await fetch("http://localhost:4000/insertinventory", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ "ItemID": itemID, "ItemName": itemName, "ItemType": itemType, "Vendor": vendor, "UnitPrice": unitPrice, "Description": description })
+                body: JSON.stringify({ "InventoryID": inventoryID, "InventoryName": inventoryName, "InventoryType": inventoryType, "Vendor": vendor, "UnitPrice": unitPrice, "Description": description })
             });
 
             await res.json();
 
             if (res.status === 201) {
                 alert("Product Added Successfully !");
-                setItemID("");
-                setItemName("");
-                setItemType("");
+                setInventoryID("");
+                setInventoryName("");
+                setInventoryType("");
                 setVendor("");
                 setUnitPrice("");
                 setDescription("");
-                navigate('/items');
+                navigate('/inventory');
             }
             else if (res.status === 422) {
                 alert("Already a Product is added with the same product ID.");
@@ -121,16 +121,16 @@ export default function InsertItem() {
                     {error && <div className="alert alert-danger">{error}</div>}
                     <div className="row">
                         <div className="col-12">
-                            <label htmlFor="item_id" className="form-label fw-bold">Item ID</label>
-                            <input type="text" onChange={setItemIDValue} value={itemID} className="form-control" id="item_id" placeholder="Enter Item ID" required />
+                            <label htmlFor="inventory_id" className="form-label fw-bold">Inventory ID</label>
+                            <input type="text" onChange={setInventoryIDValue} value={inventoryID} className="form-control" id="inventory_id" placeholder="Enter Inventory ID" required />
                         </div>
                         <div className="col-12 mt-3">
-                            <label htmlFor="item_name" className="form-label fw-bold">Item Name</label>
-                            <input type="text" onChange={setName} value={itemName} className="form-control" id="item_name" placeholder="Enter Item Name" required />
+                            <label htmlFor="inventory_name" className="form-label fw-bold">Inventory Name</label>
+                            <input type="text" onChange={setName} value={inventoryName} className="form-control" id="inventory_name" placeholder="Enter Inventory Name" required />
                         </div>
                         <div className="col-12 mt-3">
-                            <label htmlFor="item_type" className="form-label fw-bold">Item Type</label>
-                            <input type="text" onChange={setType} value={itemType} className="form-control" id="item_type" placeholder="Enter Item Type" required />
+                            <label htmlFor="inventory_type" className="form-label fw-bold">Inventory Type</label>
+                            <input type="text" onChange={setType} value={inventoryType} className="form-control" id="inventory_type" placeholder="Enter Inventory Type" required />
                         </div>
                         <div className="col-12 mt-3">
                             <label htmlFor="vendor" className="form-label fw-bold">Vendor</label>
@@ -146,8 +146,8 @@ export default function InsertItem() {
                         </div>
                     </div>
                     <div className='d-flex justify-content-end mt-3'>
-                        <NavLink to="/items" className='btn btn-secondary me-3'>Cancel</NavLink>
-                        <button type="submit" onClick={addProduct} className="btn btn-primary" disabled={loading}>{loading ? 'Inserting...' : 'Insert'}</button>
+                        <NavLink to="/inventory" className='btn btn-secondary me-3'>Cancel</NavLink>
+                        <button type="submit" onClick={addInventory} className="btn btn-primary" disabled={loading}>{loading ? 'Inserting...' : 'Insert'}</button>
                     </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-12">

@@ -1,62 +1,62 @@
 const express = require('express');
 const router = express.Router();
-const items = require('../models/inventoryModel');
+const Inventory = require('../model/InventoryModel');
 
-router.post("/insertitem", async (req, res) => {
-    const { ItemID, ItemType, ItemName, Vendor, UnitPrice, Description } = req.body;
+router.post("/insertinventory", async (req, res) => {
+    const { InventoryID, InventoryType, InventoryName, Vendor, UnitPrice, Description } = req.body;
 
     try {
-        const existingItem = await items.findOne({ ItemID });
-        if (existingItem) {
-            return res.status(422).json("ItemID must be unique.");
+        const existingInventory = await Inventory.findOne({ InventoryID });
+        if (existingInventory) {
+            return res.status(422).json("InventoryID must be unique.");
         }
 
-        const addItem = new items({ ItemID, ItemType, ItemName, Vendor, UnitPrice, Description });
+        const addInventory = new Inventory({ InventoryID, InventoryType, InventoryName, Vendor, UnitPrice, Description });
 
-        await addItem.save();
+        await addInventory.save();
 
-        res.status(201).json(addItem);
+        res.status(201).json(addInventory);
     } catch (err) {
         console.log(err);
         res.status(500).json("Internal server error");
     }
 });
 
-router.get('/items', async (req, res) => {
+router.get('/inventory', async (req, res) => {
     try {
-        const getItems = await items.find({});
-        res.status(200).json(getItems);
+        const getInventory = await Inventory.find({});
+        res.status(200).json(getInventory);
     } catch (err) {
         console.log(err);
         res.status(500).json("Internal server error");
     }
 });
 
-router.get('/items/:id', async (req, res) => {
+router.get('/inventory/:id', async (req, res) => {
     try {
-        const getItem = await items.findById(req.params.id);
-        res.status(200).json(getItem);
+        const getInventoryItem = await Inventory.findById(req.params.id);
+        res.status(200).json(getInventoryItem);
     } catch (err) {
         console.log(err);
         res.status(500).json("Internal server error");
     }
 });
 
-router.put('/updateitem/:id', async (req, res) => {
+router.put('/updateinventory/:id', async (req, res) => {
     try {
-        const { ItemID, ItemType, ItemName, Vendor, UnitPrice, Description } = req.body;
-        const updateItem = await items.findByIdAndUpdate(req.params.id, { ItemID, ItemType, ItemName, Vendor, UnitPrice, Description }, { new: true });
-        res.status(200).json(updateItem);
+        const { InventoryID, InventoryType, InventoryName, Vendor, UnitPrice, Description } = req.body;
+        const updateInventory = await Inventory.findByIdAndUpdate(req.params.id, { InventoryID, InventoryType, InventoryName, Vendor, UnitPrice, Description }, { new: true });
+        res.status(200).json(updateInventory);
     } catch (err) {
         console.log(err);
         res.status(500).json("Internal server error");
     }
 });
 
-router.delete('/deleteitem/:id', async (req, res) => {
+router.delete('/deleteinventory/:id', async (req, res) => {
     try {
-        const deleteItem = await items.findByIdAndDelete(req.params.id);
-        res.status(200).json(deleteItem);
+        const deleteInventoryItem = await Inventory.findByIdAndDelete(req.params.id);
+        res.status(200).json(deleteInventoryItem);
     } catch (err) {
         console.log(err);
         res.status(500).json("Internal server error");

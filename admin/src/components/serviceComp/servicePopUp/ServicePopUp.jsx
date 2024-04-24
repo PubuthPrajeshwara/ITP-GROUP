@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import './ServicePopUp.css';
+// import './ServicePopUp.css';
 import axios from 'axios'; // Import axios for making HTTP requests
-import './ServicePopUp.css';
+ 
 
 const AddService = ({closePop}) => {
     const [service, setService] = useState({
