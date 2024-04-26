@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 export default function InsertInventory() {  
     const [inventoryName, setInventoryName] = useState("");
     const [inventoryType, setInventoryType] = useState("");
     const [vendor, setVendor] = useState("");
     const [unitPrice, setUnitPrice] = useState("");
+    const [unitNo, setUnitNo] = useState("");
     const [description, setDescription] = useState("");
-    const [inventoryID, setInventoryID] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -48,32 +46,20 @@ export default function InsertInventory() {
         setUnitPrice(e.target.value);
     }
 
+    const setUnit = (e) => {
+        setUnitNo(e.target.value);
+    }
+
     const setDescriptionValue = (e) => {
         setDescription(e.target.value);
     };
 
-    const setInventoryIDValue = (e) => {
-        setInventoryID(e.target.value);
-    };
-
-    const addInventory = async (e) => { // Changed function name
+    const addInventory = async (e) => { 
         e.preventDefault();
 
         // Validation
-        if (!inventoryName || !inventoryType || !vendor || !unitPrice || !description || !inventoryID) {
+        if (!inventoryName || !inventoryType || !vendor || !unitPrice || !description || !unitNo) {
             setError("*Please fill in all the required fields");
-            return;
-        }
-
-        // Validate inventoryID 
-        if (!/^d\d{1,4}$/i.test(inventoryID)) {
-            setError("*Inventory ID must start with 'd' followed by three digits (e.g., d123)");
-            return;
-        }
-
-        // Validate unitPrice
-        if (isNaN(unitPrice)) {
-            setError("*Unit Price must be a number");
             return;
         }
 
@@ -83,18 +69,18 @@ export default function InsertInventory() {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ "InventoryID": inventoryID, "InventoryName": inventoryName, "InventoryType": inventoryType, "Vendor": vendor, "UnitPrice": unitPrice, "Description": description })
+                body: JSON.stringify({ "InventoryName": inventoryName, "InventoryType": inventoryType, "Vendor": vendor, "UnitPrice": unitPrice, "Description": description, "UnitNo": unitNo })
             });
 
             await res.json();
 
             if (res.status === 201) {
                 alert("Product Added Successfully !");
-                setInventoryID("");
                 setInventoryName("");
                 setInventoryType("");
                 setVendor("");
                 setUnitPrice("");
+                setUnitNo("");
                 setDescription("");
                 navigate('/inventory');
             }
@@ -120,10 +106,6 @@ export default function InsertInventory() {
                     <h1 className='text-center mb-5 d-none d-md-block'>Enter Product Information</h1>
                     {error && <div className="alert alert-danger">{error}</div>}
                     <div className="row">
-                        <div className="col-12">
-                            <label htmlFor="inventory_id" className="form-label fw-bold">Inventory ID</label>
-                            <input type="text" onChange={setInventoryIDValue} value={inventoryID} className="form-control" id="inventory_id" placeholder="Enter Inventory ID" required />
-                        </div>
                         <div className="col-12 mt-3">
                             <label htmlFor="inventory_name" className="form-label fw-bold">Inventory Name</label>
                             <input type="text" onChange={setName} value={inventoryName} className="form-control" id="inventory_name" placeholder="Enter Inventory Name" required />
@@ -139,6 +121,10 @@ export default function InsertInventory() {
                         <div className="col-12 mt-3">
                             <label htmlFor="unit_price" className="form-label fw-bold">Unit Price</label>
                             <input type="number" onChange={setPrice} value={unitPrice} className="form-control" id="unit_price" placeholder="Enter Unit Price" required />
+                        </div>
+                        <div className="col-12 mt-3">
+                            <label htmlFor="unit_no" className="form-label fw-bold">Number of Units</label>
+                            <input type="number" onChange={setUnit} value={unitNo} className="form-control" id="unit_no" placeholder="Enter Number of Units" required />
                         </div>
                         <div className="col-12 mt-3">
                             <label htmlFor="description" className="form-label fw-bold">Description</label>

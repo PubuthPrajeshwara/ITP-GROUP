@@ -5,12 +5,12 @@ import html2canvas from 'html2canvas';
 import './Product.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 export default function Inventory() {
     const [inventoryData, setInventoryData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [deleteAlert, setDeleteAlert] = useState(false);
     const [deletedInventoryId, setDeletedInventoryId] = useState('');
+    const [totalUnits, setTotalUnits] = useState(0); 
 
     useEffect(() => {
         getInventory();
@@ -25,6 +25,11 @@ export default function Inventory() {
             return () => clearTimeout(timer);
         }
     }, [deleteAlert]);
+
+    useEffect(() => {
+        const units = inventoryData.reduce((total, item) => total + item.UnitNo, 0);
+        setTotalUnits(units);
+    }, [inventoryData]);
 
     const getInventory = async () => {
         try {
@@ -109,7 +114,34 @@ export default function Inventory() {
         });
     };
 
-    const filteredInventory = inventoryData.filter(inventory => inventory.InventoryID.toLowerCase().includes(searchTerm.toLowerCase()));
+    const downloadInvoice = (id) => { 
+        const inventory = inventoryData.find(item => item.InventoryID === id);
+        if (inventory) {
+            const pdf = new jsPDF();
+            pdf.setFontSize(20);
+            pdf.text(20, 20, `Invoice for Inventory ID: ${inventory.InventoryID}`);
+            
+            pdf.setFontSize(12);
+            pdf.text(20, 30, `Inventory Type: ${inventory.InventoryType}`);
+            pdf.text(20, 40, `Inventory Name: ${inventory.InventoryName}`);
+            pdf.text(20, 50, `Vendor: ${inventory.Vendor}`);
+            pdf.text(20, 60, `Unit Price: ${inventory.UnitPrice}`);
+            pdf.text(20, 70, `Number of Units: ${inventory.UnitNo}`);
+            pdf.text(20, 80, `Description: ${inventory.Description}`);
+             
+    
+          
+            pdf.save(`invoice_${id}.pdf`);
+        }
+    };
+    
+
+    const filteredInventory = inventoryData.filter(inventory => {
+        if (inventory.InventoryID) {
+            return inventory.InventoryID.toString().toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        return false;
+    });
 
     return (
         <>
@@ -136,6 +168,7 @@ export default function Inventory() {
                                 <th scope="col">Inventory Name</th>
                                 <th scope="col">Vendor</th>
                                 <th scope="col">Unit Price</th>
+                                <th scope="col">Number of Units</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Actions</th>
                             </tr>
@@ -143,11 +176,12 @@ export default function Inventory() {
                         <tbody>
                             {filteredInventory.map((inventory, index) => (
                                 <tr key={index}>
-                                    <td>{inventory.InventoryID}</td>
+                                    <td onClick={() => downloadInvoice(inventory.InventoryID)}>{inventory.InventoryID}</td>
                                     <td>{inventory.InventoryType}</td>
                                     <td>{inventory.InventoryName}</td>
                                     <td>{inventory.Vendor}</td>
                                     <td>{inventory.UnitPrice}</td>
+                                    <td>{inventory.UnitNo}</td>
                                     <td>{inventory.Description}</td>
                                     <td className="text-center">
                                         <NavLink to={`/updateinventory/${inventory._id}`} className="btn btn-warning me-1">
@@ -168,6 +202,11 @@ export default function Inventory() {
                         <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setDeleteAlert(false)}></button>
                     </div>
                 )}
+            </div>
+          
+            <div className="total-units" style={{ paddingLeft: '50px' }}>
+                <h6>Total Units</h6>
+                <span className="badge bg-primary">{totalUnits}</span>
             </div>
         </>
     );

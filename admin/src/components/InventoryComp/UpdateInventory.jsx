@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
 import './Product.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 export default function UpdateInventory() {
     const [inventoryName, setInventoryName] = useState("");
     const [inventoryType, setInventoryType] = useState("");
     const [vendor, setVendor] = useState("");
     const [unitPrice, setUnitPrice] = useState("");
+    const [unitNo, setUnitNo] = useState("");
     const [description, setDescription] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -35,6 +34,7 @@ export default function UpdateInventory() {
                 setInventoryType(data.InventoryType);
                 setVendor(data.Vendor);
                 setUnitPrice(data.UnitPrice);
+                setUnitNo(data.UnitNo);
                 setDescription(data.Description);
             } else {
                 console.log("Something went wrong. Please try again.");
@@ -48,7 +48,7 @@ export default function UpdateInventory() {
         e.preventDefault();
 
         // Validation
-        if (!inventoryName || !inventoryType || !vendor || !unitPrice || !description) {
+        if (!inventoryName || !inventoryType || !vendor || !unitPrice || !description || !unitNo) {
             setError("*Please fill in all the required fields.");
             return;
         }
@@ -62,7 +62,7 @@ export default function UpdateInventory() {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ "InventoryName": inventoryName, "InventoryType": inventoryType, "Vendor": vendor, "UnitPrice": unitPrice, "Description": description })
+                body: JSON.stringify({ "InventoryName": inventoryName, "InventoryType": inventoryType, "Vendor": vendor, "UnitPrice": unitPrice, "Description": description,"UnitNo":unitNo})
             });
 
             if (response.ok) {
@@ -103,6 +103,10 @@ export default function UpdateInventory() {
                         <div className="col-lg-6 col-md-6 col-12">
                             <label htmlFor="unit_price" className="form-label fs-4 fw-bold">Unit Price</label>
                             <input type="number" onChange={(e) => setUnitPrice(e.target.value)} value={unitPrice} className="custom-input" id="unit_price" placeholder="Enter Unit Price" required />
+                        </div>
+                        <div className="col-lg-6 col-md-6 col-12">
+                            <label htmlFor="unit_no" className="form-label fs-4 fw-bold">Number of Units</label>
+                            <input type="number" onChange={(e) => setUnitNo(e.target.value)} value={unitNo} className="custom-input" id="unit_no" placeholder="Enter " requiredNo of Units />
                         </div>
                     </div>
                     <div className="row mt-3">
