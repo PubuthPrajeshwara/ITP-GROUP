@@ -10,7 +10,7 @@ export default function Inventory() {
     const [searchTerm, setSearchTerm] = useState('');
     const [deleteAlert, setDeleteAlert] = useState(false);
     const [deletedInventoryId, setDeletedInventoryId] = useState('');
-    const [totalUnits, setTotalUnits] = useState(0); 
+    const [lowInventoryAlert, setLowInventoryAlert] = useState(false);
 
     useEffect(() => {
         getInventory();
@@ -26,11 +26,6 @@ export default function Inventory() {
         }
     }, [deleteAlert]);
 
-    useEffect(() => {
-        const units = inventoryData.reduce((total, item) => total + item.UnitNo, 0);
-        setTotalUnits(units);
-    }, [inventoryData]);
-
     const getInventory = async () => {
         try {
             const res = await fetch("http://localhost:4000/inventory", {  
@@ -44,6 +39,10 @@ export default function Inventory() {
                 console.log("Data Retrieved.");
                 const data = await res.json();
                 setInventoryData(data);
+                // Calculate total units
+                const totalUnits = data.reduce((total, inventory) => total + inventory.UnitNo, 0);
+                // Check if total units are less than 10
+                setLowInventoryAlert(totalUnits < 10);
             } else {
                 console.log("Something went wrong. Please try again.");
             }
@@ -129,12 +128,10 @@ export default function Inventory() {
             pdf.text(20, 70, `Number of Units: ${inventory.UnitNo}`);
             pdf.text(20, 80, `Description: ${inventory.Description}`);
              
-    
-          
+            
             pdf.save(`invoice_${id}.pdf`);
         }
     };
-    
 
     const filteredInventory = inventoryData.filter(inventory => {
         if (inventory.InventoryID) {
@@ -143,9 +140,11 @@ export default function Inventory() {
         return false;
     });
 
+    // Calculate total units
+    const totalUnits = filteredInventory.reduce((total, inventory) => total + inventory.UnitNo, 0);
+
     return (
         <>
-            {/* <div className='urlBar'><h3>Inventory / Overview</h3></div> */}
             <div className='container-fluid p-5'>
                 <h1 className="mb-4">All Inventory</h1>
                 <div className="mb-3">
@@ -196,17 +195,20 @@ export default function Inventory() {
                         </tbody>
                     </table>
                 </div>
+                <div className="mt-4">
+                    <p>Total Units: {totalUnits}</p>
+                    {lowInventoryAlert && (
+                        <div className="alert alert-warning mt-2" role="alert">
+                            Inventory units are low!
+                        </div>
+                    )}
+                </div>
                 {deleteAlert && (
                     <div className="alert alert-success alert-dismissible fade show mt-4" role="alert">
                         Inventory deleted successfully!
                         <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setDeleteAlert(false)}></button>
                     </div>
                 )}
-            </div>
-          
-            <div className="total-units" style={{ paddingLeft: '50px' }}>
-                <h6>Total Units</h6>
-                <span className="badge bg-primary">{totalUnits}</span>
             </div>
         </>
     );
