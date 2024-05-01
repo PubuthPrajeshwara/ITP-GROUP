@@ -690,3 +690,118 @@ app.put('/updateservice/:id', async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 });
+
+  //Ruwindi routes
+  const Issue = require('./models/issueModel');
+
+  //Route for save new Issue
+app.post('/issues', async (request, response) => {
+    try {
+        if (
+            !request.body.cid ||
+            !request.body.Cname ||
+            !request.body.Cnic ||
+            !request.body.Ccontact ||
+            !request.body.Clocation ||
+            !request.body.Cstatus
+        ) {
+            return response.status(400).send({
+                message: 'Send all required fields: cid, Cname, Cnic, Ccontact, Clocation, Cstatus',
+            });
+        }
+        const newIssue = {
+            cid: request.body.cid,
+            Cname: request.body.Cname,
+            Cnic: request.body.Cnic,
+            Ccontact: request.body.Ccontact,
+            Clocation: request.body.Clocation,
+            Cstatus: request.body.Cstatus,
+        };
+        const issue = await Issue.create(newIssue);
+
+        return response.status(201).send(issue);
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message })
+    }
+});
+
+//Route for get all books from database
+app.get('/issues', async (request, response) => {
+    try {
+        const issues = await Issue.find({});
+        return response.status(200).json({
+            count: issues.length,
+            data: issues
+        });
+    } catch (error) {
+        confirm.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
+
+//Route for get one book from database by id
+app.get('/issues/:id', async (request, response) => {
+    try {
+        const { id } = request.params;
+
+        const issue = await Issue.findById(id);
+        return response.status(200).json(issue);
+    } catch (error) {
+        confirm.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
+
+//Route for update a Book
+app.put('/issues/:id', async (request, response) => {
+    try {
+        if (
+            !request.body.cid ||
+            !request.body.Cname ||
+            !request.body.Cnic ||
+            !request.body.Ccontact ||
+            !request.body.Clocation ||
+            !request.body.Cstatus
+        ) {
+            return response.status(400).send({
+                message: 'Send all required fields: cid, Cname, Cnic, Ccontact, Clocation, Cstatus',
+            });
+        }
+
+        const { id } = request.params;
+
+        const result = await Issue.findByIdAndUpdate(id, request.body);
+
+        if (!result) {
+            return response.status(404).json({ message: 'Issue not found' });
+        }
+
+        return response.status(200).json({ message: 'Issue update Successfully' });
+
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+
+
+});
+
+//Route for Delete a issue 
+app.delete('/issues/:id', async (request, response) => {
+    try {
+        const { id } = request.params;
+
+        const result = await Issue.findByIdAndDelete(id);
+
+        if (!result) {
+            return response.status(404).json({ message: 'Issue not found' });
+        }
+
+        return response.status(200).send({ message: 'Issue delete Successfully' });
+
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
