@@ -20,9 +20,7 @@ import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
 import Checkout from "./Components/OnlineShop/Checkout/Checkout"; 
 import "./App.css";
-import InsertInventory from './Components/InventoryComp/InsertInventory';
-import UpdateInventory from './Components/InventoryComp/UpdateInventory';
-import Inventory from './Components/InventoryComp/Inventory';
+
 
 
 function App() {
@@ -42,9 +40,6 @@ function App() {
           <Route path="/loginSignup" element={<LoginSignup />} />
           <Route path="/product" element={<Product />}>
           <Route path=":productId" element={<Product />} />
-          <Route path="/inventory" element={<Inventory />} />
-          <Route path="/insertinventory" element={<InsertInventory />} />
-          <Route path="/updateinventory/:id" element={<UpdateInventory />} />
           </Route>
           <Route path="/interiour" element={<ProductCategory category="Interiour" />} />
           <Route path="/exteriour" element={<ProductCategory category="Exteriour" />} />

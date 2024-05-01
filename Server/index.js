@@ -556,7 +556,10 @@ app.put('/order/:id', async (req, res) => {
 
 
 
-//Pathum's Booking routes
+
+
+
+//Pathum,s Booking routes
 
 const Booking = require('./models/BookingModel');
 
@@ -582,49 +585,26 @@ app.put('/order/:id', async (req, res) => {
         res.status(500).json({ success: false, error: "Internal server error" });
     }
 });
-
-
-  // Update booking status route
-  app.put('/updateBookingStatus/:id', async (req, res) => {
-    try {
-      const { id } = req.params;
-      const updatedBooking = await Booking.findByIdAndUpdate(
-        id,
-        { $set: { status: 'accepted' } }, // Update status to 'accepted'
-        { new: true }
-      );
-  
-      if (!updatedBooking) {
-        return res.status(404).json({ error: 'Booking not found' });
-      }
-  
-      res.status(200).json({ message: 'Booking status updated successfully', updatedBooking });
-    } catch (error) {
-      console.error('Error updating booking status:', error);
-      res.status(500).json({ error: 'Server error' });
-    }
-  });
-
     // Update booking details route
-app.put('/updateBookingDetails/:id', async (req, res) => {
-    try {
-      const { id } = req.params;
-      const updatedBooking = await Booking.findByIdAndUpdate(
-        id,
-        req.body, // Update booking details
-        { new: true }
-      );
-
-    if (!updatedBooking) {
-      return res.status(404).json({ error: 'Booking not found' });
-    }
-    res.status(200).json({ message: 'Booking details updated successfully', updatedBooking });
-    } catch (error) {
-    console.error('Error updating booking details:', error);
-    res.status(500).json({ error: 'Server error' });
-    }
-    }); 
-
+    app.put('/updateBookingDetails/:id', async (req, res) => {
+        try {
+          const { id } = req.params;
+          const updatedBooking = await Booking.findByIdAndUpdate(
+            id,
+            req.body, // Update booking details
+            { new: true }
+          );
+    
+        if (!updatedBooking) {
+          return res.status(404).json({ error: 'Booking not found' });
+        }
+        res.status(200).json({ message: 'Booking details updated successfully', updatedBooking });
+        } catch (error) {
+        console.error('Error updating booking details:', error);
+        res.status(500).json({ error: 'Server error' });
+        }
+        }); 
+    
 
     //pathum's Service Routes
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
-import '../Product.css';
+
 
 export default function UpdateProduct() {
     const [itemName, setItemName] = useState("");
