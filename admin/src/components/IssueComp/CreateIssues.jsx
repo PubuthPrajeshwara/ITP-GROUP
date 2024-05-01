@@ -88,7 +88,7 @@ const CreateIssues = () => {
   return (
     <div style={styles.container}>
       <BackButton />
-      <h1 style={styles.title}>Create Issue</h1>
+      <h1 style={styles.title}><center>Create Emergency Issue</center></h1>
       {loading ? <Spinner /> : ''}
       <div style={styles.formContainer}>
         <div style={styles.formField}>
@@ -167,7 +167,7 @@ const CreateIssues = () => {
 
 const styles = {
   container: {
-    padding: '1rem',
+    padding: '2rem',
   },
   title: {
     fontSize: '1.875rem',  // Equivalent to 30px
@@ -177,17 +177,17 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     border: '2px solid #90cdf4',
-    borderRadius: '0.5rem',
-    width: '600px',
-    padding: '1rem',
-    margin: 'auto',
+    borderRadius: '3.5rem',
+    width: '650px',
+    padding: '2rem',
+    margin: '40px',
   },
   formField: {
     marginBottom: '1rem',
   },
   label: {
     fontSize: '1.25rem',  // Equivalent to 20px
-    marginRight: '0.5rem',
+    marginRight: '1.5rem',
     color: '#4a5568',
   },
   input: {

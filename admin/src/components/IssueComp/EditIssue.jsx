@@ -59,7 +59,7 @@ const EditIssue = () => {
   return (
     <div style={styles.container}>
       <BackButton />
-      <h1 style={styles.title}>Update Issue</h1>
+      <h1 style={styles.title}><center>Update Issue</center></h1>
       {loading ? <Spinner /> : ''}
       <div style={styles.formContainer}>
         <div style={styles.formField}>
@@ -117,7 +117,7 @@ const EditIssue = () => {
           />
         </div>
         <button style={styles.saveButton} onClick={handleEditIssue}>
-          Save
+          Update
         </button>
       </div>
     </div>
@@ -126,7 +126,7 @@ const EditIssue = () => {
 
 const styles = {
   container: {
-    padding: '1rem',
+    padding: '2rem',
   },
   title: {
     fontSize: '1.875rem',  // Equivalent to 30px
@@ -138,8 +138,10 @@ const styles = {
     border: '2px solid #90cdf4',
     borderRadius: '0.5rem',
     width: '600px',
-    padding: '1rem',
+    padding: '2rem',
     margin: 'auto',
+    margin: '50px',
+
   },
   formField: {
     marginBottom: '1rem',
@@ -148,6 +150,7 @@ const styles = {
     fontSize: '1.25rem',  // Equivalent to 20px
     marginRight: '0.5rem',
     color: '#4a5568',
+    
   },
   input: {
     border: '2px solid #cbd5e0',
