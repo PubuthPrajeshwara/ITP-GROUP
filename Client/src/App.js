@@ -17,12 +17,6 @@ import LoginSignup from "./pages/login/loginSignup";
 import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
 import Checkout from "./Components/OnlineShop/Checkout/Checkout";
-// import InventoryPage from "./pages/InventoryPage/InventoryPage";
-import InventoryNavBar from "../../admin/src/components/InventoryComp/InventoryNavBar/INavBar";
-import Products from "../../admin/src/components/Products";
-import InsertProduct from "../../admin/src/components/InsertProduct";
-import UpdateProduct from "../../admin/src/components/UpdateProduct";
-//import InventoryNavBar from "../../admin/src/components/InventoryComp/InventoryNavBar/INavBar";
 import "./App.css";
 
 function App() {
@@ -30,7 +24,7 @@ function App() {
     <Router>
       <div className="app" >
         <Header />
-        {/*{location.pathname.startsWith('/inventory') ? <InventoryNavBar className="navBar" /> : <NavBar className="navBar" />}*/}
+        <NavBar className="navBar" />
        
         <Routes>
           <Route path='/' element={<Home/>}/>
@@ -51,19 +45,7 @@ function App() {
           <Route path="/" element={<Sort />} />
           <Route path="/filtered-products" element={<SortedProduct />} />
           <Route path="/checkout" element={<Checkout />} />
- 
-
-
- 
-          <Route path="/products" element={<Products />} />
-          <Route path="/insertproduct" element={<InsertProduct />} />
-          <Route path="/updateproduct/:id" element={<UpdateProduct />} />
           
-
-        
-
-          {/* Add Route for Inventory Page */}
-          {/*<Route path="/inventory" element={<InventoryPage />} />*/}
         </Routes>
         <Footer />
       </div>

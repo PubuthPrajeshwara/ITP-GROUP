@@ -19,7 +19,7 @@ const IssuesTable = ({ issues }) => {
         placeholder="Search by Issue ID..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={styles.searchInput}
+        style={styles.issueSerch}
       />
       <table style={styles.table}>
         <thead>
@@ -110,8 +110,8 @@ const styles = {
     color: '#E53E3E',
     transition: 'transform 0.3s ease',
   },
-  searchInput: {
-    width: '35%',
+  issueSerch: {
+    width: '50%',
     padding: '0.5rem',
     marginBottom: '1rem',
     border: '2px solid #cbd5e0',
