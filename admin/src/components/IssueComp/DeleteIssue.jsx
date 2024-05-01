@@ -27,7 +27,7 @@ const DeleteIssue = () => {
   return (
     <div style={styles.container}>
       <BackButton />
-      <h1 style={styles.title}>Delete Issue</h1>
+      <h1 style={styles.title}><center>Delete Issue</center></h1>
       {loading ? <Spinner /> : ''}
       <div style={styles.deleteBox}>
         <h3 style={styles.confirmText}>Are You Sure You want to delete this Issue?</h3>
@@ -58,12 +58,12 @@ const styles = {
     border: '2px solid #00BFFF',
     borderRadius: '0.5rem',
     width: '600px',
-    padding: '32px',
-    margin: 'auto',
+    padding: '100px',
+    margin: '30px',
   },
   confirmText: {
     fontSize: '1.25rem',
-    marginBottom: '32px',
+    marginBottom: '52px',
   },
   deleteButton: {
     padding: '16px',

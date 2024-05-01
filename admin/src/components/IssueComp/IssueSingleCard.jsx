@@ -14,14 +14,14 @@ const IssueSingleCard = ({ issues }) => {
         card: {
             border: '2px solid #A0AEC0',
             borderRadius: '8px',
-            padding: '8px 16px',
-            margin: '16px',
+            padding: '50px 16px',
+            margin: '5px',
             position: 'relative',
             transition: 'box-shadow 0.3s ease',
         },
         header: {
             position: 'absolute',
-            top: '8px',
+            top: '-5px',
             right: '16px',
             backgroundColor: '#FEB2B2',
             borderRadius: '8px',
@@ -30,12 +30,13 @@ const IssueSingleCard = ({ issues }) => {
         text: {
             margin: '8px 0',
             color: '#4A5568',
+            
         },
         iconContainer: {
             display: 'flex',
             justifyContent: 'start',
             alignItems: 'center',
-            gap: '8px',
+            gap: '38px',
         },
         icon: {
             fontSize: '24px',
@@ -64,7 +65,7 @@ const IssueSingleCard = ({ issues }) => {
                     {issues.Cname}
                 </h2>
             </div>
-            <div style={{ ...styles.iconContainer, justifyContent: 'space-between', marginTop: '16px', padding: '16px' }}>
+            <div style={{ ...styles.iconContainer, justifyContent: 'space-between', marginTop: '6px', padding: '20px' }}>
                 <BiShow
                     style={{ ...styles.icon, color: '#4299E1' }}
                     onClick={() => setShowModal(true)}

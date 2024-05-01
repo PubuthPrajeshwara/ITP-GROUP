@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { PiBookOpenTextLight } from 'react-icons/pi';
 import { BiUserCircle } from 'react-icons/bi';
@@ -13,7 +14,7 @@ const IssueCard = ({ issues }) => {
             gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
             gap: '1rem',
             padding: '1rem',
-            maxWidth: '120px',
+            maxWidth: '1000px',
             margin: 'auto',
         }}>
             {issues.map((item) => (

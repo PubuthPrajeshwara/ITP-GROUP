@@ -1,7 +1,8 @@
 import React from 'react'
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CarRepairIcon from '@mui/icons-material/CarRepair';
 import GridViewRoundedIcon from '@mui/icons-material/GridViewRounded';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
 
 export const NavBarData = [
     {
@@ -16,7 +17,12 @@ export const NavBarData = [
     },
     {
         title: 'Add Service',
-        icon: <AddCircleOutlineIcon />,
+        icon: <AddOutlinedIcon />,
         link: '/service/add',       
+    },
+    {
+        title: 'Reporting',
+        icon: <DescriptionRoundedIcon />,
+        link: '/service/reporting',       
     }
 ]
