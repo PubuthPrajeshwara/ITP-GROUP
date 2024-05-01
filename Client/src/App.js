@@ -4,8 +4,6 @@ import NavBar from "./Components/NavBar/NavBar";
 import Home from "./pages/Home";
 import Header from "./Components/Header/Header";
 import BookingForm from "./pages/BookingPage/BookingForm";
-import InsertProduct from "./pages/InsertProduct";
-import UpdateProduct from "./pages/UpdateProduct";
 import Cart from "./pages/OnlineShopPages/Cart/cart";
 import Product from "./pages/OnlineShopPages/Product/Product";
 import OnlineShop from "./pages/OnlineShopPages/OnlineShop/OnlineShop";
@@ -31,25 +29,24 @@ function App() {
         <NavBar className="navBar" />
        
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/booking" element={<BookingForm />} />
-          <Route path="/onlineShop" element={<OnlineShop />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/emergency" element={<EmergencyIssue />} />
-          <Route path="/service" element={<Service />} />
-          <Route path="/loginSignup" element={<LoginSignup />} />
-          <Route path="/product" element={<Product />}>
-          <Route path=":productId" element={<Product />} />
+        <Route path='/' element={<Home/>}/>
+          <Route path='/booking' element={<BookingForm/>}/>
+          <Route path='/onlineShop' element={<OnlineShop/>}/>
+          <Route path='/cart' element={<Cart/>}/>
+          <Route path='/emergency' element={<EmergencyIssue/>}/>
+          <Route path='/service' element={<Service/>}/>
+          <Route path='/loginSignup' element={<LoginSignup/>}/>
+          <Route path='/product' element={<Product/>}>
+            <Route path=':productId' element={<Product/>}/>
           </Route>
-          <Route path="/interiour" element={<ProductCategory category="Interiour" />} />
-          <Route path="/exteriour" element={<ProductCategory category="Exteriour" />} />
-          <Route path="/carcare" element={<ProductCategory category="Car_care" />} />
+          <Route path="/interiour" element={<ProductCategory category="Interiour"/>} />
+          <Route path="/exteriour" element={<ProductCategory category="Exteriour"/>} />
+          <Route path="/carcare" element={<ProductCategory category="Car_care"/>} />
+          <Route path="/" element={<ProductSearch />} />
           <Route path="/search-results" element={<FilteredProductsPage />} />
+          <Route path="/" element={<Sort />} />
           <Route path="/filtered-products" element={<SortedProduct />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/insertproduct" element={<InsertProduct />} />
-          <Route path="/updateproduct/:id" element={<UpdateProduct />} />
-          
+          <Route path="/checkout" element={<Checkout />} /> 
         </Routes>
         <Footer />
       </div>
