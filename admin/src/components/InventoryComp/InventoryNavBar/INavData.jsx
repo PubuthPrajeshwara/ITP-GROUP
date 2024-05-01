@@ -15,16 +15,16 @@ export const INavData = [
     {
         title: 'All Inventory',
         icon: <InventoryIcon />,
-        link: '/inventory/all',
+        link: '/inventory',
     },
     {
         title: 'Add Inventory',
         icon: <AddCircleOutlineIcon />,
-        link: '/inventory/add',
+        link: '/insertinventory',
     },
     {
         title: 'Download Report',
         icon: <CompareArrowsIcon />, 
-        link: '/inventory/all',
+        link: '/inventory',
     },   
 ];

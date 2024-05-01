@@ -8,7 +8,7 @@ import Users from '../Users/Users'
 import Service from '../Service/Service'
 import Bookings from '../Booking/bookings'
 import Issue from '../Issue/Issue'
-import Inventory from '../Inventory/Inventory'
+// import Inventory from '../Inventory/Inventory'
 import Supplier from '../Supplier/Supplier'
 import Employee from '../Employee/Employee'
 import Payment from '../Payment/Payment'
@@ -25,7 +25,10 @@ import CreateIssue from '../../components/IssueComp/CreateIssues';
 import ShowIssue from '../../components/IssueComp/ShowIssue';
 import EditIssue from '../../components/IssueComp/EditIssue';
 import DeleteIssue from '../../components/IssueComp/DeleteIssue';
-
+import InsertInventory from '../../components/InventoryComp/InsertInventory';
+import UpdateInventory from '../../components/InventoryComp/UpdateInventory';
+import Inventory from '../../components/InventoryComp/Inventory';
+ 
 
 const Admin = () => {
   return (
@@ -38,7 +41,7 @@ const Admin = () => {
         <Route path='/service' element={<Service />} />
         <Route path='/booking' element={<Bookings />} />
         <Route path='/issue' element={<Issue />} />
-        <Route path='/inventory' element={<Inventory />} />
+        {/* <Route path='/inventory' element={<Inventory />} /> */}
         <Route path='/supplier' element={<Supplier />} />
         <Route path='/employee' element={<Employee />} />
         <Route path='/payment' element={<Payment />} />
@@ -56,6 +59,10 @@ const Admin = () => {
         <Route path='/issues/details/:id' element={<ShowIssue />} />
         <Route path='/issues/edit/:id' element={<EditIssue />} />
         <Route path='/issues/delete/:id' element={<DeleteIssue />} />
+        <Route path="/inventory" element={<Inventory />} />
+        <Route path="/insertinventory" element={<InsertInventory />} />
+        <Route path="/updateinventory/:id" element={<UpdateInventory />} />
+       
 
       </Routes>
     </div>

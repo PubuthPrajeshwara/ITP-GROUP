@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
-import upload_img from '../../../assets/upload_img.png';
 import '../AddProduct/AddProduct.css';
 
 const UpdateProduct = () => {
@@ -52,9 +51,8 @@ const UpdateProduct = () => {
   const updateProduct = async () => {
     console.log(productDetails);
     let responseData;
-    let product = { ...productDetails }; // Create a copy of productDetails to avoid mutation
+    let product = { ...productDetails };
 
-    // If there's a new image selected, upload it
     if (image) {
       let formData = new FormData();
       formData.append('product', image);
@@ -69,11 +67,11 @@ const UpdateProduct = () => {
           product.image = uploadData.image_url;
         } else {
           console.error('Image upload failed');
-          return; // Stop execution if image upload failed
+          return;
         }
       } catch (error) {
         console.error('Error uploading image:', error);
-        return; // Stop execution if there's an error uploading image
+        return;
       }
     }
 
@@ -104,25 +102,25 @@ const UpdateProduct = () => {
         <div className='addproduct-itemfield'>
           <div className='addproduct-item'>
             <p>Product Name</p>
-            <input value={productDetails.name} onChange={changeHandler} type="text" name="name" placeholder='Type Name'/>
+            <input value={productDetails.name} onChange={changeHandler} type="text" name="name" placeholder='Type Name' required/>
           </div>
           <div className='addproduct-item'>
             <p>Old Price</p>
-            <input value={productDetails.old_price} onChange={changeHandler} type='text' name='old_price' placeholder='Type old price'/>
+            <input value={productDetails.old_price} onChange={changeHandler} type='text' name='old_price' placeholder='Type old price' required/>
           </div>
           <div className='addproduct-item'>
             <p>New Price</p>
-            <input value={productDetails.new_price} onChange={changeHandler} type='text' name='new_price' placeholder='Type new price'/>
+            <input value={productDetails.new_price} onChange={changeHandler} type='text' name='new_price' placeholder='Type new price' required/>
           </div>
           <div className='addproduct-item'>
             <p>Brand</p>
-            <input value={productDetails.brand} onChange={changeHandler} type='text' name='brand' placeholder='Type brand'/>
+            <input value={productDetails.brand} onChange={changeHandler} type='text' name='brand' placeholder='Type brand' required/>
           </div>
         </div>
         <div className='addproduct-itemfield'>
           <div className='addproduct-item'>
             <p>Product Description</p>
-            <textarea value={productDetails.description} onChange={changeHandler} id="description" name="description" rows="4" cols="50" />
+            <textarea value={productDetails.description} onChange={changeHandler} id="description" name="description" rows="4" cols="50" required/>
           </div>
           <div className='addproduct-item'>
             <p>Prodcut Category</p>
@@ -134,11 +132,11 @@ const UpdateProduct = () => {
           </div>
           <div className='addproduct-item'>
             <p>Product Quantity</p>
-            <input value={productDetails.quantity} onChange={changeHandler} type="number" id="quantity" name="quantity" min="0" max="100"/>
+            <input value={productDetails.quantity} onChange={changeHandler} type="number" id="quantity" name="quantity" min="0" max="100" required/>
           </div>
           <div className='addproduct-item'>
             <label htmlFor="file-input">
-              <img src={image ? URL.createObjectURL(image) : productDetails.image} className='addproduct-thumbnail' alt="Upload Thumbnail" />
+              <img src={image ? URL.createObjectURL(image) : productDetails.image} className='addproduct-thumbnail' alt="Upload Thumbnail" required/>
             </label>
             <input onChange={imageHandler} type='file' name='image' id='file-input' hidden={true} />
           </div>

@@ -1,9 +1,9 @@
-.scrolltbl{
+.scroll{
     overflow: auto;
-    height: 550px;
+    height: 700px;
     width: auto;
-}
 
+}
 .booking{
     display: flex;
     flex-direction: column;
@@ -52,7 +52,7 @@ table {
     margin-right: 5px;
   }
   /* Style for table actions */
- .accept {
+ .update {
     background-color: #4caf50;
     color: white;
     border: none;
@@ -97,14 +97,15 @@ table {
     background-color: #005D84;
     color: white;
     border: none;
+    width: 10rem;
     padding: 5px 10px;
     cursor: pointer;
     margin-right: 5px;
     font-weight: bold;
-    margin-left: 43rem;
+    margin-left: 37rem;
   }
   .myselect{
-    background-color: #282828;
+    background-color: #0f2c38;
     color: white;
     border: none;
     padding: 5px 5px;

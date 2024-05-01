@@ -1,43 +1,47 @@
-.booking-form-container {
-  max-width: 500px;
+/* Form.css */
+
+.form-container {
+  max-width: 47rem;
   margin: 0 auto;
-  padding: 20px;
+  padding: 25px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f6fafc 0%, rgba(159, 184, 195, 0.8) 100%);
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
+label{
+  font-size: 1em;
   font-weight: bold;
+  color: #4a4a4a;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea,
-input[type="date"],
-input[type="time"] {
-  width: 100%;
-  padding: 8px;
+.form-columns {
+  display: flex;
+  gap: 20px;
+}
+
+.form-column {
+  flex: 1;
+}
+
+input ,textarea,select{
+  width: 25em;
+  padding: 12px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  border-radius: 5px;
+  
 }
 
-button[type="submit"] {
-  background-color: #007bff;
+.bSubmitBTN {
+  background-color: #1c92dc;
   color: #fff;
+  width: 10rem;
   border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
+  justify-content: flex-end; /* Align button to the right */
+  margin-left: auto; /* Push the button to the right */
 }
 
-button[type="submit"]:hover {
-  background-color: #0056b3;
-}

@@ -1,0 +1,9 @@
+body{
+    overflow-x: hidden;
+}
+
+.home{
+    width:87vw;
+    height: 90vh;
+    margin: 10px;
+}
