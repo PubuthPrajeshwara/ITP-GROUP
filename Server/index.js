@@ -553,17 +553,6 @@ app.put('/order/:id', async (req, res) => {
     }
 });
 
-
-
-
-
-
-
-//Pathum,s Booking routes
-
-const Booking = require('./models/BookingModel');
-
-app.post('/addbooking', async (req, res) => {
 // Define route for updating order status
 app.put('/order/:id', async (req, res) => {
     try {
@@ -585,6 +574,36 @@ app.put('/order/:id', async (req, res) => {
         res.status(500).json({ success: false, error: "Internal server error" });
     }
 });
+
+
+
+
+
+
+//Pathum,s Booking routes
+
+const Booking = require('./models/BookingModel');
+
+app.post('/addbooking', async (req, res) => {
+    try {
+      // Extract form data from request body
+      const formData = req.body;
+  
+      // Create a new booking instance
+      const newBooking = new Booking(formData);
+  
+      // Save the booking to the database
+      await newBooking.save();
+      console.log("booking added");
+  
+      res.status(201).json({ message: 'Booking saved successfully' });
+    } catch (error) {
+      console.error('Error saving booking:', error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+  
+
     // Update booking details route
     app.put('/updateBookingDetails/:id', async (req, res) => {
         try {
@@ -605,6 +624,18 @@ app.put('/order/:id', async (req, res) => {
         }
         }); 
     
+        app.get('/allBookingRequest', async (req, res) => {
+            try {
+              const data = await Booking.find();
+              res.json(data);
+              console.log("All Booking Requests Fetched");
+        
+            } catch (error) {
+              console.error(error);
+              res.status(500).json({ message: 'Server error' });
+            }
+          }
+        );
 
     //pathum's Service Routes
 
@@ -656,9 +687,8 @@ app.delete('/deleteBookingRequest/:id', async (req, res) => {
       res.status(500).send('Internal server error');
     }
   });
-  });
-
-
+  
+  
   
   // Define route for deleting Services
 app.delete('/deleteServices/:id', async (req, res) => {

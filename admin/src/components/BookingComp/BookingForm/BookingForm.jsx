@@ -101,9 +101,9 @@ const Form = () => {
                 required
               >
                 <option value="">Select Location</option>
-                <option value="Location 1">Anuradhapura</option>
-                <option value="Location 2">Malabe</option>
-                <option value="Location 3">Colombo</option>
+                <option value="Anuradhapura">Anuradhapura</option>
+                <option value="Malabe">Malabe</option>
+                <option value="Colombo">Colombo</option>
               </select>
             </div>
             {/* Service Type */}
@@ -116,9 +116,9 @@ const Form = () => {
                 required
               >
                 
-                <option value="Service 1">Body Wash</option>
-                <option value="Service 2">Engine Tune ups</option>
-                <option value="Service 3">Spare Parts Replacement</option>
+                <option value="Body Wash">Body Wash</option>
+                <option value="Engine Tune ups">Engine Tune ups</option>
+                <option value="Spare Parts Replacement">Spare Parts Replacement</option>
               </select>
             </div>
             <label>Vehicle Model:</label>

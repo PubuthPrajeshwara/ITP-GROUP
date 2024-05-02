@@ -30,13 +30,7 @@ table {
     font-family: Arial, sans-serif;
   }
   
-  /* Style for table header */
-  th {
-    background-color: #f2f2f2;
-    padding: 8px;
-    text-align: left ;
-  }
-  
+
   /* Style for table data */
   td {
     border: 1px solid #ddd;
@@ -119,3 +113,11 @@ table {
     text-align: center;
     
   }
+
+  .bookingList th {
+    background-color: #cfcfcf;
+}
+  
+.bookingList tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

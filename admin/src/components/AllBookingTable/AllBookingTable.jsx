@@ -73,7 +73,7 @@ function Table({ openModal }) {
           <button className='gReportbtn'>Generate Report</button>
         </div>
         <div className='scroll'>
-          <table>
+          <table className='bookingList'>
             <thead>
               <tr>
                 <th>Bid</th>

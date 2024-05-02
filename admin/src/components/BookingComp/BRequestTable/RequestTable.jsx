@@ -75,7 +75,7 @@ function Table() {
           <button className='gReportbtn'>Generate Report</button>
         </div>
         <div className='scroll'>
-          <table>
+          <table className='bookingList'> 
             <thead>
               <tr>
                 <th>Bid</th>
@@ -92,7 +92,7 @@ function Table() {
             <tbody>
               {filteredData.map((row) => (
                 <tr key={row._id}>
-                  <td>{row._id}</td>
+                  <td>{row.bookingId}</td>
                   <td>{row.ownerName}</td>
                   <td>{row.serviceType}</td>
                   <td>{row.phone}</td>
