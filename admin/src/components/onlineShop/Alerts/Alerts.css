@@ -1,0 +1,68 @@
+/* Styles for Alerts component */
+ 
+  /* Styling for low stock products section */
+  .alert-section{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+    height: 650px;
+    overflow-y: auto;
+    font-family: sans-serif;
+  }
+  
+  .low-stock-section {
+    margin-bottom: 20px;
+    background-color: rgb(250, 192, 192);
+    height: fit-content;
+    padding: 20px;
+  }
+  
+  .low-stock-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .low-stock-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .low-stock-section li {
+    margin-bottom: 14px;
+  }
+  
+  /* Styling for processing orders section */
+  .processing-orders-section {
+    margin-bottom: 20px;
+    background-color: rgb(147, 255, 152);
+    padding: 40px;
+    height: 550px;
+    overflow-y: auto;
+  }
+  
+  .processing-orders-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .processing-orders-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .processing-orders-section li {
+    margin-bottom: 16px;
+  }
+  
+  .processing-orders-section .order-details {
+    padding-left: 20px;
+  }
+  
+  .processing-orders-section .item-list {
+    margin-top: 8px;
+  }
+  
+  .processing-orders-section .item-list li {
+    margin-bottom: 4px;
+  }
+  
