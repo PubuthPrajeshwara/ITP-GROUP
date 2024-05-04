@@ -621,7 +621,98 @@ app.put('/order/:id', async (req, res) => {
     }
 });
 
+app.get('/processingOrders', async (req, res) => {
+    try {
+        const processingOrdersCount = await Order.countDocuments({ status: 'processing' });
+        res.json({ success: true, processingOrdersCount });
+    } catch (error) {
+        console.error("Error while fetching processing orders count:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
 
+app.get('/shippedOrders', async (req, res) => {
+    try {
+        const shippedOrdersCount = await Order.countDocuments({ status: 'shipped' });
+        res.json({ success: true, shippedOrdersCount });
+    } catch (error) {
+        console.error("Error while fetching shipped orders count:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+// Creating API to get the total amount of all orders
+app.get('/totalAmountOfOrders', async (req, res) => {
+    try {
+        // Fetch all orders
+        const orders = await Order.find({});
+
+        // Calculate total amount by summing up 'totalAmount' field of each order
+        const totalAmountOfOrders = orders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfOrders });
+    } catch (error) {
+        console.error("Error while fetching total amount of all orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+
+app.get('/deliveredOrders', async (req, res) => {
+    try {
+        const deliveredOrdersCount = await Order.countDocuments({ status: 'delivered' });
+        res.json({ success: true, deliveredOrdersCount });
+    } catch (error) {
+        console.error("Error while fetching delivered orders count:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+// Creating API to get the total amount of all orders
+app.get('/totalAmountOfOrders', async (req, res) => {
+    try {
+        // Fetch all orders
+        const orders = await Order.find({});
+
+        // Calculate total amount by summing up 'totalAmount' field of each order
+        const totalAmountOfOrders = orders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfOrders });
+    } catch (error) {
+        console.error("Error while fetching total amount of all orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+app.get('/totalAmountOfDelivered', async (req, res) => {
+    try {
+        // Fetch orders with status 'delivered'
+        const deliveredOrders = await Order.find({ status: 'delivered' });
+
+        // Calculate total amount by summing up 'totalAmount' field of each delivered order
+        const totalAmountOfDeliveredOrders = deliveredOrders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfDeliveredOrders });
+    } catch (error) {
+        console.error("Error while fetching total amount of delivered orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+app.get('/totalAmountOfPending', async (req, res) => {
+    try {
+        // Fetch orders with status 'shipped' or 'processing'
+        const pendingOrders = await Order.find({ status: { $in: ['shipped', 'processing'] } });
+
+        // Calculate total amount by summing up 'totalAmount' field of each pending order
+        const totalAmountOfPending = pendingOrders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfPending });
+    } catch (error) {
+        console.error("Error while fetching total amount of pending orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
 
 
 
