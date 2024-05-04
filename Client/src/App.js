@@ -4,6 +4,8 @@ import NavBar from "./Components/NavBar/NavBar";
 import Home from "./pages/Home";
 import Header from "./Components/Header/Header";
 import BookingForm from "./pages/BookingPage/BookingForm";
+import GeneralIssue from "./Components/Issues/GeneralIssue"; 
+import Emegency from "./Components/Issues/Emegency"; 
 import Cart from "./pages/OnlineShopPages/Cart/cart";
 import Product from "./pages/OnlineShopPages/Product/Product";
 import OnlineShop from "./pages/OnlineShopPages/OnlineShop/OnlineShop";
@@ -16,10 +18,9 @@ import Sort from "./Components/Sort/Sort";
 import LoginSignup from "./pages/login/loginSignup";
 import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
+import CreateIssue from "./Components/Issues/CreateIssues";
 import Checkout from "./Components/OnlineShop/Checkout/Checkout";
 import "./App.css";
-
-
 
 function App() {
   return (
@@ -29,22 +30,23 @@ function App() {
         <NavBar className="navBar" />
        
         <Routes>
-        <Route path='/' element={<Home/>}/>
-          <Route path='/booking' element={<BookingForm/>}/>
-          <Route path='/onlineShop' element={<OnlineShop/>}/>
-          <Route path='/cart' element={<Cart/>}/>
-          <Route path='/emergency' element={<EmergencyIssue/>}/>
-          <Route path='/service' element={<Service/>}/>
-          <Route path='/loginSignup' element={<LoginSignup/>}/>
-          <Route path='/product' element={<Product/>}>
-            <Route path=':productId' element={<Product/>}/>
+          <Route path='/' element={<Home />} />
+          <Route path='/booking' element={<BookingForm />} />
+          <Route path='/onlineShop' element={<OnlineShop />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/emergency' element={<EmergencyIssue />} />
+          <Route path='/general' element={<GeneralIssue />} />
+          <Route path='/eme' element={<Emegency />} />
+          <Route path='/service' element={<Service />} />
+          <Route path='/loginSignup' element={<LoginSignup />} />
+          <Route path='/product' element={<Product />}>
+            <Route path=':productId' element={<Product />} />
           </Route>
-          <Route path="/interiour" element={<ProductCategory category="Interiour"/>} />
-          <Route path="/exteriour" element={<ProductCategory category="Exteriour"/>} />
-          <Route path="/carcare" element={<ProductCategory category="Car_care"/>} />
-          <Route path="/" element={<ProductSearch />} />
+          <Route path='/issues/create' element={<CreateIssue />} /> {/* Moved outside the /product route */}
+          <Route path="/interiour" element={<ProductCategory category="Interiour" />} />
+          <Route path="/exteriour" element={<ProductCategory category="Exteriour" />} />
+          <Route path="/carcare" element={<ProductCategory category="Car_care" />} />
           <Route path="/search-results" element={<FilteredProductsPage />} />
-          <Route path="/" element={<Sort />} />
           <Route path="/filtered-products" element={<SortedProduct />} />
           <Route path="/checkout" element={<Checkout />} /> 
         </Routes>

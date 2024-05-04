@@ -1,10 +1,10 @@
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Spinner from '../../components/IssueComp/Spinner';
+import Spinner from '../../Components/Issues/Spinner';
 import { Link } from 'react-router-dom';
-import { MdOutlineAddBox } from 'react-icons/md';
-import IssuesTable from '../../components/IssueComp/IssuesTable';
-import IssueCard from '../../components/IssueComp/IssueCard';
+import IssuesTable from '../../Components/Issues/IssuesTable';
+import IssueCard from '../../Components/Issues/IssueCard';
 
 const Home = () => {
   const [issues, setIssues] = useState([]);
@@ -29,7 +29,7 @@ const Home = () => {
     <div style={styles.container}>
       {/* Header */}
       <div style={styles.header}>
-        <h2 style={styles.title}> Dashboard / Emergency Issues </h2>
+        <h2 style={styles.title}> Dashboard / General Issues </h2>
 
       </div>
 
@@ -47,15 +47,7 @@ const Home = () => {
         >
           Card
         </button>
-        {/* New button for Dashboard */}
-        <Link to='/dashboard'>
-          <button
-            style={{ ...styles.navButton, backgroundColor: showType === 'dashboard' ? '#595959' : '#999999' }}
-            onClick={() => setShowType('dashboard')}
-          >
-            Dashboard
-          </button>
-        </Link>
+        
         <button onClick={() => { window.location.href = '/issues/create'; }}
           style={styles.createButton}
         >
@@ -130,6 +122,7 @@ const styles = {
     borderRadius: '0rem',
     border: 'none',
     cursor: 'pointer',
+    marginLeft: '39rem',
     fontSize: '0.8rem',
   }
 
