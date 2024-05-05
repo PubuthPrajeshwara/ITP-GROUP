@@ -10,9 +10,9 @@ function EmergencyIssue() {
       <div style={styles.content}>
         <h1 style={styles.heading}>Emergency Vehicle Service</h1>
         <p style={styles.description}>
-          If you have an emergency related to your vehicle, <br></br>please contact us immediately at the following hotline number:
+          If you have an emergency related to your vehicle, <br></br>please contact us <br></br>immediately at the following hotline number:
         </p>
-        <p style={styles.hotline}>Hotline: 1-800-123-4567</p>
+        <p style={styles.hotline}>Hotline: +9477 527 5275</p>
       </div>
     </div>
   );
@@ -23,7 +23,7 @@ const styles = {
     backgroundImage: `url(${backgroundImage})`, 
     backgroundSize: "cover",
     backgroundPosition: "center",
-    minHeight: "90vh",
+    minHeight: "100vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -33,18 +33,21 @@ const styles = {
     color: "#fff",
   },
   heading: {
-    fontSize: "3.3rem",
-    marginBottom: "6.5rem",
-    marginTop: '0.2rem',
-    color: '#1a1a00',
+    fontSize: "3.4rem",
+    marginBottom: "5.5rem",
+    marginTop: '-2rem',
+    color: '#0f0f3d',
   },
   description: {
-    fontSize: "1.5rem",
-    marginBottom: "1rem",
+    fontSize: "1.6rem",
+    marginBottom: "3rem",
+    color: '#000000'
   },
   hotline: {
-    fontSize: "1.25rem",
-    color: '#cc3300'
+    fontSize: "3.25rem",
+    color: '#ff0000',
+    marginTop: '7rem',
+
   },
 };
 
