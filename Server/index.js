@@ -602,6 +602,36 @@ app.post('/addbooking', async (req, res) => {
       res.status(500).json({ error: 'Server error' });
     }
   });
+
+
+  const sendEmail = require('./email');
+  // Update booking status route
+  app.put('/updateBookingStatus/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updatedBooking = await Booking.findByIdAndUpdate(
+        id,
+        { $set: { status: 'accepted' } }, // Update status to 'accepted'
+        { new: true }
+      );
+      if (updatedBooking.status === 'accepted') {
+        const { email } = updatedBooking;
+        const subject = 'Booking Accepted';
+        const text = 'Your booking request has been accepted.';
+  
+        await sendEmail(email, subject, text);
+      }
+  
+      if (!updatedBooking) {
+        return res.status(404).json({ error: 'Booking not found' });
+      }
+  
+      res.status(200).json({ message: 'Booking status updated successfully', updatedBooking });
+    } catch (error) {
+      console.error('Error updating booking status:', error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
   
 
     // Update booking details route
@@ -624,6 +654,7 @@ app.post('/addbooking', async (req, res) => {
         }
         }); 
     
+        //get all booking details
         app.get('/allBookingRequest', async (req, res) => {
             try {
               const data = await Booking.find();
@@ -636,6 +667,7 @@ app.post('/addbooking', async (req, res) => {
             }
           }
         );
+        
 
     //pathum's Service Routes
 
