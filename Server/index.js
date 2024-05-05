@@ -10,6 +10,7 @@ const { log } = require("console");
 const Product = require("./models/OnlineShopModels/Product");
 const Users = require("./models/OnlineShopModels/Users");
 const Order = require("./models/OnlineShopModels/Order");
+var nodemailer = require('nodemailer');
 
 app.use(express.json());
 app.use(cors());
@@ -202,6 +203,42 @@ app.get('/product/:id', async (req, res) => {
         res.json({ success: true, product });
     } catch (error) {
         console.error("Error while fetching product:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+app.get('/lowStockProducts', async (req, res) => {
+    try {
+        let products = await Product.find({});
+        
+        // Filter products with quantity less than 2
+        const lowStockProducts = products.filter(product => product.quantity < 3);
+
+        if (lowStockProducts.length > 0) {
+            // Send a notification or flag to indicate low stock products
+            res.json({ success: true, products, lowStockProducts });
+        } else {
+            res.json({ success: true, products });
+        }
+    } catch (error) {
+        console.error("Error while fetching all products:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+app.get('/processingOrdersCount', async (req, res) => {
+    try {
+        let orders = await Order.find({});
+
+        const processingOrdersCount = orders.filter(Order => Order.status === 'processing');
+
+        if (processingOrdersCount.length > 0) {
+            res.json({ success: true, orders, processingOrdersCount });
+        } else {
+            res.json({ success: true, orders });
+        }
+    } catch (error) {
+        console.error("Error while fetching processing orders:", error);
         res.status(500).json({ success: false, error: "Internal server error" });
     }
 });
@@ -452,6 +489,14 @@ const clearCart = async (userId) => {
     },
 });*/
 
+// Create a transporter using SMTP transport
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'pprajeshvara@gmail.com',
+        pass: 'wjjm bzhn lxkp ennh'
+    }
+});
 
 app.post('/checkout',fetchUser, async (req, res) => {
     try {
@@ -476,6 +521,16 @@ app.post('/checkout',fetchUser, async (req, res) => {
         const userId = req.user.id;
 
         await clearCart(userId);
+
+        const mailOptions = {
+            from: 'pprajeshvara@gmail.com',
+            to: email,
+            subject: 'Order Confirmation',
+            text: `Dear ${fullName},\n\nYour order (${orderId}) has been successfully placed.\n\nTotal Amount:- Rs.${totalAmount}\nPayment Method:- ${paymentMethod}\nDate:- ${new Date(order.orderDate).toLocaleDateString()}\n\nThank you for shopping with us!`, // Email body
+        };
+
+        // Send the email
+        await transporter.sendMail(mailOptions);
 
         res.json({ success: true, orderId });
     } catch (error) {
@@ -547,35 +602,117 @@ app.put('/order/:id', async (req, res) => {
         }
         
         res.json({ success: true, order: updatedOrder });
-    } catch (error) {
-        console.error("Error while updating order status:", error);
-        res.status(500).json({ success: false, error: "Internal server error" });
-    }
-});
 
-// Define route for updating order status
-app.put('/order/:id', async (req, res) => {
-    try {
-        const orderId = req.params.id;
-        const newStatus = req.body.status;
-        const updatedOrder = await Order.findOneAndUpdate(
-            { orderId: orderId },
-            { status: newStatus },
-            { new: true }
-        );
+        const { fullName, email } = updatedOrder;
 
-        if (!updatedOrder) {
-            return res.status(404).json({ success: false, error: 'Order not found' });
-        }
+        const mailOptions = {
+            from: 'pprajeshvara@gmail.com',
+            to: email,
+            subject: 'Order Shipped',
+            text: `Dear ${fullName},\n\nYour order (${orderId}) has been shipped. Thank you for shopping with us!`,
+        };
+
+        // Send the email
+        await transporter.sendMail(mailOptions);
         
-        res.json({ success: true, order: updatedOrder });
     } catch (error) {
         console.error("Error while updating order status:", error);
         res.status(500).json({ success: false, error: "Internal server error" });
     }
 });
 
+app.get('/processingOrders', async (req, res) => {
+    try {
+        const processingOrdersCount = await Order.countDocuments({ status: 'processing' });
+        res.json({ success: true, processingOrdersCount });
+    } catch (error) {
+        console.error("Error while fetching processing orders count:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
 
+app.get('/shippedOrders', async (req, res) => {
+    try {
+        const shippedOrdersCount = await Order.countDocuments({ status: 'shipped' });
+        res.json({ success: true, shippedOrdersCount });
+    } catch (error) {
+        console.error("Error while fetching shipped orders count:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+// Creating API to get the total amount of all orders
+app.get('/totalAmountOfOrders', async (req, res) => {
+    try {
+        // Fetch all orders
+        const orders = await Order.find({});
+
+        // Calculate total amount by summing up 'totalAmount' field of each order
+        const totalAmountOfOrders = orders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfOrders });
+    } catch (error) {
+        console.error("Error while fetching total amount of all orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+
+app.get('/deliveredOrders', async (req, res) => {
+    try {
+        const deliveredOrdersCount = await Order.countDocuments({ status: 'delivered' });
+        res.json({ success: true, deliveredOrdersCount });
+    } catch (error) {
+        console.error("Error while fetching delivered orders count:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+// Creating API to get the total amount of all orders
+app.get('/totalAmountOfOrders', async (req, res) => {
+    try {
+        // Fetch all orders
+        const orders = await Order.find({});
+
+        // Calculate total amount by summing up 'totalAmount' field of each order
+        const totalAmountOfOrders = orders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfOrders });
+    } catch (error) {
+        console.error("Error while fetching total amount of all orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+app.get('/totalAmountOfDelivered', async (req, res) => {
+    try {
+        // Fetch orders with status 'delivered'
+        const deliveredOrders = await Order.find({ status: 'delivered' });
+
+        // Calculate total amount by summing up 'totalAmount' field of each delivered order
+        const totalAmountOfDeliveredOrders = deliveredOrders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfDeliveredOrders });
+    } catch (error) {
+        console.error("Error while fetching total amount of delivered orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+app.get('/totalAmountOfPending', async (req, res) => {
+    try {
+        // Fetch orders with status 'shipped' or 'processing'
+        const pendingOrders = await Order.find({ status: { $in: ['shipped', 'processing'] } });
+
+        // Calculate total amount by summing up 'totalAmount' field of each pending order
+        const totalAmountOfPending = pendingOrders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfPending });
+    } catch (error) {
+        console.error("Error while fetching total amount of pending orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
 
 
 

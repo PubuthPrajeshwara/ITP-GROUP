@@ -5,7 +5,7 @@ import { BsArrowLeft } from 'react-icons/bs';
 const BackButton = ({ destination = '/issue' }) => {
   const styles = {
     backButton: {
-      backgroundColor: '#2C7A7B', // Sky color
+      backgroundColor: '#4299e1', // Sky color
       color: '#FFFFFF', // White color for text
       padding: '8px 16px', // Padding for better spacing
       borderRadius: '8px', // Rounded corners
@@ -15,7 +15,7 @@ const BackButton = ({ destination = '/issue' }) => {
       transition: 'background-color 0.3s ease', // Smooth transition for background color
     },
     backButtonHover: {
-      backgroundColor: '#4299E1', // Lighter sky color on hover
+      backgroundColor: '#2c5282', // Lighter sky color on hover
     },
     arrowIcon: {
       fontSize: '24px', // Icon size
@@ -28,8 +28,8 @@ const BackButton = ({ destination = '/issue' }) => {
       <Link 
         to={destination} 
         style={styles.backButton}
-        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#112f30'} // Change background color on hover
-        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#256768'} // Reset background color on mouse out
+        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#2C7A7B'} // Change background color on hover
+        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#4299e1'} // Reset background color on mouse out
       >
         <BsArrowLeft style={styles.arrowIcon} />
         Back

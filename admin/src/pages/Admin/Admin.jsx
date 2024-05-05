@@ -35,7 +35,7 @@ const Admin = () => {
     <div className='Admin'>
       <Sidebar />
       <Routes>
-        <Route path='/' element={<Dashboard />} />
+        <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/home' element={<Home />} />
         <Route path='/users' element={<Users />} />
         <Route path='/service' element={<Service />} />
