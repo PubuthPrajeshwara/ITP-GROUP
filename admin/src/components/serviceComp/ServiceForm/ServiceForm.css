@@ -1,13 +1,13 @@
 .f-container {
-  max-width: 360px;
+  max-width: 22rem;
   width: auto;
   margin: auto;
-  height: 500px;
+  height: 600px;
   border: 1px solid #1a1818;
   border-radius: 10px;
   padding: 1em 2em;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, rgba(17,102,151,1) 0%, rgba(0,0,0,0.8) 100%);
+  background: linear-gradient(135deg, rgb(58, 143, 192) 0%, rgba(3, 43, 73, 0.8) 100%);
   color: white;
 }
 
@@ -36,5 +36,13 @@
   }
   
   .buttons{
-    margin-left: 6rem;
+    margin-left: 7rem;
   }
+
+  .addService-thumbnail{
+    width:150px;
+    background: #ffffff;
+    border-radius: 10px;
+    object-fit: contain;
+    margin-top: 30px;
+}

@@ -13,8 +13,11 @@ const serviceSchema = new mongoose.Schema({
     estimatedHour: {
         type: String,
         required: true
-    }
-    
+    },
+    imagePath: { 
+        type: String, 
+        required: true 
+    } // Image path field    
 });
 
 // Create the model
