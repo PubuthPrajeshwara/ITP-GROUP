@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import NavBar from "./Components/NavBar/NavBar";
 import Home from "./pages/Home";
 import Header from "./Components/Header/Header";
 import BookingForm from "./pages/BookingPage/BookingForm";
@@ -10,20 +9,17 @@ import Cart from "./pages/OnlineShopPages/Cart/cart";
 import Product from "./pages/OnlineShopPages/Product/Product";
 import OnlineShop from "./pages/OnlineShopPages/OnlineShop/OnlineShop";
 import EmergencyIssue from "./pages/Emergency/EmergencyIssue";
-import ProductSearch from "./Components/OnlineShop/ProductSearch/ProductSearch";
 import FilteredProductsPage from "./pages/OnlineShopPages/filtered/FilteredProductsPage";
 import ProductCategory from "./pages/OnlineShopPages/ProductCategory/ProductCategory";
 import Service from "./pages/Service";
-import Sort from "./Components/Sort/Sort";
 import LoginSignup from "./pages/login/loginSignup";
 import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
 import Checkout from "./Components/OnlineShop/Checkout/Checkout"; 
 import "./App.css";
-import InsertItem from './components/InventoryComp/InsertItem';
-import UpdateItem from './components/InventoryComp/UpdateItem';
-import Items from './components/InventoryComp/Items';
-
+import Inventory from "../admin/src/components/InventoryComp/Inventory";
+import InsertInventory from "../admin/src/components/InventoryComp/InsertInventory";
+import UpdateInventory from "../admin/src/components/InventoryComp/UpdateInventory";
 function App() {
   return (
     <Router>
@@ -34,9 +30,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/booking" element={<BookingForm />} />
-          <Route path="/items" element={<Items />} />
-          <Route path="/insertitem" element={<InsertItem />} />
-          <Route path="/updateitem/:id" element={<UpdateItem />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/insertinventory" element={<InsertInventory />} />
+          <Route path="/updateinventory/:id" element={<UpdateInventory />} />
           <Route path="/onlineShop" element={<OnlineShop />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/emergency" element={<EmergencyIssue />} />

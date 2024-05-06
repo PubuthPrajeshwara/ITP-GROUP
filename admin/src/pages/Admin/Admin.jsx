@@ -1,34 +1,33 @@
-import React from 'react'
-import './Admin.css'
-import Sidebar from '../../components/Sidebar/Sidebar'
-import { Routes, Route } from 'react-router'
-import Dashboard from '../Dashboard/Dashboard'
-import Home from '../Home/Home'
-import Users from '../Users/Users'
-import Service from '../Service/Service'
-import Bookings from '../Booking/bookings'
-import Issue from '../Issue/Issue'
-import Inventory from '../Inventory/Inventory'
-import Supplier from '../Supplier/Supplier'
-import Employee from '../Employee/Employee'
-import Payment from '../Payment/Payment'
-import OnlineShop from '../OnlineShop/OnlineShop'
-import Customer from '../Customer/Customer'
-import Orders from '../../components/onlineShop/Orders/Orders'
-import Alerts from '../../components/onlineShop/Alerts/Alerts'
-import AddProduct from '../../components/onlineShop/AddProduct/AddProduct'
-import UpdateProduct from '../../components/onlineShop/UpdateProduct/UpdateProduct'
-import AddService from '../../components/serviceComp/AddService/AddService'
-import AddBooking from '../../components/BookingComp/AddBooking/AddBooking'
-import AllBooking from '../../components/BookingComp/AllBookings/AllBooking'
+import React from 'react';
+import './Admin.css';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import { Routes, Route } from 'react-router';
+import Dashboard from '../Dashboard/Dashboard';
+import Home from '../Home/Home';
+import Users from '../Users/Users';
+import Service from '../Service/Service';
+import Bookings from '../Booking/bookings';
+import Issue from '../Issue/Issue';
+// import Inventory from '../Inventory/Inventory';
+import Supplier from '../Supplier/Supplier';
+import Employee from '../Employee/Employee';
+import Payment from '../Payment/Payment';
+import OnlineShop from '../OnlineShop/OnlineShop';
+import Customer from '../Customer/Customer';
+import Orders from '../../components/onlineShop/Orders/Orders';
+import Alerts from '../../components/onlineShop/Alerts/Alerts';
+import AddProduct from '../../components/onlineShop/AddProduct/AddProduct';
+import UpdateProduct from '../../components/onlineShop/UpdateProduct/UpdateProduct';
+import AddService from '../../components/serviceComp/AddService/AddService';
+import AddBooking from '../../components/BookingComp/AddBooking/AddBooking';
+import AllBooking from '../../components/BookingComp/AllBookings/AllBooking';
 import CreateIssue from '../../components/IssueComp/CreateIssues';
 import ShowIssue from '../../components/IssueComp/ShowIssue';
 import EditIssue from '../../components/IssueComp/EditIssue';
 import DeleteIssue from '../../components/IssueComp/DeleteIssue';
-import InsertItem from '../../components/InventoryComp/InsertItem';
-import UpdateItem from './../../components/InventoryComp/UpdateItem';
-import Items from './../../components/InventoryComp/Items';
-
+import InsertInventory from '../../components/InventoryComp/InsertInventory';
+import UpdateInventory from '../../components/InventoryComp/UpdateInventory';
+import Inventory from '../../components/InventoryComp/Inventory';
 
 const Admin = () => {
   return (
@@ -51,7 +50,6 @@ const Admin = () => {
         <Route path='/Onlineshop/Alerts' element={<Alerts />} />
         <Route path='/Onlineshop/products/addproduct' element={<AddProduct />} />
         <Route path='/service/add' element={<AddService />} />
-        <Route path='/service' element={<Service />} />
         <Route exact path="/Onlineshop/products/updateproduct/:id" element={<UpdateProduct />} />
         <Route path='/booking/add' element={<AddBooking />} />
         <Route path='/booking/all' element={<AllBooking />} />
@@ -59,10 +57,8 @@ const Admin = () => {
         <Route path='/issues/details/:id' element={<ShowIssue />} />
         <Route path='/issues/edit/:id' element={<EditIssue />} />
         <Route path='/issues/delete/:id' element={<DeleteIssue />} />
-        <Route path="/items" element={<Items />} />
-        <Route path="/insertitem" element={<InsertItem />} />
-        <Route path="/updateitem/:id" element={<UpdateItem />} />
-
+        <Route path="/insertinventory" element={<InsertInventory />} />
+        <Route path="/updateinventory/:id" element={<UpdateInventory />} />
       </Routes>
     </div>
   );
