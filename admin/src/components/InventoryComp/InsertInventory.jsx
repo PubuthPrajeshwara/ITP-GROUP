@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import INavBar from './InventoryNavBar/INavBar';  
+
+
 export default function InsertInventory() {  
     const [inventoryName, setInventoryName] = useState("");
     const [inventoryType, setInventoryType] = useState("");
@@ -99,8 +102,9 @@ export default function InsertInventory() {
     }
 
     return (
+        <>
+        <INavBar />
         <div className='container-fluid p-5'>
-            <h1 className='text-center mb-5 d-md-none'>Enter Product Information</h1>
             <div className="row justify-content-start align-items-start">
                 <div className="col-lg-6 col-md-6 col-12">
                     <h1 className='text-center mb-5 d-none d-md-block'>Enter Product Information</h1>
@@ -137,9 +141,11 @@ export default function InsertInventory() {
                     </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-12">
-                    <img className="img-fluid w-100" src="images/img1.jpg" alt="productimage" style={{ margin: 0 }} />
+                    <img className="img-fluid w-100" src="/src/assets/inventory_img.png" alt="productimage" style={{ margin: 0 }} />
                 </div>
             </div>
         </div>
-    )
+        </>
+        
+    );
 }

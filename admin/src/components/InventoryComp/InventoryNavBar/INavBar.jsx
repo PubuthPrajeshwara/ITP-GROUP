@@ -16,8 +16,8 @@ function InventoryNavBar() {
                         id={location.pathname === val.link ? "active" : ""}
                     >
                         <Link to={val.link}>
-                            <div className="INavListIcons">{val.icon}</div> {/* Update class name */}
-                            <div className="INavListTitles">{val.title}</div> {/* Update class name */}
+                            <div className="INavListIcons">{val.icon}</div>
+                            <div className="INavListTitles">{val.title}</div>
                         </Link>
                     </li>
                 ))}

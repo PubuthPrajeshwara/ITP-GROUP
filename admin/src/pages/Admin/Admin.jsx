@@ -25,10 +25,9 @@ import CreateIssue from '../../components/IssueComp/CreateIssues';
 import ShowIssue from '../../components/IssueComp/ShowIssue';
 import EditIssue from '../../components/IssueComp/EditIssue';
 import DeleteIssue from '../../components/IssueComp/DeleteIssue';
-// import InsertInventory from '../../components/InventoryComp/InsertInventory';
-// import UpdateInventory from '../../components/InventoryComp/UpdateInventory';
-// import Inventory from '../../components/InventoryComp/Inventory';
- 
+import InsertInventory from '../../components/InventoryComp/InsertInventory';
+import UpdateInventory from '../../components/InventoryComp/UpdateInventory';
+import Inventory from '../../components/InventoryComp/Inventory';
 
 const Admin = () => {
   return (
@@ -51,7 +50,6 @@ const Admin = () => {
         <Route path='/Onlineshop/Alerts' element={<Alerts />} />
         <Route path='/Onlineshop/products/addproduct' element={<AddProduct />} />
         <Route path='/service/add' element={<AddService />} />
-        <Route path='/service' element={<Service />} />
         <Route exact path="/Onlineshop/products/updateproduct/:id" element={<UpdateProduct />} />
         <Route path='/booking/add' element={<AddBooking />} />
         <Route path='/booking/all' element={<AllBooking />} />
@@ -59,11 +57,8 @@ const Admin = () => {
         <Route path='/issues/details/:id' element={<ShowIssue />} />
         <Route path='/issues/edit/:id' element={<EditIssue />} />
         <Route path='/issues/delete/:id' element={<DeleteIssue />} />
-        {/* <Route path="/inventory" element={<Inventory />} />
         <Route path="/insertinventory" element={<InsertInventory />} />
-        <Route path="/updateinventory/:id" element={<UpdateInventory />} /> */}
-       
-
+        <Route path="/updateinventory/:id" element={<UpdateInventory />} />
       </Routes>
     </div>
   );
