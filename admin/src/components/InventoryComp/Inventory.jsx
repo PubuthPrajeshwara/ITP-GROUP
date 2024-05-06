@@ -4,6 +4,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import './Product.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import INavBar from './InventoryNavBar/INavBar';
 
 export default function Inventory() {
     const [inventoryData, setInventoryData] = useState([]);
@@ -11,7 +12,7 @@ export default function Inventory() {
     const [deleteAlert, setDeleteAlert] = useState(false);
     const [deletedInventoryId, setDeletedInventoryId] = useState('');
     const [lowInventoryAlert, setLowInventoryAlert] = useState(false);
-    const [emailStatus, setEmailStatus] = useState(null); 
+    const [emailStatus, setEmailStatus] = useState(null);
 
     useEffect(() => {
         getInventory();
@@ -29,7 +30,7 @@ export default function Inventory() {
 
     const getInventory = async () => {
         try {
-            const res = await fetch("http://localhost:4000/inventory", {  
+            const res = await fetch("http://localhost:4000/inventory", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -54,7 +55,7 @@ export default function Inventory() {
 
     const deleteInventory = async (id) => {
         try {
-            const response = await fetch(`http://localhost:4000/deleteinventory/${id}`, {  
+            const response = await fetch(`http://localhost:4000/deleteinventory/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -160,8 +161,6 @@ export default function Inventory() {
         }
     };
     
-    
-
     const filteredInventory = inventoryData.filter(inventory => {
         if (inventory.InventoryID) {
             return inventory.InventoryID.toString().toLowerCase().includes(searchTerm.toLowerCase());
@@ -195,6 +194,7 @@ export default function Inventory() {
 
     return (
         <>
+            <INavBar />
             <div className='container-fluid p-5'>
                 <h1 className="mb-4">All Inventory</h1>
                 <div className="mb-3">
