@@ -97,6 +97,9 @@ const Admin = () => {
         <Route path="/booking/all" element={<PrivateRoute allowedRoles={['5']} />}>
           <Route path="" element={<AllBooking />} />
         </Route>
+        <Route path="/booking/reporting" element={<PrivateRoute allowedRoles={['5']} />}>
+          <Route path="" element={<Report />} />
+        </Route>
         <Route path="/issues/create" element={<PrivateRoute allowedRoles={['6']} />}>
           <Route path="" element={<CreateIssue />} />
         </Route>
