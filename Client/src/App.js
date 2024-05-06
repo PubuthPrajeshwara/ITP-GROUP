@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavBar from "./Components/NavBar/NavBar";
 import Home from "./pages/Home";
 import Header from "./Components/Header/Header";
 import BookingForm from "./pages/BookingPage/BookingForm";
@@ -18,9 +19,7 @@ import Footer from "./Components/Footer/Footer";
 import CreateIssue from "./Components/Issues/CreateIssues";
 import Checkout from "./Components/OnlineShop/Checkout/Checkout";
 import "./App.css";
-import Inventory from "../admin/src/components/InventoryComp/Inventory";
-import InsertInventory from "../admin/src/components/InventoryComp/InsertInventory";
-import UpdateInventory from "../admin/src/components/InventoryComp/UpdateInventory";
+
 function App() {
   return (
     <Router>
@@ -31,9 +30,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/booking" element={<BookingForm />} />
-          <Route path="/inventory" element={<Inventory />} />
-          <Route path="/insertinventory" element={<InsertInventory />} />
-          <Route path="/updateinventory/:id" element={<UpdateInventory />} />
           <Route path="/onlineShop" element={<OnlineShop />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/emergency" element={<EmergencyIssue />} />

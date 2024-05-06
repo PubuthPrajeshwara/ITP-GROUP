@@ -26,9 +26,9 @@ import EditIssue from '../../components/IssueComp/EditIssue';
 import DeleteIssue from '../../components/IssueComp/DeleteIssue';
 import LogIn from '../Login/LogIn'
 import PrivateRoute from '../Login/PrivateRoute';
-import InsertInventory from '../../components/InventoryComp/InsertInventory';
-import UpdateInventory from '../../components/InventoryComp/UpdateInventory';
-import Inventory from '../../components/InventoryComp/Inventory';
+//import InsertInventory from '../../components/InventoryComp/InsertInventory';
+//import UpdateInventory from '../../components/InventoryComp/UpdateInventory';
+//import Inventory from '../../components/InventoryComp/Inventory';
 
 const Admin = () => {
   return (
@@ -54,9 +54,9 @@ const Admin = () => {
         <Route path="/issue" element={<PrivateRoute allowedRoles={['6']} />}>
           <Route path="" element={<Issue />} />
         </Route>
-        <Route path="/inventory" element={<PrivateRoute allowedRoles={['7']} />}>
+        {/*<Route path="/inventory" element={<PrivateRoute allowedRoles={['7']} />}>
           <Route path="" element={<Inventory />} />
-        </Route>
+  </Route>*/}
         <Route path="/supplier" element={<PrivateRoute allowedRoles={['8']} />}>
           <Route path="" element={<Supplier />} />
         </Route>
@@ -108,8 +108,8 @@ const Admin = () => {
         <Route path="/issues/delete/:id" element={<PrivateRoute allowedRoles={['6']} />}>
           <Route path="" element={<DeleteIssue />} />
         </Route>
-        <Route path="/insertinventory" element={<InsertInventory />} />
-        <Route path="/updateinventory/:id" element={<UpdateInventory />} />
+        {/*<Route path="/insertinventory" element={<InsertInventory />} />*/}
+        {/*<Route path="/updateinventory/:id" element={<UpdateInventory />} />*/}
       </Routes>
     </div>
   );
