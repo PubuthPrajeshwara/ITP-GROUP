@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BackButton from '../../components/IssueComp/BackButton';
 import Spinner from '../../components/IssueComp/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
 
 const CreateIssues = () => {
   const [cid, setcid] = useState('');
@@ -12,9 +11,20 @@ const CreateIssues = () => {
   const [Ccontact, setCcontact] = useState('');
   const [Clocation, setClocation] = useState('');
   const [Cstatus, setCstatus] = useState('');
+  const [points, setPoints] = useState(0); 
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    generateIssueID();
+  }, []);
+
+  const generateIssueID = () => {
+    // Generate ID with a prefix and a random number between 1000 and 9999
+    const randomID = `ID${Math.floor(1000 + Math.random() * 9000)}`;
+    setcid(randomID);
+  };
 
   const validateForm = () => {
     let valid = true;
@@ -57,6 +67,11 @@ const CreateIssues = () => {
     return valid;
   };
 
+  const calculatePoints = (status) => {
+    // Calculation logic remains the same
+    // ...
+  };
+
   const handleSaveIssue = () => {
     if (!validateForm()) {
       return;
@@ -88,7 +103,7 @@ const CreateIssues = () => {
   return (
     <div style={styles.container}>
       <BackButton />
-      <h1 style={styles.title}>Create Issue</h1>
+      <h1 style={styles.title}><center>Create Emergency Issue</center></h1>
       {loading ? <Spinner /> : ''}
       <div style={styles.formContainer}>
         <div style={styles.formField}>
@@ -101,7 +116,7 @@ const CreateIssues = () => {
           />
           {errors.cid && <p style={styles.error}>{errors.cid}</p>}
         </div>
-         
+
         <div style={styles.formField}>
           <label style={styles.label}>Customer Name</label>
           <input
@@ -112,7 +127,7 @@ const CreateIssues = () => {
           />
           {errors.Cname && <p style={styles.error}>{errors.Cname}</p>}
         </div>
-        
+
         <div style={styles.formField}>
           <label style={styles.label}>NIC</label>
           <input
@@ -123,7 +138,7 @@ const CreateIssues = () => {
           />
           {errors.Cnic && <p style={styles.error}>{errors.Cnic}</p>}
         </div>
-        
+
         <div style={styles.formField}>
           <label style={styles.label}>Contact Number</label>
           <input
@@ -134,7 +149,7 @@ const CreateIssues = () => {
           />
           {errors.Ccontact && <p style={styles.error}>{errors.Ccontact}</p>}
         </div>
-        
+
         <div style={styles.formField}>
           <label style={styles.label}>Location</label>
           <input
@@ -145,18 +160,24 @@ const CreateIssues = () => {
           />
           {errors.Clocation && <p style={styles.error}>{errors.Clocation}</p>}
         </div>
-        
+
         <div style={styles.formField}>
           <label style={styles.label}>Status</label>
-          <input
-            type='text'
+          <select
             value={Cstatus}
             onChange={(e) => setCstatus(e.target.value)}
             style={styles.input}
-          />
+          >
+            <option value="">Select Status</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Closed">Closed</option>
+          </select>
           {errors.Cstatus && <p style={styles.error}>{errors.Cstatus}</p>}
         </div>
-        
+
+
         <button style={styles.saveButton} onClick={handleSaveIssue}>
           Save
         </button>
@@ -167,7 +188,7 @@ const CreateIssues = () => {
 
 const styles = {
   container: {
-    padding: '1rem',
+    padding: '2rem',
   },
   title: {
     fontSize: '1.875rem',  // Equivalent to 30px
@@ -177,17 +198,17 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     border: '2px solid #90cdf4',
-    borderRadius: '0.5rem',
-    width: '600px',
-    padding: '1rem',
-    margin: 'auto',
+    borderRadius: '3.5rem',
+    width: '650px',
+    padding: '2rem',
+    margin: '40px',
   },
   formField: {
     marginBottom: '1rem',
   },
   label: {
     fontSize: '1.25rem',  // Equivalent to 20px
-    marginRight: '0.5rem',
+    marginRight: '1.5rem',
     color: '#4a5568',
   },
   input: {
@@ -203,7 +224,7 @@ const styles = {
   },
   saveButton: {
     padding: '0.5rem 1rem',
-    backgroundColor: '#90cdf4',
+    backgroundColor: '#4299e1',
     borderRadius: '0.25rem',
     margin: '0.5rem 0',
     cursor: 'pointer',

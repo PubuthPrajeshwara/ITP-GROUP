@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Spinner from '../../components/IssueComp/Spinner';
 import { Link } from 'react-router-dom';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { BsInfoCircle } from 'react-icons/bs';
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import { MdOutlineAddBox } from 'react-icons/md';
 import IssuesTable from '../../components/IssueComp/IssuesTable';
 import IssueCard from '../../components/IssueComp/IssueCard';
 
@@ -29,27 +27,45 @@ const Home = () => {
 
   return (
     <div style={styles.container}>
-      <div style={styles.buttonGroup}>
+      {/* Header */}
+      <div style={styles.header}>
+        <h2 style={styles.title}> Dashboard / Emergency Issues </h2>
+
+      </div>
+
+      {/* Navigation bar */}
+      <div style={styles.navbar}>
         <button
-          style={styles.button}
+          style={{ ...styles.navButton, backgroundColor: showType === 'table' ? '#595959' : '#999999' }}
           onClick={() => setShowType('table')}
         >
           Table
         </button>
         <button
-          style={styles.button}
+          style={{ ...styles.navButton, backgroundColor: showType === 'card' ? '#595959' : '#999999' }}
           onClick={() => setShowType('card')}
         >
           Card
         </button>
-      </div>
-      <div style={styles.header}>
-        <h1 style={styles.title}>Emergency Issues </h1>
-        <Link to='/issues/create'>
-          <MdOutlineAddBox style={styles.addButton} />
+        {/* New button for Dashboard */}
+        <Link to='/dashboard'>
+          <button
+            style={{ ...styles.navButton, backgroundColor: showType === 'dashboard' ? '#595959' : '#999999' }}
+            onClick={() => setShowType('dashboard')}
+          >
+            Dashboard
+          </button>
         </Link>
+        <button onClick={() => { window.location.href = '/issues/create'; }}
+          style={styles.createButton}
+        >
+          Create
+        </button>
+
       </div>
-      
+
+
+      {/* Content based on showType */}
       {loading ? (
         <Spinner />
       ) : showType === 'table' ? (
@@ -63,41 +79,61 @@ const Home = () => {
 
 const styles = {
   container: {
-    padding: '40px',
-    backgroundColor: '#f4f4f4',
+    width: '78%',
+    marginRight: '0.5rem',
+    backgroundPosition: 'right',
     borderRadius: '8px',
-    margin: '1px,'
-},
-  buttonGroup: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '0.5rem',
-    marginBottom: '1rem',
+    margin: '1px',
   },
-  button: {
-    backgroundColor: '#90cdf4',
-    hover: {
-      backgroundColor: '#4299e1',
-    },
-    padding: '0.5rem 1rem',
-    borderRadius: '0.25rem',
+  navbar: {
+    display: 'flex',
+    marginBottom: '2rem',
+    marginTop: '0rem',
+  },
+  navButton: {
+    backgroundColor: '#999999',
+    padding: '1rem 5rem',
+    borderRadius: '0rem',
     cursor: 'pointer',
+    border: 'none',
+    marginRight: '0rem',
+    outline: 'none',
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: '1rem',
+    marginBottom: '0.1rem',
   },
   title: {
-    fontSize: '1.875rem',  // Equivalent to 30px
+    fontSize: '1.875rem',
     margin: '0',
   },
   addButton: {
     color: '#2c5282',
-    fontSize: '2.5rem',  // Equivalent to 40px
+    fontSize: '2.5rem',
   },
+  title: {
+    width: '120%',
+    fontSize: '1.5rem',
+    marginTop: '0.8rem',
+    marginLeft: '0.02rem',
+    backgroundColor: '#90cdf4',
+    padding: '0.4rem ',
+    borderRadius: '0.3rem',
+
+  },
+  createButton: {
+    backgroundColor: '#2c5282',
+    color: 'white',
+    padding: '0.85rem 5rem',
+    borderRadius: '0rem',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '0.8rem',
+  }
+
+
 };
 
 export default Home;

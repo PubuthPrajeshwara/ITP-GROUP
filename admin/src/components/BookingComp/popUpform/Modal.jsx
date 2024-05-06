@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Modal.css';
+import axios from 'axios';
 
 const Modal = ({ closeModal, rowData }) => {
   const [formData, setFormData] = useState({
@@ -29,9 +30,19 @@ const Modal = ({ closeModal, rowData }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    try {
+      const response = await axios.put(`http://localhost:4000/updateBookingDetails/${formData._id}`, formData);
+      console.log(response.data); // Handle success response
+      // Close the modal or show a success message
+      alert('Booking updated successfully');
+      closeModal();
+    } catch (error) {
+      console.error(error); // Handle error response
+      // Show an error message to the user
+      alert('An error occurred. Please try again later.');
+    }
   };
 
   return (
@@ -39,10 +50,12 @@ const Modal = ({ closeModal, rowData }) => {
       if (e.target.className === 'modal-container') closeModal();
     }}>
       <div className="form-container">
-        <p>Booking ID: {formData._id}</p>
+      <form onSubmit={handleSubmit}>
+        <p>Booking ID: {formData.bookingId}</p>
         <div className="form-columns">
           <div className="form-column">
             <h3 style={{ color: '#007CB1' }}>OWNER DETAILS</h3>
+            
             <label>Name:</label>
             <input
               type="text"
@@ -116,6 +129,7 @@ const Modal = ({ closeModal, rowData }) => {
               name="date"
               value={formData.date}
               onChange={handleInputChange}
+              readOnly // Add readOnly attribute to disable editing
               required
             />
             <label>Time:</label>
@@ -124,13 +138,16 @@ const Modal = ({ closeModal, rowData }) => {
               name="time"
               value={formData.time}
               onChange={handleInputChange}
+              readOnly // Add readOnly attribute to disable editing
               required
             />
           </div>
         </div>
         <div className="button-container">
-          <button type="submit">Book Now</button>
+          <button type="submit">Update Booking</button>
+          
         </div>
+        </form>
       </div>
     </div>
   );

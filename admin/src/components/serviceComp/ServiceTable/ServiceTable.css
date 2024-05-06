@@ -1,15 +1,19 @@
 .service{
     display: flex;
-    width: 100rem;
     margin: 0 auto;
     padding-right: 1em;
-}    
+}  
+.scrolltbl{
+  overflow: auto;
+  height: 550px;
+  width: auto;
+}
 
 .btblContainer{
-    height: 520px;
+    height: 550px;
     margin-left:1em;
     padding: 1.0em;
-    border: 1px solid #1a1818;
+    border: 1px solid #d8d8d8;
     background-color: #ffffff;
     border-radius: 10px;
 }
@@ -37,8 +41,4 @@ table {
   .ckbox{
     width: 20px;
     height: 20px;   
-  }
-
-  .rwhover :hover{
-    background-color: #f2f2f2;
   }

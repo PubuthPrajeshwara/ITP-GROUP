@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from "./pages/Home";
 import Header from "./Components/Header/Header";
 import BookingForm from "./pages/BookingPage/BookingForm";
-import InsertProduct from "./pages/InsertProduct";
-import UpdateProduct from "./pages/UpdateProduct";
+import GeneralIssue from "./Components/Issues/GeneralIssue"; 
+import Emegency from "./Components/Issues/Emegency"; 
 import Cart from "./pages/OnlineShopPages/Cart/cart";
 import Product from "./pages/OnlineShopPages/Product/Product";
 import OnlineShop from "./pages/OnlineShopPages/OnlineShop/OnlineShop";
@@ -15,7 +15,8 @@ import Service from "./pages/Service";
 import LoginSignup from "./pages/login/loginSignup";
 import SortedProduct from "./pages/OnlineShopPages/SortedProduct/SortedProduct";
 import Footer from "./Components/Footer/Footer";
-import Checkout from "./Components/OnlineShop/Checkout/Checkout"; 
+import CreateIssue from "./Components/Issues/CreateIssues";
+import Checkout from "./Components/OnlineShop/Checkout/Checkout";
 import "./App.css";
 import Inventory from "../admin/src/components/InventoryComp/Inventory";
 import InsertInventory from "../admin/src/components/InventoryComp/InsertInventory";
@@ -25,7 +26,7 @@ function App() {
     <Router>
       <div className="app">
         <Header />
-        {/*{location.pathname.startsWith('/inventory') ? <InventoryNavBar className="navBar" /> : <NavBar className="navBar" />}*/}
+        <NavBar className="navBar" />
        
         <Routes>
           <Route path="/" element={<Home />} />
@@ -41,14 +42,13 @@ function App() {
           <Route path="/product" element={<Product />}>
             <Route path=":productId" element={<Product />} />
           </Route>
+          <Route path='/issues/create' element={<CreateIssue />} /> {/* Moved outside the /product route */}
           <Route path="/interiour" element={<ProductCategory category="Interiour" />} />
           <Route path="/exteriour" element={<ProductCategory category="Exteriour" />} />
           <Route path="/carcare" element={<ProductCategory category="Car_care" />} />
           <Route path="/search-results" element={<FilteredProductsPage />} />
           <Route path="/filtered-products" element={<SortedProduct />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/insertproduct" element={<InsertProduct />} />
-          <Route path="/updateproduct/:id" element={<UpdateProduct />} />
+          <Route path="/checkout" element={<Checkout />} /> 
         </Routes>
         <Footer />
       </div>

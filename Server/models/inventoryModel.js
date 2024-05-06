@@ -1,5 +1,21 @@
 const mongoose = require('mongoose');
 
+ 
+const CounterSchema = new mongoose.Schema({
+    _id: { type: String, required: true },
+    seq: { type: Number, default: 0 }
+});
+
+ 
+const Counter = mongoose.model('Counter', CounterSchema);
+
+ 
+const InventorySchema = new mongoose.Schema({
+    InventoryID: {
+        type: Number,
+        unique: true  
+    },
+    InventoryType: {
 // Define a separate schema for the counter collection
 const CounterSchema = new mongoose.Schema({
     _id: { type: String, required: true },
@@ -19,6 +35,7 @@ const InventorySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    InventoryName: {
     InventoryName: {
         type: String,
         required: true,
@@ -41,6 +58,26 @@ const InventorySchema = new mongoose.Schema({
     },
 });
 
+ 
+InventorySchema.pre('save', function(next) {
+    const doc = this;
+    Counter.findByIdAndUpdate(
+        { _id: 'inventoryId' },  
+        { $inc: { seq: 1 } },  
+        { new: true, upsert: true }  
+    )
+    .then(counter => {
+        doc.InventoryID = counter.seq;
+        next();
+    })
+    .catch(error => {
+        console.error('Error during InventoryID generation:', error);
+        next(error);
+    });
+});
+
+// Create the Inventory model
+const Inventory = mongoose.model('Inventory', InventorySchema);
  
 InventorySchema.pre('save', function(next) {
     const doc = this;

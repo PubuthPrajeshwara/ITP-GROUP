@@ -10,6 +10,7 @@ const { log } = require("console");
 const Product = require("./models/OnlineShopModels/Product");
 const Users = require("./models/OnlineShopModels/Users");
 const Order = require("./models/OnlineShopModels/Order");
+var nodemailer = require('nodemailer');
 
 app.use(express.json());
 app.use(cors());
@@ -202,6 +203,42 @@ app.get('/product/:id', async (req, res) => {
         res.json({ success: true, product });
     } catch (error) {
         console.error("Error while fetching product:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+app.get('/lowStockProducts', async (req, res) => {
+    try {
+        let products = await Product.find({});
+        
+        // Filter products with quantity less than 2
+        const lowStockProducts = products.filter(product => product.quantity < 3);
+
+        if (lowStockProducts.length > 0) {
+            // Send a notification or flag to indicate low stock products
+            res.json({ success: true, products, lowStockProducts });
+        } else {
+            res.json({ success: true, products });
+        }
+    } catch (error) {
+        console.error("Error while fetching all products:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+app.get('/processingOrdersCount', async (req, res) => {
+    try {
+        let orders = await Order.find({});
+
+        const processingOrdersCount = orders.filter(Order => Order.status === 'processing');
+
+        if (processingOrdersCount.length > 0) {
+            res.json({ success: true, orders, processingOrdersCount });
+        } else {
+            res.json({ success: true, orders });
+        }
+    } catch (error) {
+        console.error("Error while fetching processing orders:", error);
         res.status(500).json({ success: false, error: "Internal server error" });
     }
 });
@@ -452,6 +489,14 @@ const clearCart = async (userId) => {
     },
 });*/
 
+// Create a transporter using SMTP transport
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'pprajeshvara@gmail.com',
+        pass: 'wjjm bzhn lxkp ennh'
+    }
+});
 
 app.post('/checkout',fetchUser, async (req, res) => {
     try {
@@ -476,6 +521,16 @@ app.post('/checkout',fetchUser, async (req, res) => {
         const userId = req.user.id;
 
         await clearCart(userId);
+
+        const mailOptions = {
+            from: 'pprajeshvara@gmail.com',
+            to: email,
+            subject: 'Order Confirmation',
+            text: `Dear ${fullName},\n\nYour order (${orderId}) has been successfully placed.\n\nTotal Amount:- Rs.${totalAmount}\nPayment Method:- ${paymentMethod}\nDate:- ${new Date(order.orderDate).toLocaleDateString()}\n\nThank you for shopping with us!`, // Email body
+        };
+
+        // Send the email
+        await transporter.sendMail(mailOptions);
 
         res.json({ success: true, orderId });
     } catch (error) {
@@ -547,41 +602,237 @@ app.put('/order/:id', async (req, res) => {
         }
         
         res.json({ success: true, order: updatedOrder });
+
+        const { fullName, email } = updatedOrder;
+
+        const mailOptions = {
+            from: 'pprajeshvara@gmail.com',
+            to: email,
+            subject: 'Order Shipped',
+            text: `Dear ${fullName},\n\nYour order (${orderId}) has been shipped. Thank you for shopping with us!`,
+        };
+
+        // Send the email
+        await transporter.sendMail(mailOptions);
+        
     } catch (error) {
         console.error("Error while updating order status:", error);
         res.status(500).json({ success: false, error: "Internal server error" });
     }
 });
 
+app.get('/processingOrders', async (req, res) => {
+    try {
+        const processingOrdersCount = await Order.countDocuments({ status: 'processing' });
+        res.json({ success: true, processingOrdersCount });
+    } catch (error) {
+        console.error("Error while fetching processing orders count:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
 
-//Pathum,s routes
+app.get('/shippedOrders', async (req, res) => {
+    try {
+        const shippedOrdersCount = await Order.countDocuments({ status: 'shipped' });
+        res.json({ success: true, shippedOrdersCount });
+    } catch (error) {
+        console.error("Error while fetching shipped orders count:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+// Creating API to get the total amount of all orders
+app.get('/totalAmountOfOrders', async (req, res) => {
+    try {
+        // Fetch all orders
+        const orders = await Order.find({});
+
+        // Calculate total amount by summing up 'totalAmount' field of each order
+        const totalAmountOfOrders = orders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfOrders });
+    } catch (error) {
+        console.error("Error while fetching total amount of all orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+
+app.get('/deliveredOrders', async (req, res) => {
+    try {
+        const deliveredOrdersCount = await Order.countDocuments({ status: 'delivered' });
+        res.json({ success: true, deliveredOrdersCount });
+    } catch (error) {
+        console.error("Error while fetching delivered orders count:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+// Creating API to get the total amount of all orders
+app.get('/totalAmountOfOrders', async (req, res) => {
+    try {
+        // Fetch all orders
+        const orders = await Order.find({});
+
+        // Calculate total amount by summing up 'totalAmount' field of each order
+        const totalAmountOfOrders = orders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfOrders });
+    } catch (error) {
+        console.error("Error while fetching total amount of all orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+app.get('/totalAmountOfDelivered', async (req, res) => {
+    try {
+        // Fetch orders with status 'delivered'
+        const deliveredOrders = await Order.find({ status: 'delivered' });
+
+        // Calculate total amount by summing up 'totalAmount' field of each delivered order
+        const totalAmountOfDeliveredOrders = deliveredOrders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfDeliveredOrders });
+    } catch (error) {
+        console.error("Error while fetching total amount of delivered orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+app.get('/totalAmountOfPending', async (req, res) => {
+    try {
+        // Fetch orders with status 'shipped' or 'processing'
+        const pendingOrders = await Order.find({ status: { $in: ['shipped', 'processing'] } });
+
+        // Calculate total amount by summing up 'totalAmount' field of each pending order
+        const totalAmountOfPending = pendingOrders.reduce((total, order) => total + order.totalAmount, 0);
+
+        res.json({ success: true, totalAmountOfPending });
+    } catch (error) {
+        console.error("Error while fetching total amount of pending orders:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+
+
+
+//Pathum,s Booking routes
 
 const Booking = require('./models/BookingModel');
 
 app.post('/addbooking', async (req, res) => {
+    try {
+      // Extract form data from request body
+      const formData = req.body;
+  
+      // Create a new booking instance
+      const newBooking = new Booking(formData);
+  
+      // Save the booking to the database
+      await newBooking.save();
+      console.log("booking added");
+  
+      res.status(201).json({ message: 'Booking saved successfully' });
+    } catch (error) {
+      console.error('Error saving booking:', error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+
+
+  const sendEmail = require('./email');
+  // Update booking status route
+  app.put('/updateBookingStatus/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updatedBooking = await Booking.findByIdAndUpdate(
+        id,
+        { $set: { status: 'accepted' } }, // Update status to 'accepted'
+        { new: true }
+      );
+      if (updatedBooking.status === 'accepted') {
+        const { email } = updatedBooking;
+        const subject = 'Booking Accepted';
+        const text = 'Your booking request has been accepted.';
+  
+        await sendEmail(email, subject, text);
+      }
+  
+      if (!updatedBooking) {
+        return res.status(404).json({ error: 'Booking not found' });
+      }
+  
+      res.status(200).json({ message: 'Booking status updated successfully', updatedBooking });
+    } catch (error) {
+      console.error('Error updating booking status:', error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+  
+
+    // Update booking details route
+    app.put('/updateBookingDetails/:id', async (req, res) => {
+        try {
+          const { id } = req.params;
+          const updatedBooking = await Booking.findByIdAndUpdate(
+            id,
+            req.body, // Update booking details
+            { new: true }
+          );
+    
+        if (!updatedBooking) {
+          return res.status(404).json({ error: 'Booking not found' });
+        }
+        res.status(200).json({ message: 'Booking details updated successfully', updatedBooking });
+        } catch (error) {
+        console.error('Error updating booking details:', error);
+        res.status(500).json({ error: 'Server error' });
+        }
+        }); 
+    
+        //get all booking details
+        app.get('/allBookingRequest', async (req, res) => {
+            try {
+              const data = await Booking.find();
+              res.json(data);
+              console.log("All Booking Requests Fetched");
+        
+            } catch (error) {
+              console.error(error);
+              res.status(500).json({ message: 'Server error' });
+            }
+          }
+        );
+        
+
+    //pathum's Service Routes
+
+const Service = require('./models/ServiceModel');
+
+app.post('/addservice', async (req, res) => {
   try {
     // Extract form data from request body
     const formData = req.body;
 
-    // Create a new booking instance
-    const newBooking = new Booking(formData);
+    // Create a new Service instance
+    const newService = new Service(formData);
 
     // Save the booking to the database
-    await newBooking.save();
-    console.log("booking added");
+    await newService.save();
+    console.log("Service added");
 
-    res.status(201).json({ message: 'Booking saved successfully' });
+    res.status(201).json({ message: 'Service Aded successfully' });
   } catch (error) {
-    console.error('Error saving booking:', error);
+    console.error('Error saving Service:', error);
     res.status(500).json({ error: 'Server error' });
   }
 });
 
-
 // 3. Create API endpoint to retrieve data
-app.get('/allBookingRequest', async (req, res) => {
+app.get('/allServices', async (req, res) => {
     try {
-      const data = await Booking.find();
+      const data = await Service.find();
       res.json(data);
       console.log("All Booking Requests Fetched");
 
@@ -605,8 +856,39 @@ app.delete('/deleteBookingRequest/:id', async (req, res) => {
       res.status(500).send('Internal server error');
     }
   });
+  
+  
+  
+  // Define route for deleting Services
+app.delete('/deleteServices/:id', async (req, res) => {
+    const requestId = req.params.id;
+  
+    try {
+      // Find the Services by ID and delete it
+      await Service.findByIdAndDelete(requestId);
+      res.status(200).send('Booking request deleted successfully');
+    } catch (error) {
+      console.error('Error deleting booking request:', error);
+      res.status(500).send('Internal server error');
+    }
+  });
 
+  // Add a new route to handle service updates
+app.put('/updateservice/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedService = req.body;
 
+        // Find and update the service in the database
+        await Service.findByIdAndUpdate(id, updatedService);
+        console.log("Service updated");
+
+        res.status(200).json({ message: 'Service updated successfully' });
+    } catch (error) {
+        console.error('Error updating Service:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
 
   //Ruwindi routes
   const Issue = require('./models/issueModel');

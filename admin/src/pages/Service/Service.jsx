@@ -1,5 +1,5 @@
 import React from 'react'
-import './service.css'
+// import './Service.css'
 import ServiceTable from '../../components/serviceComp/ServiceTable/ServiceTable'
 import NavBar from '../../components/serviceComp/NavBar/NavBar'
 import ServicePopUp from '../../components/serviceComp/servicePopUp/ServicePopUp'
