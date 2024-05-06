@@ -28,7 +28,7 @@ export const BNavData = [
         link: '/booking/add',       
     },
     {
-        title: 'Reminders',
+        title: 'Notify',
         icon: <NotificationAddRoundedIcon />,
         link: '/booking/reminders',       
     },

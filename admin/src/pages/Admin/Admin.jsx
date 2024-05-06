@@ -20,6 +20,7 @@ import UpdateProduct from '../../components/onlineShop/UpdateProduct/UpdateProdu
 import AddService from '../../components/serviceComp/AddService/AddService'
 import AddBooking from '../../components/BookingComp/AddBooking/AddBooking'
 import AllBooking from '../../components/BookingComp/AllBookings/AllBooking'
+import Report from '../../components/BookingComp/Report/report'
 import CreateIssue from '../../components/IssueComp/CreateIssues';
 import ShowIssue from '../../components/IssueComp/ShowIssue';
 import EditIssue from '../../components/IssueComp/EditIssue';
