@@ -54,10 +54,30 @@ function Table() {
   };
   
 
-  const handleUpdateStatus = (id) => {
-    // Implement logic to update the status of a booking request with the provided id
-    // You might need to make an API call to update the status in your backend
-  };
+  
+    const handleUpdateStatus = async (id) => {
+      try {
+        // Send a PUT request to your backend API endpoint to update the status
+        await axios.put(`http://localhost:4000/updateBookingStatus/${id}`, { status: 'accepted' });
+
+        // If the request is successful, update the state to reflect the updated status
+        setData(data.map(row => {
+          if (row._id === id) {
+            return { ...row, status: 'accepted' };
+          }
+          return row;
+        }));
+        setFilteredData(filteredData.map(row => {
+          if (row._id === id) {
+            return { ...row, status: 'accepted' };
+          }
+          return row;
+        }));
+      } catch (error) {
+        console.error('Error updating status:', error);
+      }
+    };
+
 
   return (
     <div className='booking'>
@@ -101,7 +121,7 @@ function Table() {
                   <td>{row.time}</td>
                   <td>{row.status}</td>
                   <td>
-                    <button className='accept' onClick={() => handleUpdateStatus(row.id)}>Accept</button>
+                    <button className='accept' onClick={() => handleUpdateStatus(row._id)}>Accept</button>
                     <button className='delete' onClick={() => handleDeleteRow(row._id)}>Delete</button>
                   </td>
                 </tr>
