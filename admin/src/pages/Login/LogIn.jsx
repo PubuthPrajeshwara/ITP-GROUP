@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './login.css';
 
 const LoginSignup = () => {
-  const [state, setState] = useState("Log In");
+  const [state, setState] = useState("Log in");
   const [formData, setFormData] = useState({
     name: "",
     password: "",
