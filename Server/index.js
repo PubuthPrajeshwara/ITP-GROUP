@@ -10,6 +10,7 @@ const { log } = require("console");
 const Product = require("./models/OnlineShopModels/Product");
 const Users = require("./models/OnlineShopModels/Users");
 const Order = require("./models/OnlineShopModels/Order");
+const Admins = require("./models/OnlineShopModels/Admin")
 var nodemailer = require('nodemailer');
 
 app.use(express.json());
@@ -293,6 +294,48 @@ app.post('/signup',async (req,res) =>{
     res.json({success:true,token})
 })
 
+
+// Route to handle admin signup
+app.post('/adminsignup', async (req, res) => {
+    try {
+        const { name, email, password, roles } = req.body;
+
+        // Check if admin with the same email already exists
+        const existingAdmin = await Admins.findOne({ email });
+
+        if (existingAdmin) {
+            return res.status(400).json({ success: false, errors: "An admin with this email already exists" });
+        }
+
+        // Create a new Admin document
+        const newAdmin = new Admin({
+            name,
+            email,
+            password,
+            role: roles || [],  // Assign roles array to 'role' field
+        });
+
+        // Save the newAdmin document to the database
+        await newAdmin.save();
+
+        // Prepare response data
+        const data = {
+            Admin: {
+                id: newAdmin._id,
+                name: newAdmin.name,
+                email: newAdmin.email,
+                role: newAdmin.role,
+            }
+        };
+
+        // Return success response with token (if needed)
+        res.json({ success: true, data });
+    } catch (error) {
+        console.error('Admin signup error:', error);
+        res.status(500).json({ success: false, errors: "Internal server error" });
+    }
+});
+
 app.post('/login', async (req,res) => {
     let user = await Users.findOne({email:req.body.email});
     if(user){
@@ -303,6 +346,31 @@ app.post('/login', async (req,res) => {
                     id: user.id
                 }
             }
+            const token = jwt.sign(data, 'secret_ecom');
+            res.json({success:true,token});
+        }
+        else{
+            res.json({success:false,errors:"wrong Password"});
+        }
+    }
+    else{
+        res.json({success:false,errors:"wrong Email Id"})
+    }
+})
+
+app.post('/adminlogin', async (req,res) => {
+    let Admin = await Admins.findOne({email:req.body.email});
+    if(Admin){
+        const passCompare = req.body.password === Admin.password;
+        if(passCompare){
+            const data = {
+                Admin: {
+                    id: Admin._id,
+                    name: Admin.name,
+                    email: Admin.email,
+                    role: Admin.role,
+                }
+            };
             const token = jwt.sign(data, 'secret_ecom');
             res.json({success:true,token});
         }
@@ -860,6 +928,7 @@ app.put('/updateservice/:id', async (req, res) => {
 
   //Ruwindi routes
   const Issue = require('./models/issueModel');
+const Admin = require("./models/OnlineShopModels/Admin");
 
   //Route for save new Issue
 app.post('/issues', async (request, response) => {

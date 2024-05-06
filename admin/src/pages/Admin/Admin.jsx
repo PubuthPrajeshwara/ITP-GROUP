@@ -8,7 +8,6 @@ import Users from '../Users/Users'
 import Service from '../Service/Service'
 import Bookings from '../Booking/bookings'
 import Issue from '../Issue/Issue'
-// import Inventory from '../Inventory/Inventory'
 import Supplier from '../Supplier/Supplier'
 import Employee from '../Employee/Employee'
 import Payment from '../Payment/Payment'
@@ -25,44 +24,94 @@ import CreateIssue from '../../components/IssueComp/CreateIssues';
 import ShowIssue from '../../components/IssueComp/ShowIssue';
 import EditIssue from '../../components/IssueComp/EditIssue';
 import DeleteIssue from '../../components/IssueComp/DeleteIssue';
+import LogIn from '../Login/LogIn'
+import PrivateRoute from '../Login/PrivateRoute';
 // import InsertInventory from '../../components/InventoryComp/InsertInventory';
 // import UpdateInventory from '../../components/InventoryComp/UpdateInventory';
 // import Inventory from '../../components/InventoryComp/Inventory';
- 
+
 
 const Admin = () => {
   return (
     <div className='Admin'>
-      <Sidebar />
+      {localStorage.getItem('authToken') ? <Sidebar /> : <></>}
       <Routes>
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/home' element={<Home />} />
-        <Route path='/users' element={<Users />} />
-        <Route path='/service' element={<Service />} />
-        <Route path='/booking' element={<Bookings />} />
-        <Route path='/issue' element={<Issue />} />
-        {/* <Route path='/inventory' element={<Inventory />} /> */}
-        <Route path='/supplier' element={<Supplier />} />
-        <Route path='/employee' element={<Employee />} />
-        <Route path='/payment' element={<Payment />} />
-        <Route path='/onlineshop' element={<OnlineShop />} />
-        <Route path='/customer' element={<Customer />} />
-        <Route path='/Onlineshop/orders' element={<Orders />} />
-        <Route path='/Onlineshop/Alerts' element={<Alerts />} />
-        <Route path='/Onlineshop/products/addproduct' element={<AddProduct />} />
-        <Route path='/service/add' element={<AddService />} />
-        <Route path='/service' element={<Service />} />
-        <Route exact path="/Onlineshop/products/updateproduct/:id" element={<UpdateProduct />} />
-        <Route path='/booking/add' element={<AddBooking />} />
-        <Route path='/booking/all' element={<AllBooking />} />
-        <Route path='/issues/create' element={<CreateIssue />} />
-        <Route path='/issues/details/:id' element={<ShowIssue />} />
-        <Route path='/issues/edit/:id' element={<EditIssue />} />
-        <Route path='/issues/delete/:id' element={<DeleteIssue />} />
-        {/* <Route path="/inventory" element={<Inventory />} /> */}
+        <Route path='/' element={<LogIn />} />
+        <Route path="/dashboard" element={<PrivateRoute allowedRoles={['1']} />}>
+          <Route path="" element={<Dashboard />} />
+        </Route>
+        <Route path="/home" element={<PrivateRoute allowedRoles={['2']} />}>
+          <Route path="" element={<Home />} />
+        </Route>
+        <Route path="/users" element={<PrivateRoute allowedRoles={['3']} />}>
+          <Route path="" element={<Users />} />
+        </Route>
+        <Route path="/service" element={<PrivateRoute allowedRoles={['4']} />}>
+          <Route path="" element={<Service />} />
+        </Route>
+        <Route path="/booking" element={<PrivateRoute allowedRoles={['5']} />}>
+          <Route path="" element={<Bookings />} />
+        </Route>
+        <Route path="/issue" element={<PrivateRoute allowedRoles={['6']} />}>
+          <Route path="" element={<Issue />} />
+        </Route>
+        {/*<Route path="/inventory" element={<PrivateRoute allowedRoles={['7']} />}>
+          <Route path="" element={<Inventory />} />
+        </Route> */}
+        <Route path="/supplier" element={<PrivateRoute allowedRoles={['8']} />}>
+          <Route path="" element={<Supplier />} />
+        </Route>
+        <Route path="/employee" element={<PrivateRoute allowedRoles={['9']} />}>
+          <Route path="" element={<Employee />} />
+        </Route>
+        <Route path="/payment" element={<PrivateRoute allowedRoles={['10']} />}>
+          <Route path="" element={<Payment />} />
+        </Route>
+        <Route path="/onlineshop" element={<PrivateRoute allowedRoles={['11']} />}>
+          <Route path="" element={<OnlineShop />} />
+        </Route>
+        <Route path="/customer" element={<PrivateRoute allowedRoles={['12']} />}>
+          <Route path="" element={<Customer />} />
+        </Route>
+        <Route path="/Onlineshop/orders" element={<PrivateRoute allowedRoles={['11']} />}>
+          <Route path="" element={<Orders />} />
+        </Route>
+        <Route path="/Onlineshop/Alerts" element={<PrivateRoute allowedRoles={['11']} />}>
+          <Route path="" element={<Alerts />} />
+        </Route>
+        <Route path="/Onlineshop/products/addproduct" element={<PrivateRoute allowedRoles={['11']} />}>
+          <Route path="" element={<AddProduct />} />
+        </Route>
+        <Route path="/service/add" element={<PrivateRoute allowedRoles={['4']} />}>
+          <Route path="" element={<AddService />} />
+        </Route>
+        <Route path="/service" element={<PrivateRoute allowedRoles={['4']} />}>
+          <Route path="" element={<Service />} />
+        </Route>
+        <Route exact path="/Onlineshop/products/updateproduct/:id" element={<PrivateRoute allowedRoles={['11']} />}>
+          <Route path="" element={<UpdateProduct />} />
+        </Route>
+        <Route path="/booking/add" element={<PrivateRoute allowedRoles={['5']} />}>
+          <Route path="" element={<AddBooking />} />
+        </Route>
+        <Route path="/booking/all" element={<PrivateRoute allowedRoles={['5']} />}>
+          <Route path="" element={<AllBooking />} />
+        </Route>
+        <Route path="/issues/create" element={<PrivateRoute allowedRoles={['6']} />}>
+          <Route path="" element={<CreateIssue />} />
+        </Route>
+        <Route path="/issues/details/:id" element={<PrivateRoute allowedRoles={['6']} />}>
+          <Route path="" element={<ShowIssue />} />
+        </Route>
+        <Route path="/issues/edit/:id" element={<PrivateRoute allowedRoles={['6']} />}>
+          <Route path="" element={<EditIssue />} />
+        </Route>
+        <Route path="/issues/delete/:id" element={<PrivateRoute allowedRoles={['6']} />}>
+          <Route path="" element={<DeleteIssue />} />
+        </Route>
         {/* <Route path="/insertinventory" element={<InsertInventory />} /> */}
         {/* <Route path="/updateinventory/:id" element={<UpdateInventory />} /> */}
-       
+
 
       </Routes>
     </div>
