@@ -29,7 +29,7 @@ function MyServices() {
           <div className='cards'>
             {services.map((service) => (
               <div key={service._id} className='card'>
-                <img className="img" src={img1} alt="" />
+                <img className="img" src={service.imagePath} alt="" />
                 <h2>{service.serviceTitle}</h2>
                 <p>{service.details}</p>
                 <p>{service.estimatedHour}</p>

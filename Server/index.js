@@ -881,25 +881,24 @@ const Service = require('./models/ServiceModel');
 // POST route for adding a new service
 app.post('/addservice', upload.single('image'), async (req, res) => {
     try {
-      const { serviceTitle, estimatedHour, details } = req.body;
-  
-      // Create new service object
-      const newService = new Service({
-        serviceTitle,
-        estimatedHour,
-        details,
-        imagePath: req.file.path // Save image path
-      });
-  
-      // Save the service to MongoDB
-      await newService.save();
-  
-      res.status(200).json({ message: 'Service added successfully', service: newService });
+        // Create new service object
+        const newService = new Service({
+            serviceTitle: req.body.serviceTitle,
+            estimatedHour: req.body.estimatedHour,
+            details: req.body.details,
+            imagePath: req.body.image, // Save image path
+        });
+        // Save the service to MongoDB
+        await newService.save();
+        res.json({
+            success: true,
+            name: req.body.name,
+        });
     } catch (error) {
-      console.error('Error adding service:', error);
-      res.status(500).json({ error: 'An error occurred while adding the service' });
+        console.error('Error adding service:', error);
+        res.status(500).json({ error: 'An error occurred while adding the service' });
     }
-  });
+});
 
 // 3. Create API endpoint to retrieve data
 app.get('/allServices', async (req, res) => {
