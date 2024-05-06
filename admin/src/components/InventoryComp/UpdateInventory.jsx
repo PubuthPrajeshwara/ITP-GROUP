@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
 import './Product.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import INavBar from './InventoryNavBar/INavBar';
+
 export default function UpdateInventory() {
     const [inventoryName, setInventoryName] = useState("");
     const [inventoryType, setInventoryType] = useState("");
@@ -81,7 +83,10 @@ export default function UpdateInventory() {
     }
 
     return (
-        <div className='container-fluid p-0'>
+        <>
+        <INavBar />
+         
+        <div className='container-fluid p-0' style={{ marginTop: '50px' }}>
             <div className='container d-flex justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
                 <div className='update-form'>
                     <h3 className='text-center'>Update Inventory Information</h3>
@@ -125,5 +130,7 @@ export default function UpdateInventory() {
                 </div>
             </div>
         </div>
+        </>
     );
 }
+

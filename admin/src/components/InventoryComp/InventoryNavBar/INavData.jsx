@@ -10,7 +10,7 @@ export const INavData = [
     {
         title: 'Dashboard',
         icon: <GridViewRoundedIcon />,
-        link: '/inventory/dashboard',
+        link: '/inventory',
     },
     {
         title: 'All Inventory',
