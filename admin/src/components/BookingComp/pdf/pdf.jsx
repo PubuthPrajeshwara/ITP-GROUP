@@ -40,14 +40,15 @@ const styles = StyleSheet.create({
     width: 'auto',
     borderStyle: 'solid',
     borderWidth: 1,
+    borderColor: 'gray',
     borderRightWidth: 0,
     borderBottomWidth: 0,
     marginBottom: 10,
 
   },
   tableRow: { flexDirection: 'row', fontSize: 12 , display: 'table-row', },
-  tableColHeader: { width: '20%', borderStyle: 'solid', borderWidth: 1, borderLeftWidth: 0, borderTopWidth: 0 , padding: 5, textAlign: 'center', fontSize: 10, fontWeight: 'bold', backgroundColor: '#b8d7ef'},
-  tableCol: { width: '25%', borderStyle: 'solid', borderWidth: 1, borderLeftWidth: 0, borderTopWidth: 0 , padding: 5, textAlign: 'center' , fontSize: 10 },
+  tableColHeader: { width: '20%', borderStyle: 'solid', borderColor: 'gray', borderWidth: 1, borderLeftWidth: 0, borderTopWidth: 0 , padding: 5, textAlign: 'center', fontSize: 10, fontWeight: 'bold', backgroundColor: '#1c649f',color: 'white'},
+  tableCol: { width: '25%', borderStyle: 'solid',borderColor: 'lightgray', borderWidth: 1, borderLeftWidth: 0, borderTopWidth: 0 , padding: 5, textAlign: 'center' , fontSize: 10 },
   logo: { width: 100, height: 80, position:'absolute', marginTop: 20 , marginLeft: 450 }, // Style for the image
   horizontalLine: { borderBottom: 1, borderBottomColor: '#04355b', marginTop: 5, marginBottom: 5 },
 });

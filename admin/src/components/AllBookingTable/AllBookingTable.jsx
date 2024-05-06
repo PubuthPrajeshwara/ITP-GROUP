@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Search from '../BookingComp/Search/Search';
 import './AllBookingTable.css'; 
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 function Table({ openModal }) {
   const [filteredData, setFilteredData] = useState([]);
+  const [selectedBooking, setSelectedBooking] = useState(null); // State to manage selected booking for pop-up
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +58,14 @@ function Table({ openModal }) {
     }
   };
 
+  const openBookingDetails = (booking) => {
+    setSelectedBooking(booking); // Set the selected booking to display its details
+  };
+
+  const closeBookingDetails = () => {
+    setSelectedBooking(null); // Close the pop-up by resetting selected booking
+  };
+
 
   return (
     <div className='booking'>
@@ -99,7 +109,8 @@ function Table({ openModal }) {
                   <td>{row.time}</td>
                   <td>{row.status}</td>
                   <td>
-                  <button className='update' onClick={() => handleOpenModal(row)}>Update</button>
+                  <button className='viewBtn' onClick={() => handleOpenModal(row)}><VisibilityOutlinedIcon fontSize='small'/></button>
+                  <button className='update' onClick={() => openBookingDetails(row)}>Update</button>
                     <button className='delete' onClick={() => handleDeleteRow(row._id)}>Delete</button>
                   </td>
                 </tr>
@@ -108,6 +119,23 @@ function Table({ openModal }) {
           </table>
         </div>
       </div>
+      {selectedBooking && (
+        <div className="popup">
+          <div className="popup-inner">
+           
+            <h2>Booking Details</h2>
+            <p><strong>Name:</strong> {selectedBooking.ownerName}</p>
+            <p><strong>Service Type:</strong> {selectedBooking.serviceType}</p>
+            <p><strong>Phone:</strong> {selectedBooking.phone}</p>
+            <p><strong>Email:</strong> {selectedBooking.email}</p>
+            <p><strong>Date:</strong> {formatDate(selectedBooking.date)}</p>
+            <p><strong>Time:</strong> {selectedBooking.time}</p>
+            <p><strong>Status:</strong> {selectedBooking.status}</p>
+
+            <button className="closeBtn" onClick={closeBookingDetails}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
