@@ -69,6 +69,8 @@ const AdminSignupForm = () => {
                 // Handle successful signup
                 console.log('Admin signed up successfully!');
                 console.log('Token:', data.token);
+                alert('User Added Successfully')
+                window.location.reload()
             } else {
                 // Handle signup errors
                 console.error('Signup error:', data.errors);

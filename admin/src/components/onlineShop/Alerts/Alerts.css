@@ -5,6 +5,7 @@
     display: flex;
     justify-content: space-around;
     margin: 10px;
+    width: 83.4vw;
     height: 650px;
     overflow-y: auto;
     font-family: sans-serif;
@@ -51,7 +52,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    height: 550px;
+    height: 590px;
     overflow-y: auto;
   }
   

@@ -1113,3 +1113,16 @@ app.delete("/customers/:id", (req, res) => {
             .json({ msg: "Delete successfully" }))
             .catch(() => res.status(400).json({ msg: "Delete fail" }));
 });
+
+app.get('/allusers',async (req, res)=>{
+    let users = await Admin.find({})
+    console.log("All Users Fetched");
+    res.send(users);
+})
+
+app.delete("/users/:id", (req, res) => {
+    Admin.findByIdAndDelete(req.params.id).then(() =>
+        res
+            .json({ msg: "Delete successfully" }))
+            .catch(() => res.status(400).json({ msg: "Delete fail" }));
+});

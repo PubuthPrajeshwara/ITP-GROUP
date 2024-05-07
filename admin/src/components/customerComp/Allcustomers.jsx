@@ -85,7 +85,7 @@ const Allcustomers = () => {
 
                 <div ref={componentPDF} style={{ width: '100%' }}>
 
-                    <table class="table">
+                    <table className="table">
                         <thead>
                             <tr class="table-dark">
 
