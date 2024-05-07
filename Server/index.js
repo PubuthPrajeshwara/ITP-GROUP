@@ -1076,3 +1076,40 @@ app.delete('/issues/:id', async (request, response) => {
         response.status(500).send({ message: error.message });
     }
 });
+
+//Amada's Routes
+
+const Customers = require("./models/customerModel");
+
+app.post("/customers/", (req, res) => {
+    Customers.create(req.body)
+        .then(() => res.json({ msg: "Customer added successfully" }))
+        .catch(() => res.status(400).json({ msg: "Custommer adding failed" }));
+});
+
+app.get("/customers/", (req, res) => {
+
+    Customers.find()
+        .then((customers) => res.json(customers))
+        .catch(() => rex.status(400).json({ msg: "No employee" }));
+});
+
+app.get("/customers/:id", (req, res) => {
+    Customers.findById(req.params.id)
+        .then((customers) => res.json(customers))
+        .catch(() => res.status(400).json({ msg: "cannot find this customer" }))
+});
+
+app.put("/customers/:id", (req, res) => {
+    Customers.findByIdAndUpdate(req.params.id, req.body)
+        .then(() => res.json({ msg: "Update successfully" }))
+        .catch(() => res.status(400).json({ msg: "Update fail" }))
+        ;
+});
+
+app.delete("/customers/:id", (req, res) => {
+    Customers.findByIdAndDelete(req.params.id).then(() =>
+        res
+            .json({ msg: "Delete successfully" }))
+            .catch(() => res.status(400).json({ msg: "Delete fail" }));
+});

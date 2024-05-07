@@ -30,6 +30,12 @@ import PrivateRoute from '../Login/PrivateRoute';
 //import InsertInventory from '../../components/InventoryComp/InsertInventory';
 //import UpdateInventory from '../../components/InventoryComp/UpdateInventory';
 //import Inventory from '../../components/InventoryComp/Inventory';
+import Register from '../../components/customerComp/Register';
+import Userprofile from '../../components/customerComp/Userprofile';
+import Edituser from '../../components/customerComp/Edituser';
+import ViewDetails from '../../components/customerComp/Viewdetails';
+import UpdateCustomerForm from '../../components/customerComp/Updatecustomer';
+
 
 const Admin = () => {
   return (
@@ -114,6 +120,11 @@ const Admin = () => {
         </Route>
         {/*<Route path="/insertinventory" element={<InsertInventory />} />*/}
         {/*<Route path="/updateinventory/:id" element={<UpdateInventory />} />*/}
+        <Route path="/customer/register" element={<Register />} />
+        <Route path="/customer/userprofile" element={<Userprofile />} />
+        <Route path="/customer/edituser" element={<Edituser />} />
+        <Route path="/customer/viewdetails/:id" element={<ViewDetails />} />
+        <Route path="/customer/updatecustomer/:id" element={<UpdateCustomerForm />} />
       </Routes>
     </div>
   );
