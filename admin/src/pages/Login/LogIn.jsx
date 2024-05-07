@@ -46,8 +46,8 @@ const LoginSignup = () => {
     }
 
     if (responseData.success) {
-      localStorage.setItem('authToken', responseData.token);
-      window.location.replace("/dashboard");
+      sessionStorage.setItem('authToken', responseData.token);
+      window.location.replace("/home");
     } else {
       alert(responseData.errors);
     }

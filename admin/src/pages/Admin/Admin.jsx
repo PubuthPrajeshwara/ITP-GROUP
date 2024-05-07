@@ -34,7 +34,7 @@ import PrivateRoute from '../Login/PrivateRoute';
 const Admin = () => {
   return (
     <div className='Admin'>
-      {localStorage.getItem('authToken') ? <Sidebar /> : <></>}
+      {sessionStorage.getItem('authToken') ? <Sidebar /> : <></>}
       <Routes>
         <Route path='/' element={<LogIn />} />
         <Route path="/dashboard" element={<PrivateRoute allowedRoles={['1']} />}>

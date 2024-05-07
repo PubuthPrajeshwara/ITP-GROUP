@@ -4,14 +4,14 @@ import { jwtDecode } from 'jwt-decode'; // Import jwtDecode to decode JWT tokens
 
 const PrivateRoute = ({ allowedRoles }) => {
   // Check if user is authenticated
-  const isAuthenticated = localStorage.getItem('authToken') !== null;
+  const isAuthenticated = sessionStorage.getItem('authToken') !== null;
 
   // Retrieve user roles from the decoded JWT token
   let userRoles = [];
 
   if (isAuthenticated) {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = sessionStorage.getItem('authToken');
       const decodedToken = jwtDecode(token);
       if (decodedToken && decodedToken.Admin && decodedToken.Admin.role) {
         // Ensure `userRoles` is always an array (even if single role string)
