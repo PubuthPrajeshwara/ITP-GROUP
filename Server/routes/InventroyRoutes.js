@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Inventory = require('./models/InventoryModel');
+const Inventory = require('../models/InventoryModel');
 const { sendEmail } = require('../services/emailService');
 
 router.post("/insertinventory", async (req, res) => {

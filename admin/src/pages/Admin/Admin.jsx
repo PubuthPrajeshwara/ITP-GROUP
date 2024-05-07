@@ -40,7 +40,7 @@ const Admin = () => {
         <Route path='/service' element={<Service />} />
         <Route path='/booking' element={<Bookings />} />
         <Route path='/issue' element={<Issue />} />
-        {/* <Route path='/inventory' element={<Inventory />} /> */}
+        <Route path='/inventory' element={<Inventory />} />
         <Route path='/supplier' element={<Supplier />} />
         <Route path='/employee' element={<Employee />} />
         <Route path='/payment' element={<Payment />} />
