@@ -42,3 +42,8 @@ table {
     width: 20px;
     height: 20px;   
   }
+
+  .service-images{
+    width: 5rem;
+    height: auto;
+  }

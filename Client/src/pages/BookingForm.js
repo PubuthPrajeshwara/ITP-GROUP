@@ -26,6 +26,8 @@ const BookingForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!validateForm()) return;
+
     try {
       // Send form data to backend server
       await axios.post("http://localhost:4000/addbooking", formData);
@@ -47,6 +49,68 @@ const BookingForm = () => {
       alert("An error occurred while submitting the booking.");
     }
   };
+
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
+
+    // Validate each field
+    if (!formData.ownerName.trim()) {
+      errors.ownerName = 'Owner name is required';
+      isValid = false;
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'Email is invalid';
+      isValid = false;
+    }
+
+    if (!formData.phone.trim()) {
+      errors.phone = 'Phone number is required';
+      isValid = false;
+    } else if (!/^\d{10}$/.test(formData.phone)) {
+      errors.phone = 'Phone number is invalid';
+      isValid = false;
+    }
+
+    if (!formData.location) {
+      errors.location = 'Location is required';
+      isValid = false;
+    }
+
+    if (!formData.serviceType) {
+      errors.serviceType = 'Service type is required';
+      isValid = false;
+    }
+
+    if (!formData.vehicleModel.trim()) {
+      errors.vehicleModel = 'Vehicle model is required';
+      isValid = false;
+    }
+
+    if (!formData.vehicleNumber.trim()) {
+      errors.vehicleNumber = 'Vehicle number is required';
+      isValid = false;
+    }
+
+    if (!formData.date) {
+      errors.date = 'Date is required';
+      isValid = false;
+    }
+
+    if (!formData.time) {
+      errors.time = 'Time is required';
+      isValid = false;
+    }
+
+    setErrors(errors);
+    return isValid;
+  };
+
+
   return (
     <div className="booking-form-container">
       <h2>Booking Form</h2>
@@ -62,6 +126,7 @@ const BookingForm = () => {
               required
             />
           </div>
+          {errors.ownerName && <span className="error">{errors.ownerName}</span>}
           <div className="form-group">
             <label>Email:</label>
             <input
@@ -71,6 +136,8 @@ const BookingForm = () => {
               onChange={handleInputChange}
               required
             />
+          {errors.email && <span className="error">{errors.email}</span>}
+
           </div>
           <div className="form-group">
             <label>Phone:</label>
@@ -82,6 +149,7 @@ const BookingForm = () => {
               required
             />
           </div>
+          {errors.phone && <span className="error">{errors.phone}</span>}
           <div className="form-group">
             <label>Location:</label>
             <input

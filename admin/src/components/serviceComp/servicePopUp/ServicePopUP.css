@@ -1,86 +1,57 @@
-.popupContainer{
-  display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    font-family: 'Roboto', sans-serif;
-    z-index: 10;
+.f-container {
+  max-width: 22rem;
+  width: auto;
+  margin: auto;
+  height: 600px;
+  border: 1px solid #1a1818;
+  border-radius: 10px;
+  padding: 1em 2em;
+  font-family: Arial, sans-serif;
+  background: rgb(33, 61, 87);
+  color: white;
 }
 
-
-.popup {
-    max-width: 500px;
-    width: auto;
-    margin: auto;
-    height: 520px;
-    border: 1px solid #1a1818;
-    border-radius: 10px;
-    padding: 1em;
-    font-family: Arial, sans-serif;
-    background-color: rgb(231, 231, 231);
-   
-  }
-
-  .p-container {
-    max-width: 360px;
-    width: auto;
-    margin: auto;
-    height: 500px;
-    border: 1px solid #1a1818;
-    border-radius: 10px;
-    padding: 1em 2em;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, rgba(17,102,151,1) 0%, rgba(0,0,0,0.8) 100%);
+.lab {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 1em;
     color: white;
   }
-  
-  .lab {
-      display: block;
-      margin-top: 10px;
-      margin-bottom: 5px;
-      font-size: 1em;
-      color: white;
-    }
-  
-    .s-image {
-      width: 100%;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .import-button {
-      display: block;
-      margin-top: 10px;
-      margin-left: 9rem;
-    }
-    
-    input, textarea, button {
-       margin-top:10px;   
-    }
-    
-    .btn-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-      align-items: center; 
-      margin-right: 100px;
-    }
 
-    .cancelBtn{
-      background-color: #f44336;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-right: 10px;
-    }
+  .s-image {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .import-button {
+    display: block;
+    margin-top: 10px;
+    margin-left: 9rem;
+  }
+  
+  input, textarea, button {
+     margin-top:10px;   
+  }
+  
+  .buttons{
+    margin-left: 7rem;
+  }
 
-    .cancelBtn:hover {
-      background-color: #565151;
-    }
+  .addService-thumbnail{
+    width:150px;
+    background: #ffffff;
+    border-radius: 10px;
+    object-fit: contain;
+    margin-top: 30px;
+}
+
+.cancel-bTn{
+  background-color: #f4433600;
+  color: white;
+  border: 1px solid white;
+
+  cursor: pointer;
+
+}

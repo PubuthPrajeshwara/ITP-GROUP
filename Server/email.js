@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Define a function to send the email
-const sendEmail = async (email, subject, text, qrCodeData) => {
+const sendEmail = async (email, subject, text) => {
   try {
     // Send mail with defined transport object
     await transporter.sendMail({
@@ -18,11 +18,7 @@ const sendEmail = async (email, subject, text, qrCodeData) => {
       to: email,
       subject: subject,                 
       text: text,
-      attachments: [{
-        filename: 'qr_code.jpg',
-        content: qrCodeData, // This should be the data of the QR code image
-        encoding: 'base64', // Encoding type of the attachment
-      }]
+      
     });
     console.log('Email sent successfully');
   } catch (error) {
