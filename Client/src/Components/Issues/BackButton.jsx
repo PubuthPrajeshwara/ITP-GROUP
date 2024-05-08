@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
 
-const BackButton = ({ destination = '/eme' }) => {
+const BackButton = ({ destination = '/emergency' }) => {
   const styles = {
     backButton: {
       backgroundColor: '#4299e1', // Sky color
