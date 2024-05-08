@@ -1,8 +1,11 @@
 import React from 'react'
+//import SupplyHome from '../../components/SupplyComp/supply/Home'
 
 const Supplier = () => {
   return (
-    <div></div>
+    <div>
+        {/*<SupplyHome/>*/}
+    </div>
   )
 }
 
