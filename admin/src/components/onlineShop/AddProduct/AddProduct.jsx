@@ -81,6 +81,7 @@ const AddProduct = () => {
         body:JSON.stringify(product),
       }).then((resp)=>resp.json()).then((data)=>{
         data.success?alert("Product Added"):alert("Failed")
+        window.location.reload()
       })
     }
   }

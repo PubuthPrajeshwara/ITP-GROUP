@@ -881,25 +881,24 @@ const Service = require('./models/ServiceModel');
 // POST route for adding a new service
 app.post('/addservice', upload.single('image'), async (req, res) => {
     try {
-      const { serviceTitle, estimatedHour, details } = req.body;
-  
-      // Create new service object
-      const newService = new Service({
-        serviceTitle,
-        estimatedHour,
-        details,
-        imagePath: req.file.path // Save image path
-      });
-  
-      // Save the service to MongoDB
-      await newService.save();
-  
-      res.status(200).json({ message: 'Service added successfully', service: newService });
+        // Create new service object
+        const newService = new Service({
+            serviceTitle: req.body.serviceTitle,
+            estimatedHour: req.body.estimatedHour,
+            details: req.body.details,
+            imagePath: req.body.image, // Save image path
+        });
+        // Save the service to MongoDB
+        await newService.save();
+        res.json({
+            success: true,
+            name: req.body.name,
+        });
     } catch (error) {
-      console.error('Error adding service:', error);
-      res.status(500).json({ error: 'An error occurred while adding the service' });
+        console.error('Error adding service:', error);
+        res.status(500).json({ error: 'An error occurred while adding the service' });
     }
-  });
+});
 
 // 3. Create API endpoint to retrieve data
 app.get('/allServices', async (req, res) => {
@@ -1076,4 +1075,54 @@ app.delete('/issues/:id', async (request, response) => {
         console.log(error.message);
         response.status(500).send({ message: error.message });
     }
+});
+
+//Amada's Routes
+
+const Customers = require("./models/customerModel");
+
+app.post("/customers/", (req, res) => {
+    Customers.create(req.body)
+        .then(() => res.json({ msg: "Customer added successfully" }))
+        .catch(() => res.status(400).json({ msg: "Custommer adding failed" }));
+});
+
+app.get("/customers/", (req, res) => {
+
+    Customers.find()
+        .then((customers) => res.json(customers))
+        .catch(() => rex.status(400).json({ msg: "No employee" }));
+});
+
+app.get("/customers/:id", (req, res) => {
+    Customers.findById(req.params.id)
+        .then((customers) => res.json(customers))
+        .catch(() => res.status(400).json({ msg: "cannot find this customer" }))
+});
+
+app.put("/customers/:id", (req, res) => {
+    Customers.findByIdAndUpdate(req.params.id, req.body)
+        .then(() => res.json({ msg: "Update successfully" }))
+        .catch(() => res.status(400).json({ msg: "Update fail" }))
+        ;
+});
+
+app.delete("/customers/:id", (req, res) => {
+    Customers.findByIdAndDelete(req.params.id).then(() =>
+        res
+            .json({ msg: "Delete successfully" }))
+            .catch(() => res.status(400).json({ msg: "Delete fail" }));
+});
+
+app.get('/allusers',async (req, res)=>{
+    let users = await Admin.find({})
+    console.log("All Users Fetched");
+    res.send(users);
+})
+
+app.delete("/users/:id", (req, res) => {
+    Admin.findByIdAndDelete(req.params.id).then(() =>
+        res
+            .json({ msg: "Delete successfully" }))
+            .catch(() => res.status(400).json({ msg: "Delete fail" }));
 });

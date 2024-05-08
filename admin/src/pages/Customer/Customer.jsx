@@ -1,8 +1,13 @@
 import React from 'react'
+import Headcustomer from '../../components/customerComp/Navbar'
+import Allcustomers from '../../components/customerComp/Allcustomers'
 
 const Customer = () => {
   return (
-    <div></div>
+    <div>
+      <Headcustomer/>
+      <Allcustomers/>
+    </div>
   )
 }
 

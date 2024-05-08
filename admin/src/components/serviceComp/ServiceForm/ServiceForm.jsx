@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./ServiceForm.css";
-import axios from "axios"; // Import axios for making HTTP requests
 import upload_img from "../../../assets/upload_img.png";
 
 const AddService = () => {
@@ -8,6 +7,7 @@ const AddService = () => {
 
   const [service, setService] = useState({
     serviceTitle: "",
+    image: "",
     estimatedHour: "",
     details: "",
   });
@@ -23,33 +23,38 @@ const AddService = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    let responseData;
+    let serviceDet = service;
 
-    try {
-      const formData = new FormData();
-      formData.append('image', image); // Append the image file to FormData
-      formData.append('serviceTitle', service.serviceTitle);
-      formData.append('estimatedHour', service.estimatedHour);
-      formData.append('details', service.details);
+    let formData = new FormData();
+    formData.append('product', image);
 
-      // Send form data to backend server
-      await axios.post('http://localhost:4000/addservice', formData, {
+    await fetch('http://localhost:4000/upload', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+      },
+      body: formData,
+    }).then((resp) => resp.json()).then((data) => { responseData = data })
+
+    if (responseData.success) {
+      serviceDet.image = responseData.image_url;
+      console.log(serviceDet);
+      await fetch('http://localhost:4000/addservice', {
+        method: 'POST',
         headers: {
-          'Content-Type': 'multipart/form-data',
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
-      });
-      alert('Service added successfully!');
-      // Optionally, reset the form after submission
-       console.error("Error submitting Service:", error);
-    } catch (error) {
-      console.error("Error submitting Service:", error);
-      alert("An error occurred while Adding the Service.");
+        body: JSON.stringify(serviceDet),
+      }).then((resp) => resp.json()).then((data) => {
+        data.success ? alert("Service added successfully!") : alert("Service added Failed")
+      })
     }
   };
   return (
     <div>
       <div className="f-container">
-        <form onSubmit={handleSubmit}>
           <div className="add-image">
             <label htmlFor="file-input">
               <img
@@ -93,10 +98,9 @@ const AddService = () => {
             required
           ></textarea>
 
-          <button className="buttons" type="submit">
+          <button onClick={handleSubmit} className="buttons" type="submit">
             Add Service
           </button>
-        </form>
       </div>
     </div>
   );

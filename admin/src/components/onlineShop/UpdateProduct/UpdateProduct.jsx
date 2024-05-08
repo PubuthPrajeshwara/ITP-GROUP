@@ -87,6 +87,7 @@ const UpdateProduct = () => {
       const updateData = await updateResponse.json();
       if (updateData.success) {
         alert("Product Updated Successfully");
+        window.location.replace('/Onlineshop')
       } else {
         alert("Failed to update product");
       }

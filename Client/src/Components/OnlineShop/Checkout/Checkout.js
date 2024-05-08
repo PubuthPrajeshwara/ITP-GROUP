@@ -11,7 +11,7 @@ const Checkout = () => {
         email: '',
         address: '',
         contact: '',
-        paymentMethod: 'Credit Card',
+        paymentMethod: 'Cash On Delivery',
     });
 
     const [errors, setErrors] = useState({

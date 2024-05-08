@@ -105,7 +105,7 @@ const ProductList = () => {
             <div className="ProductList">
                 <table className="ProductList-table">
                     <thead>
-                        <tr className='head'>
+                        <tr className='headp'>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Category</th>
