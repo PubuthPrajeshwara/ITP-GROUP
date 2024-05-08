@@ -22,7 +22,7 @@ export default function Inventory() {
         if (deleteAlert) {
             const timer = setTimeout(() => {
                 setDeleteAlert(false);
-            }, 3000);
+            }, 4000);
 
             return () => clearTimeout(timer);
         }

@@ -1,9 +1,10 @@
 const express = require('express');
-const router = express.Router();
-const Inventory = require('../models/InventoryModel');
+const app = express(); // Create an instance of the Express application
+
+const Inventory = require('../models/InventoryModels/inventory');
 const { sendEmail } = require('../services/emailService');
 
-router.post("/insertinventory", async (req, res) => {
+app.post("/insertinventory", async (req, res) => {
     const { InventoryType, InventoryName, Vendor, UnitPrice, UnitNo, Description } = req.body;
 
     try {
@@ -20,7 +21,7 @@ router.post("/insertinventory", async (req, res) => {
     }
 });
 
-router.get('/inventory', async (req, res) => {
+app.get('/inventory', async (req, res) => {
     try {
         // Retrieve all inventory items
         const getInventory = await Inventory.find({});
@@ -31,7 +32,7 @@ router.get('/inventory', async (req, res) => {
     }
 });
 
-router.get('/inventory/:id', async (req, res) => {
+app.get('/inventory/:id', async (req, res) => {
     try {
         // Retrieve a specific inventory item by ID
         const getInventoryItem = await Inventory.findById(req.params.id);
@@ -42,7 +43,7 @@ router.get('/inventory/:id', async (req, res) => {
     }
 });
 
-router.put('/updateinventory/:id', async (req, res) => {
+app.put('/updateinventory/:id', async (req, res) => {
     try {
         // Update an inventory item by ID
         const { InventoryType, InventoryName, Vendor, UnitPrice, UnitNo, Description } = req.body;
@@ -54,7 +55,7 @@ router.put('/updateinventory/:id', async (req, res) => {
     }
 });
 
-router.delete('/deleteinventory/:id', async (req, res) => {
+app.delete('/deleteinventory/:id', async (req, res) => {
     try {
         // Delete an inventory item by ID
         const deleteInventoryItem = await Inventory.findByIdAndDelete(req.params.id);
@@ -66,7 +67,7 @@ router.delete('/deleteinventory/:id', async (req, res) => {
 });
 
 // Check inventory levels and send email notification if below threshold
-router.post('/sendmail', async (req, res) => {
+app.post('/sendmail', async (req, res) => {
     try {
         const threshold = 10; // Define your threshold here
         const inventoryItems = await Inventory.find({});
@@ -87,4 +88,4 @@ router.post('/sendmail', async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = app;
