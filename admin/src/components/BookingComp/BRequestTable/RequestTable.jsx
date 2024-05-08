@@ -3,11 +3,15 @@ import axios from 'axios';
 import './RequestTable.css';
 import Search from '../Search/Search';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import {QRCodeSVG} from 'qrcode.react';
+import { QRCodeCanvas } from 'qrcode.react';
+
 
 function Table() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null); // State to manage selected booking for pop-up
+  const [qrCodeData, setQRCodeData] = useState(null); // State to store QR code data
 
 
   useEffect(() => {
@@ -15,7 +19,7 @@ function Table() {
       try {
         const response = await axios.get('http://localhost:4000/allBookingRequest');
         setData(response.data);
-        setFilteredData(response.data.filter(row => row.status === 'pending')); // Filter pending bookings
+        setFilteredData(response.data); // Filter pending bookings
         // Initialize filteredData with all data
       } catch (error) {
         console.error(error);
@@ -24,6 +28,8 @@ function Table() {
 
     fetchData();
   }, []);
+
+
 
   const handleSearch = (searchTerm) => {
     const filteredRows = data.filter((row) => {
@@ -59,10 +65,10 @@ function Table() {
   
 
   
-    const handleUpdateStatus = async (id) => {
+    const handleUpdateStatus = async (id, qrCodeData) => {
       try {
         // Send a PUT request to your backend API endpoint to update the status
-        await axios.put(`http://localhost:4000/updateBookingStatus/${id}`, { status: 'accepted' });
+        await axios.put(`http://localhost:4000/updateBookingStatus/${id}`, { status: 'accepted' ,qrCodeData: qrCodeData});
 
         // If the request is successful, update the state to reflect the updated status
         setData(data.map(row => {
@@ -91,6 +97,24 @@ function Table() {
     const closeBookingDetails = () => {
       setSelectedBooking(null); // Close the pop-up by resetting selected booking
     };
+
+    // Function to generate QR code data
+  const generateQRCode = (booking) => {
+    // Generate QR code data based on booking details
+    const qrData = {
+      ownerName: booking.ownerName,
+      serviceType: booking.serviceType,
+      phone: booking.phone,
+      email: booking.email,
+      date: booking.date,
+      time: booking.time,
+      status: booking.status
+    };
+    setQRCodeData(qrData); // Set QR code data to state
+
+    // Call handleUpdateStatus with QR code data
+     handleUpdateStatus(booking._id, qrData);
+  };
 
 
   return (
@@ -138,6 +162,7 @@ function Table() {
                   <button className='viewBtn' onClick={() => openBookingDetails(row)}><VisibilityOutlinedIcon fontSize='small'/></button>
                     <button className='accept' onClick={() => handleUpdateStatus(row._id)} >Accept</button>
                     <button className='delete' onClick={() => handleDeleteRow(row._id)}>Reject</button>
+                    <button className='generateQR' onClick={() => generateQRCode(row)}>Generate QR</button>
                   </td>
                 </tr>
               ))}
@@ -148,7 +173,6 @@ function Table() {
       {selectedBooking && (
         <div className="popup">
           <div className="popup-inner">
-           
             <h2>Booking Details</h2>
             <p><strong>Name:</strong> {selectedBooking.ownerName}</p>
             <p><strong>Service Type:</strong> {selectedBooking.serviceType}</p>
@@ -157,8 +181,16 @@ function Table() {
             <p><strong>Date:</strong> {formatDate(selectedBooking.date)}</p>
             <p><strong>Time:</strong> {selectedBooking.time}</p>
             <p><strong>Status:</strong> {selectedBooking.status}</p>
-
             <button className="closeBtn" onClick={closeBookingDetails}>Close</button>
+          </div>
+        </div>
+      )}
+      {qrCodeData && (
+        <div className="popup">
+          <div className="popup-inner">
+            <h2>QR Code</h2>
+            <QRCodeCanvas value={JSON.stringify(qrCodeData)} /> {/* Convert data to string */}
+            <button className="closeBtn" onClick={() => setQRCodeData(null)}>Close</button>
           </div>
         </div>
       )}
