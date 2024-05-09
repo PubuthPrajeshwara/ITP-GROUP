@@ -1,8 +1,8 @@
 .NavBar {
-    width: 79rem;
-    background-color: #3d3c3c;
+    width: 100%;
+    background-color: #1d2634;
     color: rgb(255, 255, 255);
-    margin-top: 10px;
+    border-radius: 5px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-bottom: 10px;
 

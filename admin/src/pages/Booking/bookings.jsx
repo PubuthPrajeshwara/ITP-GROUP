@@ -7,7 +7,7 @@ import BNavBar from '../../components/BookingComp//BookingNavBar/BNavBar'
 function BookingRequest() {
   
   return (
-    <div className='wrapContent'>
+    <div className='wrapContent-booking'>
       <BNavBar />
       <RequestTable />
     </div>
