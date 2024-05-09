@@ -10,7 +10,7 @@ function AllBooking() {
   const [rowData, setRowData] = useState(null); // State to hold row data
 
   return (
-    <div className='wrapContent'>
+    <div className='wrapContent-AllBooking'>
       <BNavBar />
       <AllBookingTable openModal={(rowData) => { // Pass rowData to openModal
         setRowData(rowData); // Set rowData state

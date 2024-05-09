@@ -3,7 +3,7 @@
     height: 80px;
     display: flex;
     flex-direction: row;
-    background-color: #1e1e1e;
+    background-color: #0e1926;
     align-items: center;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .auto {
-    color: #4194e1;
+    color: #d0e8ff;
     margin-left: 10px;   
 }
 
