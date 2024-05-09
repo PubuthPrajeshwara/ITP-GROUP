@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../../assets/newlogo.png';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Import Link
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineDelete } from 'react-icons/md';
@@ -46,6 +46,12 @@ const IssuesTable = ({ issues }) => {
     });
   };
 
+  // Function to handle sending email
+  const sendEmail = () => {
+    // Implement email sending logic here
+    console.log('Email sent!');
+  };
+
   return (
     <div>
       {/* Display counts for each status */}
@@ -66,8 +72,15 @@ const IssuesTable = ({ issues }) => {
         onChange={(e) => setSearchTerm(e.target.value)}
         style={styles.issueSearch}
       />
-       {/* Button to generate report */}
-       <button style={styles.pdfButton} onClick={generateReport}>Generate PDF Report</button>
+      
+      {/* Button to generate report */}
+      <button style={styles.pdfButton} onClick={generateReport}>Generate PDF Report</button>
+
+      {/* Button to send email */}
+      <Link to="/contact" style={{ textDecoration: 'none' }}> {/* Link to Contact.js */}
+        <button style={styles.emailButton} onClick={sendEmail}>Send Email</button>
+      </Link>
+
       {/* Table */}
       <table id="issueTable" style={styles.table}>
         <thead>
@@ -190,6 +203,16 @@ const styles = {
     margin: '8px 17px',
     border: 'none',
     borderRadius: '4px',
+    cursor: 'pointer',
+    fontSize: '1rem',
+    transition: 'background-color 0.3s',
+  },
+  emailButton: {
+    backgroundColor: '#4299e1',
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
+    padding: '10px 20px',
     cursor: 'pointer',
     fontSize: '1rem',
     transition: 'background-color 0.3s',

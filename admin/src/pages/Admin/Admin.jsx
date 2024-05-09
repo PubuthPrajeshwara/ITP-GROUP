@@ -25,6 +25,8 @@ import CreateIssue from '../../components/IssueComp/CreateIssues';
 import ShowIssue from '../../components/IssueComp/ShowIssue';
 import EditIssue from '../../components/IssueComp/EditIssue';
 import DeleteIssue from '../../components/IssueComp/DeleteIssue';
+import Cont from '../../components/IssueComp/Cont';
+
 // import InsertInventory from '../../components/InventoryComp/InsertInventory';
 // import UpdateInventory from '../../components/InventoryComp/UpdateInventory';
 // import Inventory from '../../components/InventoryComp/Inventory';
@@ -59,6 +61,8 @@ const Admin = () => {
         <Route path='/issues/details/:id' element={<ShowIssue />} />
         <Route path='/issues/edit/:id' element={<EditIssue />} />
         <Route path='/issues/delete/:id' element={<DeleteIssue />} />
+        <Route path='/contact' element={<Cont />} />
+
         {/* <Route path="/inventory" element={<Inventory />} /> */}
         {/* <Route path="/insertinventory" element={<InsertInventory />} /> */}
         {/* <Route path="/updateinventory/:id" element={<UpdateInventory />} /> */}
