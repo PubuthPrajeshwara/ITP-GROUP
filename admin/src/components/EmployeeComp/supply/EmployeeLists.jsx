@@ -192,7 +192,7 @@ class EmployeeLists extends Component {
             },
             buttonStyle: {
                 width: '15%',
-                height: '50px', // Adjusted height
+                height: '50px', 
                 borderRadius: '20px',
                 marginLeft: '20px',
                 border: 'none',
@@ -201,7 +201,7 @@ class EmployeeLists extends Component {
                 cursor: 'pointer',
                 fontSize: '16px',
                 textDecoration: 'none',
-                marginBottom: '10px', // Add margin bottom
+                marginBottom: '10px', 
             },
 
             
@@ -213,9 +213,9 @@ class EmployeeLists extends Component {
             buttonContainer: {
                 display: 'flex',
                 width: '83vw',
-                flexDirection: 'column', // Display buttons vertically
-                alignItems: 'flex-end', // Align buttons to the right
-                marginBottom: '20px', // Add margin bottom
+                flexDirection: 'column', 
+                alignItems: 'flex-end', 
+                marginBottom: '20px', 
             },
             searchInput: {
                 padding: '10px',
