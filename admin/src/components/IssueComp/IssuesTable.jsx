@@ -208,14 +208,16 @@ const styles = {
     transition: 'background-color 0.3s',
   },
   emailButton: {
-    backgroundColor: '#4299e1',
-    color: '#ffffff',
+    backgroundColor: '#e6e600',
+    color: '#000000',
     border: 'none',
+    marginLeft: '48rem',
+    marginTop: '-2rem',
     borderRadius: '4px',
-    padding: '10px 20px',
+    padding: '10px 60px',
     cursor: 'pointer',
     fontSize: '1rem',
-    transition: 'background-color 0.3s',
+    transition: '#ffff1a',
   },
 };
 
