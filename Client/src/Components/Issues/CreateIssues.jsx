@@ -42,6 +42,9 @@ const CreateIssues = () => {
     if (!Cnic.trim()) {
       newErrors.Cnic = 'NIC is required';
       valid = false;
+    } else if (!/^\d{12}$/.test(Cnic.trim())) {
+      newErrors.Cnic = 'NIC should contain exactly 12 digits';
+      valid = false;
     }
 
     if (!Ccontact.trim()) {
@@ -160,14 +163,15 @@ const CreateIssues = () => {
 
               <div style={styles.formField}>
                 <label style={styles.label}>Action:</label>
-                <select
+                <input
+                  type='text'
                   value={Cstatus}
                   onChange={(e) => setCstatus(e.target.value)}
                   style={styles.input}
-                >
-                </select>
+                />
                 {errors.Cstatus && <p style={styles.error}>{errors.Cstatus}</p>}
               </div>
+              
 
 
               <button style={styles.saveButton} onClick={handleSaveIssue}>
