@@ -18,14 +18,17 @@ function Table() {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:4000/allBookingRequest');
-        setData(response.data);
-        setFilteredData(response.data); // Filter pending bookings
-        // Initialize filteredData with all data
+        
+        // Filter pending bookings
+        const pendingBookings = response.data.filter(row => row.status === 'pending');
+        
+        setData(pendingBookings);
+        setFilteredData(pendingBookings);
       } catch (error) {
         console.error(error);
       }
     };
-
+  
     fetchData();
   }, []);
 
