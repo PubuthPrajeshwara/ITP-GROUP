@@ -1,86 +1,105 @@
-import { useState } from 'react';
-// import './ServicePopUp.css';
-import axios from 'axios'; // Import axios for making HTTP requests
- 
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import upload_img from "../../../assets/upload_img.png";
+import './ServicePopUP.css';
 
-const AddService = ({closePop}) => {
-    const [service, setService] = useState({
-      serviceTitle: '',
-      estimatedHour: '',
+const updateService = ({ service, closePop }) => {
+  const [image, setImage] = useState(null);
+    const [editedService, setEditedService] = useState({
+        serviceTitle: '',
+        image: "",
+        estimatedHour: '',
         details: '',
-    }); 
+    });
+
+    const handleImageChange = (e) => {
+      const file = e.target.files[0];
+      setImage(file);
+    };
+
+    useEffect(() => {
+        if (service) {
+            setEditedService(service);
+        }
+    }, [service]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setService({ ...service, [name]: value });
-      };
-    
-    
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-    
+        setEditedService({ ...editedService, [name]: value });
+    };
+
+    const handleSubmit = async () => {
         try {
-          // Send form data to backend server
-          await axios.post("http://localhost:4000/addservice", service);
-          alert("Booking submitted successfully!");
-          // Optionally, reset the form after submission
-          setService({
-            serviceTitle: "",
-            estimatedHour: "",
-            details: "",
-          });
+            // Update service details on the backend
+            await axios.put(`http://localhost:4000/updateService/${editedService._id}`, editedService);
+            closePop(null); // Close the popup
+            window.location.reload(); // Reload the page to reflect changes
         } catch (error) {
-          console.error("Error submitting Service:", error);
-          alert("An error occurred while Adding the Service.");
+            console.error("Error updating service:", error);
         }
-      };
+    };
+
+    const handleCancel = () => {
+      closePop(null); // Close the popup
+    };
+    
     return (
-        <div className='popupContainer' onClick={(e) => {
-            if(e.target.className === 'popupContainer') closePop()
-        }}>
-            
-            <div className="p-container">
-                <form onSubmit={handleSubmit}>
-                  <div className='img-container'>
-                    <img src="car-service.jpg" alt="Car Service" className=""/>
-                    </div>
-                    <button className="import-button">Import</button>
+        <div>
+          <div className="fontainer">
+            <div className="f-container">
+            <div className="add-image">
+            <label htmlFor="file-input">
+              <img
+                src={image ? URL.createObjectURL(image) : editedService.imagePath || upload_img}
+                className="addService-thumbnail"
+                alt="Upload Thumbnail"
+              />
+            </label>
+            <input
+              onChange={handleImageChange}
+              type="file"
+              name="image"
+              id="file-input"
+              hidden={true}
+            />
+          </div>
+                <label className="lab">Service Title:</label>
+                <input
+                    type="text"
+                    name="serviceTitle"
+                    required
+                    value={editedService.serviceTitle}
+                    onChange={handleChange}
+                />
 
-                    <label className='lab'>Service Title:</label>
-                    <input 
-                        type="text" 
-                        name="serviceTitle"
-                        required
-                        value={service.serviceTitle}
-                        onChange={handleChange}
-                    />
+                <label className="lab">Estimated Hour:</label>
+                <input
+                    type="text"
+                    name="estimatedHour"
+                    required
+                    value={editedService.estimatedHour}
+                    onChange={handleChange}
+                />
 
-                    <label className='lab'>Estimated Hour:</label>
-                    <input 
-                        type="text" 
-                        name="estimatedHour"
-                        required
-                        value={service.estimatedHour}
-                        onChange={handleChange}
-                    />
+                <label className="lab">Special Notes:</label>
+                <textarea
+                    name="details"
+                    placeholder="Any special notes or instructions?"
+                    value={editedService.details}
+                    onChange={handleChange}
+                    required
+                ></textarea>
 
-                    <label className='lab'>Special Notes:</label>
-                    <textarea
-                        name="details"
-                        placeholder="Any special notes or instructions?"
-                        value={service.details}
-                        onChange={handleChange}
-                        required
-                    ></textarea>
-
-                    <div className='btn-container'>
-                    <button className="buttons" type='submit'>Update</button>
-                    <button className="buttons" type='submit'>Cancel</button>
-                    </div>
-                </form>
+                <button onClick={handleSubmit} className="buttons" type="submit">
+                    Update
+                </button>
+                <button className="cancel-bTn" type="submit" onClick={handleCancel}>
+                  Cancel
+                </button>
             </div>
         </div>
-    )
-}
+        </div>
+    );
+};
 
-export default AddService;
+export default updateService;

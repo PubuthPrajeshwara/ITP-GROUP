@@ -12,20 +12,23 @@ function Table() {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null); // State to manage selected booking for pop-up
   const [qrCodeData, setQRCodeData] = useState(null); // State to store QR code data
-
+  const [filter, setFilter] = useState('All'); 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:4000/allBookingRequest');
-        setData(response.data);
-        setFilteredData(response.data); // Filter pending bookings
-        // Initialize filteredData with all data
+        
+        // Filter pending bookings
+        const pendingBookings = response.data.filter(row => row.status === 'pending');
+        
+        setData(pendingBookings);
+        setFilteredData(pendingBookings);
       } catch (error) {
         console.error(error);
       }
     };
-
+  
     fetchData();
   }, []);
 
@@ -116,19 +119,36 @@ function Table() {
      handleUpdateStatus(booking._id, qrData);
   };
 
+  useEffect(() => {
+    applyFilter(filter);
+  }, [filter, data]);
+
+  const applyFilter = (filter) => {
+    if (filter === 'All') {
+      setFilteredData(data);
+    } else {
+      const filteredRows = data.filter((row) => row.status === filter.toLowerCase());
+      setFilteredData(filteredRows);
+    }
+  };
+
+  const handleFilterChange = (event) => {
+    const selectedFilter = event.target.value;
+    setFilter(selectedFilter);
+  };
+
 
   return (
     <div className='booking'>
       <div className="tblContainer">
         <div className='line-one'>
-        <select className='myselect'
-          name="Filter" >
-          <option value="">All</option>
-          <option value="accepted">accepted</option>
-          <option value="ongoing">ongoing</option>
-          <option value="completed">completed</option>
-          <option value="cancelled">cancelled</option>
-        </select>
+        <select className='myselect' name='Filter' onChange={handleFilterChange }>
+            <option value='All'>All</option>
+            <option value='accepted'>Accepted</option>
+            <option value='pending'>Pending</option>
+            <option value='completed'>Completed</option>
+            <option value='cancelled'>Cancelled</option>
+          </select>
           <Search handleSearch={handleSearch}/>
           <button className='gReportbtn'>Generate Report</button>
         </div>

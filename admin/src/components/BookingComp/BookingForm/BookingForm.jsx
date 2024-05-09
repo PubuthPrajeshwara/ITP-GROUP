@@ -26,6 +26,8 @@ const Form = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+   
+
     try {
       // Send form data to backend server
       await axios.post("http://localhost:4000/addbooking", formData);
@@ -47,6 +49,7 @@ const Form = () => {
       alert("An error occurred while submitting the booking.");
     }
   };
+
 
   return (
     <div className="form-container">
@@ -113,9 +116,8 @@ const Form = () => {
                 name="serviceType"
                 value={formData.serviceType}
                 onChange={handleInputChange}
-                required
-              >
-                
+                required>
+          
                 <option value="Body Wash">Body Wash</option>
                 <option value="Engine Tune ups">Engine Tune ups</option>
                 <option value="Spare Parts Replacement">Spare Parts Replacement</option>

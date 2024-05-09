@@ -822,7 +822,7 @@ app.post('/addbooking', async (req, res) => {
       if (updatedBooking.status === 'accepted') {
         const { email } = updatedBooking;
         const subject = 'Booking Accepted';
-        const text = 'Your booking request has been accepted.';
+        const text = 'We are excited to confirm your booking! Your service request has been accepted. We look forward to serving you on Booking Date at Booking Time. Should you have any questions, feel free to reach out. Thank you for choosing us.';
   
         await sendEmail(email, subject, text);
       }

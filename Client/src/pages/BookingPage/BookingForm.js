@@ -23,6 +23,7 @@ const Form = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (formData.phone.length !== 10 || isNaN(formData.phone) || formData.phone.charAt(0) !== '0'){
@@ -30,6 +31,8 @@ const Form = () => {
       alert("Please enter a valid phone number.");
       return;
     }
+
+    
     try {
       // Send form data to backend server
       await axios.post("http://localhost:4000/addbooking", formData);

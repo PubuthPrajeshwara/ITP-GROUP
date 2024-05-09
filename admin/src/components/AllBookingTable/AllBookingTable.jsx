@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Search from '../BookingComp/Search/Search';
 import './AllBookingTable.css'; 
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 function Table({ openModal }) {
+  const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null); // State to manage selected booking for pop-up
+  const [qrCodeData, setQRCodeData] = useState(null); // State to store QR code data
+  const [selectedStatus, setSelectedStatus] = useState('accepted'); // State to manage selected status
+  const [filter, setFilter] = useState('All'); 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:4000/allBookingRequest');
-        const acceptedData = response.data.filter(row => row.status === 'accepted');
+        const acceptedData = response.data.filter(row => row.status != 'pending');
+        setData(response.data);
         setFilteredData(acceptedData);
       } catch (error) {
         console.error(error);
@@ -66,19 +72,59 @@ function Table({ openModal }) {
     setSelectedBooking(null); // Close the pop-up by resetting selected booking
   };
 
+  useEffect(() => {
+    applyFilter(filter);
+  }, [filter, data]);
+
+  const applyFilter = (filter) => {
+    if (filter === 'All') {
+      setFilteredData(data);
+    } else {
+      const filteredRows = data.filter((row) => row.status === filter.toLowerCase());
+      setFilteredData(filteredRows);
+    }
+  };
+
+  const handleFilterChange = (event) => {
+    const selectedFilter = event.target.value;
+    setFilter(selectedFilter);
+  };
+
+  const handleStatusChange = (event) => {
+    setSelectedStatus(event.target.value);
+  };
+
+  const handleUpdateStatus = async () => {
+    try {
+      await axios.put(`http://localhost:4000/updateBookingStatus/${selectedBooking._id}`, { status: selectedStatus });
+      // If the request is successful, update the status in the local state
+      const updatedData = data.map(row => {
+        if (row._id === selectedBooking._id) {
+          return { ...row, status: selectedStatus };
+        }
+        return row;
+      });
+      setData(updatedData);
+      setFilteredData(updatedData);
+      closeBookingDetails();
+    } catch (error) {
+      console.error('Error updating status:', error);
+    }
+  };
+  
+
 
   return (
     <div className='booking'>
       <div className="tblContainer">
         <div className='line-one'>
-        <select className='myselect'
-          name="Filter" >
-          <option value="">All</option>
-          <option value="accepted">accepted</option>
-          <option value="ongoing">ongoing</option>
-          <option value="completed">completed</option>
-          <option value="cancelled">cancelled</option>
-        </select>
+        <select className='myselect' name='Filter' onChange={handleFilterChange }>
+            <option value='All'>All</option>
+            <option value='accepted'>Accepted</option>
+            <option value='pending'>Pending</option>
+            <option value='completed'>Completed</option>
+            <option value='cancelled'>Cancelled</option>
+          </select>
           <Search handleSearch={handleSearch}/>
           <button className='gReportbtn'>Generate Report</button>
         </div>
@@ -109,7 +155,7 @@ function Table({ openModal }) {
                   <td>{row.time}</td>
                   <td>{row.status}</td>
                   <td>
-                  <button className='viewBtn' onClick={() => handleOpenModal(row)}><VisibilityOutlinedIcon fontSize='small'/></button>
+                  <button className='viewBtn' onClick={() => handleOpenModal(row)} ><VisibilityOutlinedIcon fontSize='small'/></button>
                   <button className='update' onClick={() => openBookingDetails(row)}>Update</button>
                     <button className='delete' onClick={() => handleDeleteRow(row._id)}>Delete</button>
                   </td>
@@ -120,18 +166,18 @@ function Table({ openModal }) {
         </div>
       </div>
       {selectedBooking && (
-        <div className="popup">
-          <div className="popup-inner">
+        <div className="poPup">
+          <div className="poPup-inner">
            
-            <h2>Booking Details</h2>
-            <p><strong>Name:</strong> {selectedBooking.ownerName}</p>
-            <p><strong>Service Type:</strong> {selectedBooking.serviceType}</p>
-            <p><strong>Phone:</strong> {selectedBooking.phone}</p>
-            <p><strong>Email:</strong> {selectedBooking.email}</p>
-            <p><strong>Date:</strong> {formatDate(selectedBooking.date)}</p>
-            <p><strong>Time:</strong> {selectedBooking.time}</p>
-            <p><strong>Status:</strong> {selectedBooking.status}</p>
-
+            <h2>Update Service Status</h2>
+            <select className='updateStatusinput' value={selectedStatus} onChange={handleStatusChange}>
+              <option value='accepted'>Accepted</option>
+              <option value='In_Progress'>In Progress </option>
+              <option value='completed'>Completed</option>
+              <option value='cancelled'>Cancelled</option>
+            </select>
+          
+            <button className="updatBtn" onClick={handleUpdateStatus}>Update</button>
             <button className="closeBtn" onClick={closeBookingDetails}>Close</button>
           </div>
         </div>
