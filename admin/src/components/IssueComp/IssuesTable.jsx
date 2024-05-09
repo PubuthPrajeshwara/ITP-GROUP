@@ -213,6 +213,7 @@ const styles = {
     border: 'none',
     marginLeft: '48rem',
     marginTop: '-2rem',
+    marginBottom: '2rem',
     borderRadius: '4px',
     padding: '10px 60px',
     cursor: 'pointer',
