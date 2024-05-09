@@ -5,12 +5,12 @@
 }
 
 .loginSignup-container{
-    width: 400px;
+    width: 350px;
     height: auto;
     background: white;
     margin: auto;
     padding: 40px 40px;
-    padding-right: 60px;
+    padding-right: 65px;
     text-align: center;
     font-family: sans-serif;
     box-shadow: 1px 4px 4px 4px rgba(0, 0, 0, 0.15);
@@ -19,7 +19,7 @@
 .loginSignup-container h1{
     margin: 20px 0px;
     font-size: 40px;
-    color: #e14141;
+    color: #1e69a7;
 }
 
 .loginSignup-field{
@@ -40,10 +40,10 @@
 }
 
 .loginSignup-container button{
-    width: 430px;
+    width: 380px;
     height: 60px;
     color: white;
-    background: #e14141;
+    background: #1e69a7;
     margin-top: 30px;
     border: none;
     font-size: 24px;
