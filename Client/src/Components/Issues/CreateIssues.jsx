@@ -201,7 +201,7 @@ const styles = {
     alignItems: 'center',
   },
   content: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
     borderRadius: '10px',
     padding: '40px',
     width: '70%',
