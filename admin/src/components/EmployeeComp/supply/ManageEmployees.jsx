@@ -210,8 +210,7 @@ import { Link } from 'react-router-dom';
             validationMessages.jobCategory = 'Job Category cannot be empty.';
             isValid = false;
         }
-        // You can add more validation rules for NIC, email, etc.
-        // For brevity, I'm skipping them here.
+        
         
         this.setState({ validationMessages });
 
@@ -310,8 +309,8 @@ import { Link } from 'react-router-dom';
           boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
           padding: '20px',
           position: 'relative',
-          overflow: 'hidden', // Prevent scrolling
-          maxWidth: 'auto', // Adjust according to your sidebar width
+          overflow: 'hidden', 
+          maxWidth: 'auto', 
       };
 
       const commonStyles = {
@@ -332,13 +331,13 @@ import { Link } from 'react-router-dom';
           },
 
           tableContainer: {
-            overflowX: 'auto', // Add horizontal scrolling if table overflows
-            maxWidth: '100%', // Ensure the table does not exceed the container's width
+            overflowX: 'auto', 
+            maxWidth: '100%', 
         },
         
 
         tableStyle: {
-          width: '100%', // Occupy full width of the container
+          width: '100%', 
           borderCollapse: 'collapse',
           marginTop: '2px',
       },

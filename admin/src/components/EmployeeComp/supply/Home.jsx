@@ -8,12 +8,12 @@ class Home extends Component {
           top: -100,
           left: 10,
           width: '85.2vw',
-          overflow: 'hidden', // Prevent scrolling
+          overflow: 'hidden', 
         };
 
         const contentStyle = {
             display: 'flex',
-            flexGrow: 1, // Content area fills the remaining space
+            flexGrow: 1, 
         };
 
         const globalStyles = `
