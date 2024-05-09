@@ -128,7 +128,7 @@ const CreateIssues = () => {
               <div style={styles.formField}>
                 <label style={styles.label}>NIC:</label>
                 <input
-                  type='text'
+                  type='number'
                   value={Cnic}
                   onChange={(e) => setCnic(e.target.value)}
                   style={styles.input}
@@ -139,7 +139,7 @@ const CreateIssues = () => {
               <div style={styles.formField}>
                 <label style={styles.label}>Contact Number:</label>
                 <input
-                  type='text'
+                  type='number'
                   value={Ccontact}
                   onChange={(e) => setCcontact(e.target.value)}
                   style={styles.input}
