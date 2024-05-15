@@ -1,11 +1,9 @@
 .Sidebar {
     height: 750px;
     width: 250px;
-    background-color: #141921;
-    margin-left: 10px;
-    border-radius: 5px;
+    background-color: #222835;
     overflow: hidden;
-    margin-top: 10px;
+    
 
 }
 

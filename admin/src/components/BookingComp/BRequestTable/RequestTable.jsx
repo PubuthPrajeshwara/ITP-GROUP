@@ -68,10 +68,10 @@ function Table() {
   
 
   
-    const handleUpdateStatus = async (id, qrCodeData) => {
+    const handleUpdateStatus = async (id) => {
       try {
         // Send a PUT request to your backend API endpoint to update the status
-        await axios.put(`http://localhost:4000/updateBookingStatus/${id}`, { status: 'accepted' ,qrCodeData: qrCodeData});
+        await axios.put(`http://localhost:4000/updateBookingStatus2/${id}`, { status: 'accepted' });
 
         // If the request is successful, update the state to reflect the updated status
         setData(data.map(row => {
@@ -87,6 +87,7 @@ function Table() {
           }
           return row;
         }));
+        window.location.reload();
       } catch (error) {
         console.error('Error updating status:', error);
       }
@@ -115,8 +116,6 @@ function Table() {
     };
     setQRCodeData(qrData); // Set QR code data to state
 
-    // Call handleUpdateStatus with QR code data
-     handleUpdateStatus(booking._id, qrData);
   };
 
   useEffect(() => {

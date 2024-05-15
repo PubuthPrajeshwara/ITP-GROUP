@@ -9,7 +9,6 @@ function Table({ openModal }) {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null); // State to manage selected booking for pop-up
-  const [qrCodeData, setQRCodeData] = useState(null); // State to store QR code data
   const [selectedStatus, setSelectedStatus] = useState('accepted'); // State to manage selected status
   const [filter, setFilter] = useState('All'); 
 
@@ -17,17 +16,17 @@ function Table({ openModal }) {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:4000/allBookingRequest');
-        const acceptedData = response.data.filter(row => row.status != 'pending');
-        setData(response.data);
+        const acceptedData = response.data.filter(row => row.status !== 'pending');
+        setData(acceptedData); // Set data to filtered data
         setFilteredData(acceptedData);
       } catch (error) {
         console.error(error);
       }
     };
-
+  
     fetchData();
   }, []);
-
+  
   const handleSearch = (searchTerm) => {
     const filteredRows = data.filter((row) => {
       // Customize this logic based on your search requirements
@@ -96,21 +95,27 @@ function Table({ openModal }) {
 
   const handleUpdateStatus = async () => {
     try {
-      await axios.put(`http://localhost:4000/updateBookingStatus/${selectedBooking._id}`, { status: selectedStatus });
-      // If the request is successful, update the status in the local state
+      await axios.put(`http://localhost:4000/updateBookingStatus2/${selectedBooking._id}`, { status: selectedStatus });
+  
+      // Update the status in the local state
       const updatedData = data.map(row => {
         if (row._id === selectedBooking._id) {
           return { ...row, status: selectedStatus };
         }
         return row;
       });
+  
       setData(updatedData);
       setFilteredData(updatedData);
+  
       closeBookingDetails();
+      window.location.reload();
     } catch (error) {
       console.error('Error updating status:', error);
     }
   };
+  
+  
   
 
 
@@ -172,7 +177,7 @@ function Table({ openModal }) {
             <h2>Update Service Status</h2>
             <select className='updateStatusinput' value={selectedStatus} onChange={handleStatusChange}>
               <option value='accepted'>Accepted</option>
-              <option value='In_Progress'>In Progress </option>
+              <option value='pending'>Pending</option>
               <option value='completed'>Completed</option>
               <option value='cancelled'>Cancelled</option>
             </select>

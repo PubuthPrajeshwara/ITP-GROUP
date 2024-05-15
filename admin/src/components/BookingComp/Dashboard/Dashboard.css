@@ -1,4 +1,4 @@
-.wrapContent-AddBooking{
+.wrapContent-dashboard{
     display: flex;
     flex-wrap: wrap;
     max-width: 100%;
@@ -7,8 +7,4 @@
     margin: 0 auto;
     padding: 1em;
 
-}
-.form-cont{
-    overflow: scroll;
-    width: auto;
 }
