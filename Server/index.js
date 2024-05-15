@@ -810,33 +810,36 @@ app.post('/addbooking', async (req, res) => {
 
 
   const sendEmail = require('./email');
+
   // Update booking status route
-  app.put('/updateBookingStatus/:id', async (req, res) => {
+app.put('/updateBookingStatus2/:id', async (req, res) => {
     try {
-      const { id } = req.params;
-      const updatedBooking = await Booking.findByIdAndUpdate(
-        id,
-        { $set: { status: 'accepted' } }, // Update status to 'accepted'
-        { new: true }
-      );
-      if (updatedBooking.status === 'accepted') {
-        const { email } = updatedBooking;
-        const subject = 'Booking Accepted';
-        const text = 'We are excited to confirm your booking! Your service request has been accepted. We look forward to serving you on Booking Date at Booking Time. Should you have any questions, feel free to reach out. Thank you for choosing us.';
-  
-        await sendEmail(email, subject, text);
-      }
-  
-      if (!updatedBooking) {
-        return res.status(404).json({ error: 'Booking not found' });
-      }
-  
-      res.status(200).json({ message: 'Booking status updated successfully', updatedBooking });
+        const { id } = req.params;
+        const { status } = req.body;
+
+        const updatedBooking = await Booking.findByIdAndUpdate(
+            id,
+            { $set: { status } }, // Update status
+            { new: true }
+        );
+        if (updatedBooking.status === 'accepted') {
+            const { email } = updatedBooking;
+            const subject = 'Booking Accepted';
+            const text = 'We are excited to confirm your booking! Your service request has been accepted. We look forward to serving you on Booking Date at Booking Time. Should you have any questions, feel free to reach out. Thank you for choosing us.';
+      
+            await sendEmail(email, subject, text);
+          }
+
+        if (!updatedBooking) {
+            return res.status(404).json({ error: 'Booking not found' });
+        }
+
+        res.status(200).json({ message: 'Booking status updated successfully', updatedBooking });
     } catch (error) {
-      console.error('Error updating booking status:', error);
-      res.status(500).json({ error: 'Server error' });
+        console.error('Error updating booking status:', error);
+        res.status(500).json({ error: 'Server error' });
     }
-  });
+});
   
 
     // Update booking details route
@@ -872,6 +875,8 @@ app.post('/addbooking', async (req, res) => {
             }
           }
         );
+
+        
         
 
     //pathum's Service Routes

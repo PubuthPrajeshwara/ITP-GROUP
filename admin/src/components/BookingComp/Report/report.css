@@ -1,10 +1,12 @@
-.wrapContent{
-    display: flex;
-    flex-direction: column;
-    max-width: 77.5em;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
+.wrapContent-Report{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1em;
+
 }
 
 .booking-report {
@@ -35,11 +37,9 @@
     border: none;
     padding: 10px 20px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    margin-left: 21rem;
+    margin-left: 24rem;
   }
   
 .pdfContainer{

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import BNavBar from '../BookingNavBar/BNavBar';
 import './report.css';
 import PdfView from '../pdf/pdf';
-import { saveAs } from 'file-saver';
 
 function Report() {
   const [startDate, setStartDate] = useState('');
@@ -21,7 +20,7 @@ function Report() {
   }
 
   return (
-    <div className='wrapContent'>
+    <div className='wrapContent-Report'>
       <BNavBar />
 
       <div className='booking-report'>

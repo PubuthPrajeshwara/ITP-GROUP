@@ -20,6 +20,7 @@ import UpdateProduct from '../../components/onlineShop/UpdateProduct/UpdateProdu
 import AddService from '../../components/serviceComp/AddService/AddService'
 import AddBooking from '../../components/BookingComp/AddBooking/AddBooking'
 import AllBooking from '../../components/BookingComp/AllBookings/AllBooking'
+import BookingDashboard from '../../components/BookingComp/Dashboard/Dashboard'
 import Report from '../../components/BookingComp/Report/report'
 import CreateIssue from '../../components/IssueComp/CreateIssues';
 import ShowIssue from '../../components/IssueComp/ShowIssue';
@@ -96,6 +97,9 @@ const Admin = () => {
         </Route>
         <Route exact path="/Onlineshop/products/updateproduct/:id" element={<PrivateRoute allowedRoles={['11']} />}>
           <Route path="" element={<UpdateProduct />} />
+        </Route>
+        <Route path="/booking/dashboard" element={<PrivateRoute allowedRoles={['5']} />}>
+          <Route path="" element={<BookingDashboard />} />
         </Route>
         <Route path="/booking/add" element={<PrivateRoute allowedRoles={['5']} />}>
           <Route path="" element={<AddBooking />} />

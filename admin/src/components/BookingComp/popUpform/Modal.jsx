@@ -49,7 +49,7 @@ const Modal = ({ closeModal, rowData }) => {
     <div className='modal-container' onClick={(e) => {
       if (e.target.className === 'modal-container') closeModal();
     }}>
-      <div className="form-container">
+      <div className="formContainer">
       <form onSubmit={handleSubmit}>
         <p>Booking ID: {formData.bookingId}</p>
         <div className="form-columns">
@@ -64,7 +64,7 @@ const Modal = ({ closeModal, rowData }) => {
               value={formData.ownerName}
               onChange={handleInputChange}
             />
-            {errors.ownerName && <span className="error">{errors.ownerName}</span>}
+
             <label>Email:</label>
             <input
               type="email"
@@ -73,7 +73,7 @@ const Modal = ({ closeModal, rowData }) => {
               onChange={handleInputChange}
               required
             />
-            {errors.email && <span className="error">{errors.email}</span>}
+
             <label>Phone:</label>
             <input
               type="tel"
@@ -82,7 +82,7 @@ const Modal = ({ closeModal, rowData }) => {
               onChange={handleInputChange}
               required
             />
-            {errors.phone && <span className="error">{errors.phone}</span>}
+
             <label>Special Notes:</label>
             <textarea
               name="specialNotes"
