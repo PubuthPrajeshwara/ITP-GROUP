@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import './BookingForm.css'; // Import your CSS file
 import axios from "axios"; // Import Axios for making HTTP requests
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +33,6 @@ const Form = () => {
     try {
       // Send form data to backend server
       await axios.post("http://localhost:4000/addbooking", formData);
-      alert("Booking submitted successfully!");
       // Optionally, reset the form after submission
       setFormData({
         ownerName: "",
@@ -44,12 +45,12 @@ const Form = () => {
         date: "",
         time: ""
       });
+      toast.success('Booking submitted successfully!');
     } catch (error) {
       console.error("Error submitting booking:", error);
-      alert("An error occurred while submitting the booking.");
+      toast.error("An error occurred while submitting the booking.");
     }
   };
-
 
   return (
     <div className="form-container">
@@ -159,7 +160,8 @@ const Form = () => {
             />
           </div>
         </div>
-        <button className='bSubmitBTN' type="submit">Book Now</button>
+        <button className='bSubmitBTN' type="submit" onClick={handleSubmit} >Book Now</button>
+        <ToastContainer />
       </form>
     </div>
   );
